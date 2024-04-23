@@ -44,7 +44,7 @@ jobs:
           only_notify: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
-   test:
+  test:
     name: Lint and Test
     runs-on: ubuntu-latest
 
