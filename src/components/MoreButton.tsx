@@ -64,6 +64,10 @@ const StyledIconButton = styled(IconButton)(() => {
     border: currentTheme.border,
     borderRadius: currentTheme.borderRadius,
     marginLeft: '0.5rem',
+    '@media (max-width: 600px)': {
+      width: '2.5rem',
+      height: '2.2rem',
+    },
   };
 });
 
@@ -78,5 +82,8 @@ const SMenu = styled(Menu)(() => {
 const SMenuItem = styled(MenuItem)(() => {
   return {
     fontWeight: 800,
+    '@media (max-width: 600px)': {
+      fontSize: '0.8rem',
+    },
   };
 });

@@ -17,4 +17,7 @@ const LandingContainer = styled('div')({
   alignItems: 'center',
   justifyContent: 'center',
   width: '100%',
+  '@media (max-width: 600px)': {
+    padding: '0 1rem',
+  },
 });

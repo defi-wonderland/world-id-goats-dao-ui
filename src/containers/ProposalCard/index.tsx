@@ -28,6 +28,9 @@ const ProposalCardContainer = styled('div')({
   display: 'grid',
   gridTemplateRows: 'auto 1fr',
   height: '100%',
+  '@media (max-width: 600px)': {
+    display: 'block',
+  },
 });
 
 const HeaderSection = styled('div')({
@@ -40,6 +43,9 @@ const ContentSection = styled('div')({
   gridTemplateColumns: '2fr 1fr',
   gridRow: '2',
   gap: '1rem',
+  '@media (max-width: 600px)': {
+    display: 'block',
+  },
 });
 
 const LeftColumn = styled('div')({

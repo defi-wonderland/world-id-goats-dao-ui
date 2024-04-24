@@ -32,7 +32,7 @@ export const StyledButton = styled(Button)(() => {
     },
 
     '@media (max-width: 600px)': {
-      fontSize: '1.6rem',
+      fontSize: '0.8rem',
     },
   };
 });

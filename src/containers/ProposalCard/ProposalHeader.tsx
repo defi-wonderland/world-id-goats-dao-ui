@@ -52,6 +52,9 @@ const HeaderContainer = styled('div')(() => {
     borderRadius: currentTheme.borderRadius,
     padding: '0 2rem',
     boxShadow: currentTheme.boxShadow,
+    '@media (max-width: 600px)': {
+      display: 'inline-block',
+    },
   };
 });
 
@@ -64,6 +67,10 @@ const LeftSection = styled('div')({
 const RightSection = styled('div')({
   display: 'flex',
   alignItems: 'center',
+  '@media (max-width: 600px)': {
+    justifyContent: 'space-between',
+    marginTop: '1rem',
+  },
 });
 
 const StatusBadge = styled(Typography)(() => {
@@ -77,6 +84,10 @@ const StatusBadge = styled(Typography)(() => {
     fontSize: '0.75rem',
     width: 'fit-content',
     textTransform: 'uppercase',
+    '@media (max-width: 600px)': {
+      fontSize: '0.5rem',
+      marginTop: '1rem',
+    },
   };
 });
 
@@ -91,9 +102,15 @@ const IDDateBox = styled(Box)(() => {
       color: currentTheme.textSecondary,
       fontWeight: 600,
     },
+    '@media (max-width: 600px)': {
+      justifyContent: 'space-between',
+    },
   };
 });
 
 const Title = styled(Typography)({
   fontWeight: 800,
+  '@media (max-width: 600px)': {
+    fontSize: '1.3rem',
+  },
 });

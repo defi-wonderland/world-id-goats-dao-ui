@@ -33,6 +33,9 @@ const StyledHeader = styled('header')(() => {
     width: '100%',
     zIndex: zIndex.HEADER,
     boxShadow: currentTheme.boxShadow,
+    '@media (max-width: 600px)': {
+      padding: '0 1rem',
+    },
   };
 });
 

@@ -102,6 +102,9 @@ const CodeSnippet = styled(Typography)(() => {
     overflow: 'auto',
     whiteSpace: 'pre',
     color: currentTheme.textPrimary,
+    '@media (max-width: 600px)': {
+      maxWidth: '18rem',
+    },
   };
 });
 
