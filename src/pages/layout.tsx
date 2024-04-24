@@ -1,10 +1,23 @@
 import { Box, CssBaseline, styled } from '@mui/material';
-import { Footer, Header } from '~/containers';
+import { Footer, Header, LoadingModal, VerifyModal, SuccessModal, ErrorModal } from '~/containers';
+
+export const Modals = () => {
+  return (
+    <>
+      {/* Add all modals here... */}
+      <VerifyModal />
+      <LoadingModal />
+      <SuccessModal />
+      <ErrorModal />
+    </>
+  );
+};
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <CssBaseline />
+      <Modals />
       <MainContent>
         <NoScriptMessage>
           <p>This website requires JavaScript to function properly.</p>

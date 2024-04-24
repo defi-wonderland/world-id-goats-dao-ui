@@ -1,36 +1,40 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { styled } from '@mui/material/styles';
-import { IconButton } from '@mui/material';
+import { IconButton, Box } from '@mui/material';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 import { useCustomTheme } from '~/hooks/useTheme';
-import { zIndex, HEADER_HEIGHT } from '~/utils';
 
 export const Header = () => {
   const { changeTheme, theme } = useCustomTheme();
 
   return (
     <StyledHeader>
-      <Logo>Logo</Logo>
-      <SIconButton onClick={changeTheme}>{theme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}</SIconButton>
-      <ConnectButton />
+      <Logo>GoatDAO</Logo>
+      <ControlsBox>
+        <SIconButton onClick={changeTheme}>{theme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}</SIconButton>
+        <ConnectButton showBalance={false} accountStatus='address' chainStatus='none' />
+      </ControlsBox>
     </StyledHeader>
   );
 };
 
-//Styles
+// Styles
 const StyledHeader = styled('header')(() => {
   const { currentTheme } = useCustomTheme();
   return {
     display: 'flex',
-    height: `${HEADER_HEIGHT}rem`,
+    height: '5rem',
     padding: '0 8rem',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: currentTheme.backgroundSecondary,
     width: '100%',
-    zIndex: zIndex.HEADER,
+    zIndex: '100',
+    boxShadow: currentTheme.boxShadow,
+    '@media (max-width: 600px)': {
+      padding: '0 1rem',
+    },
   };
 });
 
@@ -40,7 +44,12 @@ const Logo = styled('h1')({
   cursor: 'pointer',
 });
 
+const ControlsBox = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '1rem',
+});
+
 const SIconButton = styled(IconButton)({
-  position: 'absolute',
-  left: '50%',
+  color: 'inherit',
 });

@@ -1,12 +1,8 @@
-# Web3 React Boilerplate
+# GoatDAO
 
 ## Features
 
-- Modern React setup with the latest tools and libraries.
-- Boilerplate for building web3-enabled applications.
-- Example unit and integration tests included.
-- Code linting and formatting for clean and maintainable code.
-- GitHub workflows for continuous integration.
+- TBD
 
 ## Setup
 
@@ -17,7 +13,6 @@
    ```bash
    pnpm install
    ```
-
 ## Available Scripts
 
 Available scripts that can be run using `pnpm`:
@@ -33,12 +28,9 @@ Available scripts that can be run using `pnpm`:
 | `prettier:fix` | Format code using Prettier and automatically fix issues.     |
 | `format`       | Run Prettier and ESLint to format and fix code issues.       |
 | `format:check` | Check code formatting and linting without making changes.    |
-| `test`         | Run tests using Cypress                                 |
-| `test:watch`   | Run Cypress in watch mode.                                    |
+
 
 ## Technologies Used
-
-This boilerplate leverages the latest technologies, including:
 
 - [NextJS](https://nextjs.org/)
 - [Wagmi](https://wagmi.sh/)
