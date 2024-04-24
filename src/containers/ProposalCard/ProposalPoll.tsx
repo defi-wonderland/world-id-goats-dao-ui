@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Box, Typography, Divider, TypographyProps, styled } from '@mui/material';
 import { CheckCircle, Circle } from '@mui/icons-material';
 
-import { useCustomTheme, useVote } from '~/hooks';
+import { useCustomTheme, useContract } from '~/hooks';
 import { getConfig } from '~/config';
 
 const { PROPOSAL_ID } = getConfig();
@@ -26,11 +26,12 @@ interface Vote {
 }
 
 export const ProposalPoll = () => {
-  const { getQuorumThreshold } = useVote();
+  const { getQuorumThreshold } = useContract();
 
   const info = async () => {
-    await getQuorumThreshold(PROPOSAL_ID).then((res) => console.log(res));
+    await getQuorumThreshold(BigInt(PROPOSAL_ID)).then((res) => console.log(res));
   };
+
   useEffect(() => {
     info();
   }, []);

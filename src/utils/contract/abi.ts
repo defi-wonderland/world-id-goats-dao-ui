@@ -9,7 +9,7 @@ import { parseAbi } from 'viem';
  */
 
 export const checkVoteValidity = parseAbi([
-  'function checkVoteValidity(uint8 _support,uint256 _proposalId,bytes memory _proofData ) external returns (uint256 _nullifierHash);',
+  'function checkVoteValidity(uint8 _support,uint256 _proposalId,bytes memory _proofData ) external returns (uint256 _nullifierHash)',
 ]);
 
 /**
@@ -19,7 +19,7 @@ export const checkVoteValidity = parseAbi([
  */
 
 export const proposalsQuorumThreshold = parseAbi([
-  'function proposalsQuorumThreshold(uint256 _proposalId) external view returns (uint256 _quorumThreshold);',
+  'function proposalsQuorumThreshold(uint256 _proposalId) external view returns (uint256 _quorumThreshold)',
 ]);
 
 /**
@@ -29,15 +29,15 @@ export const proposalsQuorumThreshold = parseAbi([
  */
 
 export const castVoteWithReasonAndParams = parseAbi([
-  'function castVoteWithReasonAndParams( uint256 proposalId,uint8 support, string calldata reason, bytes memory params) external returns (uint256 balance);',
+  'function castVoteWithReasonAndParams( uint256 proposalId,uint8 support, string calldata reason, bytes memory params) external returns (uint256 balance)',
 ]);
 
 /**
  * @notice module:core
  * @dev Current state of a proposal, following Compound's convention
  */
-
-export const state = parseAbi(['function state(uint256 proposalId) external view returns (ProposalState);']);
+// temporary disabled
+// export const state = parseAbi(['function state(uint256 proposalId) external view returns (ProposalState)']);
 
 /**
  * @notice module:core
@@ -47,7 +47,7 @@ export const state = parseAbi(['function state(uint256 proposalId) external view
  */
 
 export const proposalSnapshot = parseAbi([
-  'function proposalSnapshot(uint256 proposalId) external view returns (uint256);',
+  'function proposalSnapshot(uint256 proposalId) external view returns (uint256)',
 ]);
 
 /**
@@ -57,7 +57,7 @@ export const proposalSnapshot = parseAbi([
  */
 
 export const proposalDeadline = parseAbi([
-  'function proposalDeadline(uint256 proposalId) external view returns (uint256);',
+  'function proposalDeadline(uint256 proposalId) external view returns (uint256)',
 ]);
 
 /**
@@ -69,12 +69,12 @@ export const proposalDeadline = parseAbi([
  * proposal starts.
  */
 
-export const votingDelay = parseAbi(['function votingDelay() public view virtual returns (uint256);']);
+export const votingDelay = parseAbi(['function votingDelay() public view returns (uint256)']);
 
 /**
  * @dev Accessor to the internal vote counts.
  */
 
 export const proposalVotes = parseAbi([
-  ' function proposalVotes(uint256 proposalId) public view virtual returns (uint256 againstVotes, uint256 forVotes, uint256 abstainVotes) ',
+  'function proposalVotes(uint256 proposalId) public view returns (uint256 againstVotes, uint256 forVotes, uint256 abstainVotes)',
 ]);
