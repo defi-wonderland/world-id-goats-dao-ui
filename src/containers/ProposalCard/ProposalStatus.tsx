@@ -9,8 +9,6 @@ import { useCustomTheme } from '~/hooks';
 import { MoreButton } from '~/components';
 
 export const ProposalStatus = () => {
-  const { currentTheme } = useCustomTheme();
-
   const handleExplorer = (url: string) => {
     //navigate to block scan
     if (typeof window !== 'undefined') {
@@ -22,13 +20,13 @@ export const ProposalStatus = () => {
     {
       icon: <AddCircleOutlineIcon />,
       primary: 'Draft created',
-      secondary: 'Wed Apr 3, 02:50 pm - cattin.seedlatam.eth',
+      secondary: 'Wed Apr 3, 02:50 pm',
       state: 'done',
     },
     {
       icon: <PublishedWithChangesIcon />,
       primary: 'Published onchain',
-      secondary: 'Wed Apr 3, 02:50 pm - cattin.seedlatam.eth',
+      secondary: 'Wed Apr 3, 02:50 pm',
       state: 'active',
       menuItems: [
         { label: 'View on block explorer', onClick: () => handleExplorer('https://optimistic.etherscan.io/') },
@@ -37,7 +35,7 @@ export const ProposalStatus = () => {
     {
       icon: <PlayCircleOutlineIcon />,
       primary: 'Voting period started',
-      secondary: 'Sat Apr 6, 03:22 pm - cattin.seedlatam.eth',
+      secondary: 'Sat Apr 6, 03:22 pm',
       state: 'pending',
       menuItems: [
         { label: 'View on block explorer', onClick: () => handleExplorer('https://optimistic.etherscan.io/') },
@@ -61,9 +59,9 @@ export const ProposalStatus = () => {
 
   return (
     <StatusContainer>
-      <Typography variant='h6' sx={{ color: currentTheme.textPrimary }}>
-        Status
-      </Typography>
+      <TitleContainer>
+        <STitle variant='h6'>Status</STitle>
+      </TitleContainer>
       <Divider sx={{ my: 2 }} />
       <List>
         {statusItems.map((item, index) => (
@@ -87,8 +85,8 @@ const StatusContainer = styled(Box)(() => {
     backgroundColor: currentTheme.backgroundSecondary,
     borderRadius: currentTheme.borderRadius,
     boxShadow: currentTheme.boxShadow,
-    padding: '1rem',
-    margin: '0 0 2rem 0',
+    margin: '0 0 1rem 0',
+    padding: '2rem',
   };
 });
 
@@ -117,4 +115,12 @@ const StatusListItem = styled(ListItem)(() => {
       flexDirection: 'column-reverse',
     },
   };
+});
+
+const TitleContainer = styled(Box)({
+  paddingBottom: '0.5rem',
+});
+
+const STitle = styled(Typography)({
+  fontWeight: 800,
 });

@@ -56,7 +56,7 @@ export const ProposalPoll = () => {
   return (
     <PollContainer>
       <TitleContainer>
-        <Typography variant='h6'>Current Votes</Typography>
+        <STitle variant='h6'>Current Votes</STitle>
       </TitleContainer>
       <Divider sx={{ my: 2 }} />
       <StatsContainer>
@@ -64,14 +64,14 @@ export const ProposalPoll = () => {
           <CheckCircleIcon />
           <Typography>Quorum</Typography>
         </StatsInfoContainer>
-        <Typography>{quorum}</Typography>
+        <SText>{quorum}</SText>
       </StatsContainer>
       <StatsContainer>
         <StatsInfoContainer>
           <CheckCircleIcon />
           <Typography>Majority support</Typography>
         </StatsInfoContainer>
-        <Typography>{majoritySupport}</Typography>
+        <SText>{majoritySupport}</SText>
       </StatsContainer>
       <OverallProgressContainer>
         {voteOffsets.map((vote, index) => (
@@ -83,7 +83,7 @@ export const ProposalPoll = () => {
           <SBox key={vote.type}>
             <StyledCircleIcon sx={{ color: vote.color }} />
             <StyledTypography color={vote.color}>{vote.type}</StyledTypography>
-            <Typography>{vote.count}</Typography>
+            <SText>{vote.count}</SText>
           </SBox>
         ))}
       </VoteStatsContainer>
@@ -103,6 +103,7 @@ const PollContainer = styled(Box)(() => {
     padding: '2rem',
     boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
     gap: '0.5rem',
+    fontWeight: 800,
   };
 });
 
@@ -138,6 +139,21 @@ const SBox = styled(Box)({
   width: '100%',
   margin: '8px 0',
   padding: '4px',
+});
+
+const STitle = styled(Typography)({
+  fontWeight: 800,
+});
+
+const SText = styled(Typography)(() => {
+  const { currentTheme } = useCustomTheme();
+  return {
+    fontWeight: 800,
+    color: currentTheme.textSecondary,
+    '@media (max-width: 1200px)': {
+      fontSize: '0.75rem',
+    },
+  };
 });
 
 const StyledTypography = styled(Typography)<StyledTypographyProps>(({ color }) => ({

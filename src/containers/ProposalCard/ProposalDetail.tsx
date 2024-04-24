@@ -17,7 +17,7 @@ export const ProposalDetail = () => {
   return (
     <DetailContainer>
       <TitleContainer>
-        <Typography variant='h6'>Proposal</Typography>
+        <STitle variant='h6'>Proposal</STitle>
       </TitleContainer>
       <Divider sx={{ my: 2 }} />
       <StyledTabs value={tabValue} onChange={handleChange} aria-label='proposal detail tabs'>
@@ -110,4 +110,8 @@ const CodeSnippet = styled(Typography)(() => {
 
 const SParagraph = styled(Typography)({
   textAlign: 'justify',
+});
+
+const STitle = styled(Typography)({
+  fontWeight: 800,
 });
