@@ -25,7 +25,7 @@ const StyledHeader = styled('header')(() => {
   const { currentTheme } = useCustomTheme();
   return {
     display: 'flex',
-    height: `5rem`,
+    height: '5rem',
     padding: '0 8rem',
     alignItems: 'center',
     justifyContent: 'space-between',

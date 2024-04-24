@@ -141,6 +141,7 @@ export const StyledButton = styled(Button)(({ theme }) => {
     fontWeight: 600,
     fontSize: '1.1rem',
     boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+    margin: '0.5rem 0',
     width: '100%',
     '&:hover': {
       backgroundColor: theme.palette.primary.dark,

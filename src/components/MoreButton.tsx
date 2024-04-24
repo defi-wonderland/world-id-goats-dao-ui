@@ -4,9 +4,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { styled } from '@mui/material/styles';
 import { useCustomTheme } from '~/hooks';
 
-// Props type definition for custom menu items
 interface MoreButtonProps {
-  menuItems: { label: string; onClick: () => void }[];
+  menuItems: { label: string; onClick: () => void; icon: React.ReactNode }[];
 }
 
 export const MoreButton = ({ menuItems }: MoreButtonProps) => {
@@ -50,7 +49,7 @@ export const MoreButton = ({ menuItems }: MoreButtonProps) => {
               handleClose();
             }}
           >
-            {item.label}
+            {item.icon} {item.label}
           </SMenuItem>
         ))}
       </SMenu>
@@ -81,9 +80,19 @@ const SMenu = styled(Menu)(() => {
 
 const SMenuItem = styled(MenuItem)(() => {
   return {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
     fontWeight: 800,
+    '& svg': {
+      fontSize: '1.2rem',
+      color: 'inherit',
+    },
     '@media (max-width: 600px)': {
       fontSize: '0.8rem',
+      '& svg': {
+        fontSize: '1rem',
+      },
     },
   };
 });

@@ -1,16 +1,15 @@
 import { Box, Typography, styled } from '@mui/material';
-import Image from 'next/image';
+import { Cancel } from '@mui/icons-material';
 
 import BaseModal from '~/components/BaseModal';
 import { useCustomTheme } from '~/hooks';
 import { ModalType } from '~/types';
-import errorIcon from '~/assets/icons/x-circle.svg';
 
 export const ErrorModal = () => {
   return (
     <BaseModal type={ModalType.ERROR} title={'Error'}>
       <ModalBody>
-        <Image src={errorIcon} alt='Error' width={100} height={100} />
+        <SErrorIcon />
         <STitle variant='h4'> Something went wrong</STitle>
       </ModalBody>
     </BaseModal>
@@ -39,4 +38,9 @@ const STitle = styled(Typography)(() => {
       fontWeight: 600,
     },
   };
+});
+
+const SErrorIcon = styled(Cancel)({
+  fontSize: '5rem',
+  color: '#D92D20',
 });

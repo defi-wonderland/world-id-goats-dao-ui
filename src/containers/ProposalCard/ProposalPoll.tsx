@@ -1,6 +1,5 @@
 import { Box, Typography, Divider, TypographyProps, styled } from '@mui/material';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CircleIcon from '@mui/icons-material/Circle';
+import { CheckCircle, Circle } from '@mui/icons-material';
 import { useCustomTheme } from '~/hooks';
 
 interface StyledTypographyProps extends TypographyProps {
@@ -26,6 +25,7 @@ export const ProposalPoll = () => {
   const quorum = '141.71M of 104.64M';
   const majoritySupport = 'Yes';
 
+  // Parse num pending
   const votes = {
     for: 138000000,
     against: 25801100,
@@ -61,14 +61,14 @@ export const ProposalPoll = () => {
       <Divider sx={{ my: 2 }} />
       <StatsContainer>
         <StatsInfoContainer>
-          <CheckCircleIcon />
+          <CheckCircle />
           <Typography>Quorum</Typography>
         </StatsInfoContainer>
         <SText>{quorum}</SText>
       </StatsContainer>
       <StatsContainer>
         <StatsInfoContainer>
-          <CheckCircleIcon />
+          <CheckCircle />
           <Typography>Majority support</Typography>
         </StatsInfoContainer>
         <SText>{majoritySupport}</SText>
@@ -118,10 +118,19 @@ const StatsContainer = styled(Box)({
   width: '100%',
 });
 
-const StatsInfoContainer = styled(Box)({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '10px',
+const StatsInfoContainer = styled(Box)(() => {
+  const { currentTheme } = useCustomTheme();
+  return {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    '& svg': {
+      color: currentTheme.textTertiary,
+    },
+    '& .MuiTypography-root': {
+      fontWeight: 800,
+    },
+  };
 });
 
 const VoteStatsContainer = styled(Box)({
@@ -163,7 +172,7 @@ const StyledTypography = styled(Typography)<StyledTypographyProps>(({ color }) =
   fontWeight: 800,
 }));
 
-const StyledCircleIcon = styled(CircleIcon)(({ color }) => ({
+const StyledCircleIcon = styled(Circle)(({ color }) => ({
   color: color,
 }));
 

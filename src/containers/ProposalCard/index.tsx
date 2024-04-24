@@ -24,7 +24,7 @@ export const ProposalCard = () => {
   );
 };
 
-const ProposalCardContainer = styled('div')({
+const ProposalCardContainer = styled('article')({
   display: 'grid',
   gridTemplateRows: 'auto 1fr',
   height: '100%',
@@ -33,12 +33,12 @@ const ProposalCardContainer = styled('div')({
   },
 });
 
-const HeaderSection = styled('div')({
+const HeaderSection = styled('header')({
   gridRow: '1',
   width: '100%',
 });
 
-const ContentSection = styled('div')({
+const ContentSection = styled('main')({
   display: 'grid',
   gridTemplateColumns: '2fr 1fr',
   gridRow: '2',
@@ -48,13 +48,13 @@ const ContentSection = styled('div')({
   },
 });
 
-const LeftColumn = styled('div')({
+const LeftColumn = styled('section')({
   display: 'flex',
   flexDirection: 'column',
   gap: '1rem',
 });
 
-const RightColumn = styled('div')({
+const RightColumn = styled('section')({
   display: 'flex',
   flexDirection: 'column',
   gap: '1rem',

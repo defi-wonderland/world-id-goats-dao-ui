@@ -1,12 +1,31 @@
-import { Box, Typography, List, ListItem, ListItemIcon, ListItemText, Divider, styled } from '@mui/material';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import {
+  Box,
+  Typography,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  styled,
+  TypographyProps,
+} from '@mui/material';
+import {
+  AddCircleOutline,
+  PublishedWithChanges,
+  PlayCircleOutline,
+  PauseCircleOutline,
+  CheckCircleOutline,
+  OpenInNew,
+} from '@mui/icons-material';
 
 import { useCustomTheme } from '~/hooks';
 import { MoreButton } from '~/components';
+
+type StatusType = 'done' | 'active' | 'pending';
+
+interface STextProps extends TypographyProps {
+  status: StatusType | string;
+}
 
 export const ProposalStatus = () => {
   const handleExplorer = (url: string) => {
@@ -16,43 +35,57 @@ export const ProposalStatus = () => {
     }
   };
 
+  /*
+  TBD: Add more states/dynamic
+  Quorum not reached
+  Proposal executed
+  */
+
   const statusItems = [
     {
-      icon: <AddCircleOutlineIcon />,
+      icon: <AddCircleOutline />,
       primary: 'Draft created',
       secondary: 'Wed Apr 3, 02:50 pm',
-      state: 'done',
+      status: 'done',
     },
     {
-      icon: <PublishedWithChangesIcon />,
+      icon: <PublishedWithChanges />,
       primary: 'Published onchain',
       secondary: 'Wed Apr 3, 02:50 pm',
-      state: 'active',
+      status: 'active',
       menuItems: [
-        { label: 'View on block explorer', onClick: () => handleExplorer('https://optimistic.etherscan.io/') },
+        {
+          label: 'View on block explorer',
+          onClick: () => handleExplorer('https://optimistic.etherscan.io/'),
+          icon: <OpenInNew />,
+        },
       ],
     },
     {
-      icon: <PlayCircleOutlineIcon />,
+      icon: <PlayCircleOutline />,
       primary: 'Voting period started',
       secondary: 'Sat Apr 6, 03:22 pm',
-      state: 'pending',
+      status: 'pending',
       menuItems: [
-        { label: 'View on block explorer', onClick: () => handleExplorer('https://optimistic.etherscan.io/') },
+        {
+          label: 'View on block explorer',
+          onClick: () => handleExplorer('https://optimistic.etherscan.io/'),
+          icon: <OpenInNew />,
+        },
       ],
     },
     {
-      icon: <PauseCircleOutlineIcon />,
+      icon: <PauseCircleOutline />,
       primary: 'End voting period',
       secondary: 'Sat Apr 20, 05:32 pm',
-      state: 'pending',
+      status: 'pending',
       links: false,
     },
     {
-      icon: <CheckCircleOutlineIcon />,
-      primary: 'Execute',
+      icon: <CheckCircleOutline />,
+      primary: 'Execute proposal',
       secondary: 'Sat Apr 20, 05:32 pm',
-      state: 'pending',
+      status: 'pending',
       links: false,
     },
   ];
@@ -67,11 +100,11 @@ export const ProposalStatus = () => {
         {statusItems.map((item, index) => (
           <>
             {item.primary === 'Execute' && <Divider sx={{ my: 2 }} />}
-            <StatusListItem key={index}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.primary} secondary={item.secondary} />
+            <ListItem key={index}>
+              <SIcon status={item.status}>{item.icon}</SIcon>
+              <ListItemText primary={<SText status={item.status}>{item.primary}</SText>} secondary={item.secondary} />
               {item.menuItems && <MoreButton menuItems={item.menuItems} />}
-            </StatusListItem>
+            </ListItem>
           </>
         ))}
       </List>
@@ -90,37 +123,58 @@ const StatusContainer = styled(Box)(() => {
   };
 });
 
-const StatusListItem = styled(ListItem)(() => {
-  const { currentTheme } = useCustomTheme();
-  return {
-    '&.done': {
-      color: currentTheme.textSecondary,
-    },
-    '&.active': {
-      color: currentTheme.textPrimary,
-      // '& .MuiListItemIcon-root': {
-      //   color: currentTheme.active,
-      // },
-    },
-    '&.pending': {
-      color: currentTheme.textSecondary,
-      opacity: 0.5,
-    },
-    // '& .MuiListItemIcon-root': {
-    //   color: currentTheme.done,
-    // },
-    '& .MuiIconButton-root': {
-      color: currentTheme.textSecondary,
-      display: 'flex',
-      flexDirection: 'column-reverse',
-    },
-  };
-});
-
 const TitleContainer = styled(Box)({
   paddingBottom: '0.5rem',
 });
 
 const STitle = styled(Typography)({
   fontWeight: 800,
+});
+
+const SIcon = styled(ListItemIcon)<STextProps>(({ status }) => {
+  const { currentTheme } = useCustomTheme();
+  let color;
+
+  switch (status) {
+    case 'active':
+      color = currentTheme.textTertiary;
+      break;
+    case 'pending':
+      color = currentTheme.textSecondary;
+      break;
+    case 'done':
+      color = currentTheme.textPrimary;
+      break;
+    default:
+      color = currentTheme.textPrimary;
+  }
+
+  return {
+    fontWeight: 800,
+    color: color,
+  };
+});
+
+const SText = styled(Typography)<STextProps>(({ status }) => {
+  const { currentTheme } = useCustomTheme();
+  let color;
+
+  switch (status) {
+    case 'active':
+      color = currentTheme.textTertiary;
+      break;
+    case 'pending':
+      color = currentTheme.textSecondary;
+      break;
+    case 'done':
+      color = currentTheme.textPrimary;
+      break;
+    default:
+      color = currentTheme.textPrimary;
+  }
+
+  return {
+    fontWeight: 800,
+    color: color,
+  };
 });

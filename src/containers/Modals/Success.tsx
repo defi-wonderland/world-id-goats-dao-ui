@@ -1,13 +1,11 @@
-import { Box, Typography, styled } from '@mui/material';
-import Image from 'next/image';
 import Link from 'next/link';
+import { Box, Typography, styled } from '@mui/material';
+import { CheckCircle, OpenInNew } from '@mui/icons-material';
 
 import BaseModal from '~/components/BaseModal';
 import { useCustomTheme } from '~/hooks';
 import { ModalType } from '~/types';
-import { truncateValue } from '~/utils/misc';
-import successIcon from '~/assets/icons/check-circle.svg';
-import openLinkIcon from '~/assets/icons/open-link.svg';
+import { truncateValue } from '~/utils';
 
 export const SuccessModal = () => {
   const hash = '0x';
@@ -15,12 +13,12 @@ export const SuccessModal = () => {
   return (
     <BaseModal type={ModalType.SUCCESS} title={'Vote'}>
       <ModalBody>
-        <Image src={successIcon} alt='Success' width={100} height={100} />
+        <SCheckIcon />
         <STitle variant='h4'> Vote Succeed! </STitle>
         {hash && (
           <StyledLink href={`https://optimistic.etherscan.io//${hash}`} target='_blank'>
             {truncateValue(hash)}
-            <Image src={openLinkIcon} alt='Open transaction in block explorer' />
+            <OpenInNew />
           </StyledLink>
         )}
         <STypography variant='body1'>You can safely close this modal</STypography>
@@ -69,13 +67,23 @@ const StyledLink = styled(Link)(() => {
   const { currentTheme } = useCustomTheme();
   return {
     textDecoration: 'none',
-    color: currentTheme.primaryColor,
+    color: currentTheme.textTertiary,
     display: 'flex',
     alignItems: 'center',
     gap: '0.5rem',
+    fontWeight: 800,
+    '& svg': {
+      fontSize: '1.2rem',
+      color: 'inherit',
+    },
     '&:hover': {
       textDecoration: 'underline',
-      color: currentTheme.primaryColor,
+      color: currentTheme.textTertiary,
     },
   };
+});
+
+const SCheckIcon = styled(CheckCircle)({
+  fontSize: '5rem',
+  color: '#4aa16c',
 });

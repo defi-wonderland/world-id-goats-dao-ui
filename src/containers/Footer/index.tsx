@@ -1,8 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { useCustomTheme } from '~/hooks/useTheme';
 
-import { FOOTER_HEIGHT } from '~/utils';
-
 export const Footer = () => {
   return (
     <FooterContainer>
@@ -19,7 +17,7 @@ const FooterContainer = styled('footer')(() => {
   const { currentTheme } = useCustomTheme();
   return {
     display: 'flex',
-    height: `${FOOTER_HEIGHT}rem`,
+    height: '5rem',
     padding: '0 8rem',
     alignItems: 'center',
     justifyContent: 'space-between',

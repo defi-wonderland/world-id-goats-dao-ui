@@ -1,5 +1,5 @@
-import { Typography, Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { Typography, Box, styled } from '@mui/material';
+import { OpenInNew } from '@mui/icons-material';
 
 import { useCustomTheme } from '~/hooks';
 import proposalData from '../../data/proposal.json';
@@ -18,8 +18,17 @@ export const ProposalHeader = () => {
   };
 
   const menuItems = [
-    { label: 'View on block explorer', onClick: () => handleExplorer('https://optimistic.etherscan.io/') },
+    {
+      label: 'View on block explorer',
+      onClick: () => handleExplorer('https://optimistic.etherscan.io/'),
+      icon: <OpenInNew />,
+    },
   ];
+
+  /*
+  TBD: Add more status/dynamic
+  active - executed - defeated
+  */
 
   return (
     <HeaderContainer>
