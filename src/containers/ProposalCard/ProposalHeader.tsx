@@ -64,6 +64,9 @@ const HeaderContainer = styled('div')(() => {
     '@media (max-width: 600px)': {
       display: 'inline-block',
     },
+    '@media (max-width: 390px)': {
+      height: '15rem',
+    },
   };
 });
 

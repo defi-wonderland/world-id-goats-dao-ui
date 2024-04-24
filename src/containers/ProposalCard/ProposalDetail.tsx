@@ -55,6 +55,9 @@ const DetailContainer = styled(Box)(() => {
     padding: '2rem',
     boxShadow: currentTheme.boxShadow,
     width: '50rem',
+    '@media (max-width: 600px)': {
+      width: 'inherit',
+    },
   };
 });
 
