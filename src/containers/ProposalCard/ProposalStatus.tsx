@@ -65,7 +65,7 @@ export const ProposalStatus = () => {
         Status
       </Typography>
       <Divider sx={{ my: 2 }} />
-      <StatusList>
+      <List>
         {statusItems.map((item, index) => (
           <>
             {item.primary === 'Execute' && <Divider sx={{ my: 2 }} />}
@@ -76,7 +76,7 @@ export const ProposalStatus = () => {
             </StatusListItem>
           </>
         ))}
-      </StatusList>
+      </List>
     </StatusContainer>
   );
 };
@@ -91,10 +91,6 @@ const StatusContainer = styled(Box)(() => {
     margin: '0 0 2rem 0',
   };
 });
-
-const StatusList = styled(List)(() => ({
-  // Additional styles if needed
-}));
 
 const StatusListItem = styled(ListItem)(() => {
   const { currentTheme } = useCustomTheme();
@@ -117,6 +113,8 @@ const StatusListItem = styled(ListItem)(() => {
     // },
     '& .MuiIconButton-root': {
       color: currentTheme.textSecondary,
+      display: 'flex',
+      flexDirection: 'column-reverse',
     },
   };
 });
