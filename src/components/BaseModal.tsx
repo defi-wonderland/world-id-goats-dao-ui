@@ -6,7 +6,6 @@ import Image from 'next/image';
 import closeIcon from '~/assets/icons/x-mark.svg';
 import { useCustomTheme, useModal } from '~/hooks';
 import { ModalType } from '~/types';
-import { zIndex } from '~/utils';
 
 interface BaseModalProps {
   children: React.ReactNode;
@@ -46,7 +45,7 @@ Backdrop.displayName = 'Backdrop';
 
 export const StyledModal = styled(Modal)`
   position: fixed;
-  z-index: ${zIndex.MODAL};
+  z-index: 200;
   inset: 0;
   display: flex;
   align-items: center;
@@ -59,7 +58,7 @@ export const StyledModal = styled(Modal)`
 `;
 
 export const StyledBackdrop = styled(Backdrop)`
-  z-index: ${zIndex.BACKDROP};
+  z-index: -1;
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
