@@ -1,9 +1,8 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import { Modal, styled, Box, Typography, IconButton, Divider } from '@mui/material';
-import Image from 'next/image';
+import CloseIcon from '@mui/icons-material/Close';
 
-import closeIcon from '~/assets/icons/x-mark.svg';
 import { useCustomTheme, useModal } from '~/hooks';
 import { ModalType } from '~/types';
 
@@ -22,9 +21,8 @@ const BaseModal = ({ children, type, title, fixedHeight }: BaseModalProps) => {
       <SModal className={fixedHeight ? 'big-modal' : ''}>
         <ModalHeader>
           <Box>{title && <Title variant='h2'>{title}</Title>}</Box>
-
           <IconButton onClick={closeModal} className='close-button'>
-            <Image src={closeIcon} alt='Close modal' />
+            <CloseIcon />
           </IconButton>
         </ModalHeader>
         <Divider />
@@ -116,16 +114,16 @@ export const ModalHeader = styled(Box)(() => {
       h2: {
         fontSize: '1.8rem',
       },
-      img: {
-        width: '2.4rem',
-        height: '2.4rem',
-      },
     },
   };
 });
 
-const Title = styled(Typography)({
-  fontSize: '1rem',
-  alignItems: 'center',
-  fontWeight: 800,
+const Title = styled(Typography)(() => {
+  const { currentTheme } = useCustomTheme();
+  return {
+    fontSize: '1rem',
+    alignItems: 'center',
+    fontWeight: 800,
+    color: currentTheme.textSecondary,
+  };
 });
