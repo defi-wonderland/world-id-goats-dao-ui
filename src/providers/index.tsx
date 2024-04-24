@@ -4,6 +4,7 @@ import { StateProvider } from './StateProvider';
 import { ThemeProvider } from './ThemeProvider';
 import { WalletProvider } from './WalletProvider';
 import { ModalProvider } from './ModalProvider';
+import { ClientProvider } from './ClientProvider';
 
 type Props = {
   children: ReactNode;
@@ -14,7 +15,9 @@ export const Providers = ({ children }: Props) => {
     <ThemeProvider>
       <ModalProvider>
         <StateProvider>
-          <WalletProvider>{children}</WalletProvider>
+          <ClientProvider>
+            <WalletProvider>{children}</WalletProvider>
+          </ClientProvider>
         </StateProvider>
       </ModalProvider>
     </ThemeProvider>

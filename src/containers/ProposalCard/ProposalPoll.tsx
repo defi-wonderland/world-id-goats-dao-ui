@@ -1,6 +1,11 @@
+import { useEffect } from 'react';
 import { Box, Typography, Divider, TypographyProps, styled } from '@mui/material';
 import { CheckCircle, Circle } from '@mui/icons-material';
-import { useCustomTheme } from '~/hooks';
+
+import { useCustomTheme, useVote } from '~/hooks';
+import { getConfig } from '~/config';
+
+const { PROPOSAL_ID } = getConfig();
 
 interface StyledTypographyProps extends TypographyProps {
   color?: string;
@@ -21,6 +26,15 @@ interface Vote {
 }
 
 export const ProposalPoll = () => {
+  const { getQuorumThreshold } = useVote();
+
+  const info = async () => {
+    await getQuorumThreshold(PROPOSAL_ID).then((res) => console.log(res));
+  };
+  useEffect(() => {
+    info();
+  }, []);
+
   // Dummy data to simulate the props
   const quorum = '141.71M of 104.64M';
   const majoritySupport = 'Yes';
