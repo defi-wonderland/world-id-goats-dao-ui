@@ -6,7 +6,7 @@ import { FOOTER_HEIGHT } from '~/utils';
 export const Footer = () => {
   return (
     <FooterContainer>
-      <h1>Footer</h1>
+      <h1>{''}</h1>
       <Subtitle>
         <p>Made with 💜 by</p>
         <a href='https://defi.sucks'>Wonderland</a>
@@ -23,7 +23,7 @@ const FooterContainer = styled('footer')(() => {
     padding: '0 8rem',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: currentTheme.backgroundSecondary,
+    backgroundColor: currentTheme.backgroundPrimary,
     borderTop: currentTheme.border,
     width: '100%',
   };

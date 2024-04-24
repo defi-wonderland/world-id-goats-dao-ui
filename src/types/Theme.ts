@@ -12,6 +12,13 @@ export interface Theme {
   borderRadius: string;
   secondaryBorderRadius: string;
   border: string;
+  boxShadow: string;
+  primaryColor: string;
+  accentColor: string;
+  disabledColor: string;
+  errorPrimary: string;
+  warningPrimary: string;
+  successPrimary: string;
 }
 
 export interface PropTheme {

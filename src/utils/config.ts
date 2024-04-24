@@ -23,7 +23,7 @@ const connectors = connectorsForWallets(
     },
   ],
   {
-    appName: 'Web3 React boilerplate',
+    appName: 'GoatDAO',
     projectId: PROJECT_ID,
   },
 );

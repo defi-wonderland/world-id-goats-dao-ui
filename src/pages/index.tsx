@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Web3 Boilerplate</title>
+        <title>GoatDAO</title>
       </Head>
       <Landing />
     </>

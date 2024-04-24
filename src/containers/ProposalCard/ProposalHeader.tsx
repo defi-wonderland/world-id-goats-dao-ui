@@ -1,0 +1,99 @@
+import { Typography, Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
+
+import { useCustomTheme } from '~/hooks';
+import proposalData from '../../data/proposal.json';
+import { truncateValue } from '~/utils';
+import { MoreButton } from '~/components';
+import { VoteButton } from './VoteButton';
+
+export const ProposalHeader = () => {
+  const { title, status, date, id } = proposalData.HEADER;
+
+  const handleExplorer = (url: string) => {
+    //navigate to block scan
+    if (typeof window !== 'undefined') {
+      window.open(url, '_blank');
+    }
+  };
+
+  const menuItems = [
+    { label: 'View on block explorer', onClick: () => handleExplorer('https://optimistic.etherscan.io/') },
+  ];
+
+  return (
+    <HeaderContainer>
+      <LeftSection>
+        <StatusBadge>{status}</StatusBadge>
+        <Title variant='h5'>{title}</Title>
+        <IDDateBox>
+          <Typography variant='subtitle2'>ID {truncateValue(id)}</Typography>
+          <Typography variant='subtitle2'>Proposed on: {date}</Typography>
+        </IDDateBox>
+      </LeftSection>
+      <RightSection>
+        <VoteButton />
+        <MoreButton menuItems={menuItems} />
+      </RightSection>
+    </HeaderContainer>
+  );
+};
+
+const HeaderContainer = styled('div')(() => {
+  const { currentTheme } = useCustomTheme();
+  return {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '12.5rem',
+    margin: '1rem 0',
+    backgroundColor: currentTheme.backgroundSecondary,
+    color: currentTheme.textPrimary,
+    borderRadius: currentTheme.borderRadius,
+    padding: '0 2rem',
+    boxShadow: currentTheme.boxShadow,
+  };
+});
+
+const LeftSection = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.5rem',
+});
+
+const RightSection = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+});
+
+const StatusBadge = styled(Typography)(() => {
+  const { currentTheme } = useCustomTheme();
+  return {
+    backgroundColor: currentTheme.primaryColor,
+    color: '#fff',
+    borderRadius: '20px',
+    padding: '0.2rem 1rem',
+    fontWeight: 800,
+    fontSize: '0.75rem',
+    width: 'fit-content',
+    textTransform: 'uppercase',
+  };
+});
+
+const IDDateBox = styled(Box)(() => {
+  const { currentTheme } = useCustomTheme();
+  return {
+    display: 'flex',
+    gap: '1rem',
+    alignItems: 'center',
+
+    '& .MuiTypography-root': {
+      color: currentTheme.textSecondary,
+      fontWeight: 600,
+    },
+  };
+});
+
+const Title = styled(Typography)({
+  fontWeight: 800,
+});

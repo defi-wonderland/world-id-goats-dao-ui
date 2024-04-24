@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { StateProvider } from './StateProvider';
 import { ThemeProvider } from './ThemeProvider';
 import { WalletProvider } from './WalletProvider';
+import { ModalProvider } from './ModalProvider';
 
 type Props = {
   children: ReactNode;
@@ -11,9 +12,11 @@ type Props = {
 export const Providers = ({ children }: Props) => {
   return (
     <ThemeProvider>
-      <StateProvider>
-        <WalletProvider>{children}</WalletProvider>
-      </StateProvider>
+      <ModalProvider>
+        <StateProvider>
+          <WalletProvider>{children}</WalletProvider>
+        </StateProvider>
+      </ModalProvider>
     </ThemeProvider>
   );
 };

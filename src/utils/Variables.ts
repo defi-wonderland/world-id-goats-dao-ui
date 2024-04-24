@@ -28,6 +28,6 @@ export const zIndex = {
   TOAST: 500,
 };
 
-export const HEADER_HEIGHT = 8; // Header height in rem units
-export const FOOTER_HEIGHT = 8; // Footer height in rem units
+export const HEADER_HEIGHT = 5; // Header height in rem units
+export const FOOTER_HEIGHT = 5; // Footer height in rem units
 export const MAIN_HEIGHT = HEADER_HEIGHT + FOOTER_HEIGHT;
