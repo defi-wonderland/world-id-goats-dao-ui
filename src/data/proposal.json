@@ -1,16 +1,15 @@
 {
-    "HEADER":{
-        "status": "active",
-        "title": "Request for Continuation of the Arbitrum DDA Program Request",
-        "date": "Apr 3rd, 2024",
-        "id": "98446466630612736687159241204141593794174501692677162686607521796118942563659"
-    },
-    "DESCRIPTION":{
-        "summary": "As we near the end of allocating the initial grant budget (link to proposal), where through the Arbitrum Grants Program 14 run via the Delegated Domain Allocation model by Questbook, $912k has already been allocated to over 60 proposals. Based on the overwhelming response and number of quality proposals the grant program has received, we propose to start a new program for the Arbitrum Grants via DDA through Questbook with a budget of $4,000,000 spread across 4 domains over the next two quarters. We have received great feedback and support from the community, builders, and domain allocators for requesting additional budget and continue funding projects through the delegated domain allocation model.",
-        "background": "The Arbitrum grants 14, administered via DDA by Questbook and 4 domain allocators, (Cattin, Adam, Juandi and JoJo) went live on the 5th of October with a total grants budget of $800k 6 spread across four domains. Since the launch of the grants program, the Arbitrum domain allocators approved proposals requesting $912k and disbursed a total of ~$394,000 to accepted proposals from a pool of 201 proposals. These domain allocators were elected from the community and by the community. 3 The specific information regarding the accepted proposals and the funded teams can be found here 14. As previously stated in our initial proposal, Questbook launched the grants program to further scale it based on proposal volume and learnings from the first ever grants program in the Arbitrum Ecosystem. The Arbitrum Grants run through DDA has received overwhelming response, receiving over 200+ proposals since launch. Please find below the Arbitrum DDA Grant Programs funding breakdown of relevant metrics and insights and proposed improvements going forward."
-    },
-    "CODE": {
-        "data": "Signature: transfer(address,address,uint256)"
-    }
-
+  "HEADER": {
+    "status": "active",
+    "title": "Request for Continuation of the Arbitrum DDA Program Request",
+    "date": "Apr 3rd, 2024",
+    "id": "98446466630612736687159241204141593794174501692677162686607521796118942563659"
+  },
+  "DESCRIPTION": {
+    "summary": "As we near the end of allocating the initial grant budget (link to proposal), where through the Arbitrum Grants Program 14 run via the Delegated Domain Allocation model by Questbook, $912k has already been allocated to over 60 proposals. Based on the overwhelming response and number of quality proposals the grant program has received, we propose to start a new program for the Arbitrum Grants via DDA through Questbook with a budget of $4,000,000 spread across 4 domains over the next two quarters. We have received great feedback and support from the community, builders, and domain allocators for requesting additional budget and continue funding projects through the delegated domain allocation model.",
+    "background": "The Arbitrum grants 14, administered via DDA by Questbook and 4 domain allocators, (Cattin, Adam, Juandi and JoJo) went live on the 5th of October with a total grants budget of $800k 6 spread across four domains. Since the launch of the grants program, the Arbitrum domain allocators approved proposals requesting $912k and disbursed a total of ~$394,000 to accepted proposals from a pool of 201 proposals. These domain allocators were elected from the community and by the community. 3 The specific information regarding the accepted proposals and the funded teams can be found here 14. As previously stated in our initial proposal, Questbook launched the grants program to further scale it based on proposal volume and learnings from the first ever grants program in the Arbitrum Ecosystem. The Arbitrum Grants run through DDA has received overwhelming response, receiving over 200+ proposals since launch. Please find below the Arbitrum DDA Grant Programs funding breakdown of relevant metrics and insights and proposed improvements going forward."
+  },
+  "CODE": {
+    "data": "Signature: transfer(address,address,uint256)"
+  }
 }
