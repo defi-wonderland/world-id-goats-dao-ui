@@ -54,7 +54,7 @@ const DetailContainer = styled(Box)(() => {
     borderRadius: currentTheme.borderRadius,
     padding: '2rem',
     boxShadow: currentTheme.boxShadow,
-    width: '45rem',
+    width: '50rem',
   };
 });
 
