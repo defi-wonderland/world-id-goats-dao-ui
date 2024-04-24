@@ -16,7 +16,7 @@ export const SuccessModal = () => {
         <SCheckIcon />
         <STitle variant='h4'> Vote Succeed! </STitle>
         {hash && (
-          <StyledLink href={`https://optimistic.etherscan.io//${hash}`} target='_blank'>
+          <StyledLink href={`https://optimistic.etherscan.io/tx/${hash}`} target='_blank'>
             {truncateValue(hash)}
             <OpenInNew />
           </StyledLink>

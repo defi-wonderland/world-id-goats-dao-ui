@@ -95,7 +95,9 @@ export const ProposalStatus = () => {
       <TitleContainer>
         <STitle variant='h6'>Status</STitle>
       </TitleContainer>
+
       <Divider sx={{ my: 2 }} />
+
       <List>
         {statusItems.map((item, index) => (
           <>

@@ -2,7 +2,7 @@ import { Typography, Box, styled } from '@mui/material';
 import { OpenInNew } from '@mui/icons-material';
 
 import { useCustomTheme } from '~/hooks';
-import proposalData from '../../data/proposal.json';
+import proposalData from '~/data/proposal.json';
 import { truncateValue } from '~/utils';
 import { MoreButton } from '~/components';
 import { VoteButton } from './VoteButton';
@@ -40,6 +40,7 @@ export const ProposalHeader = () => {
           <Typography variant='subtitle2'>Proposed on: {date}</Typography>
         </IDDateBox>
       </LeftSection>
+
       <RightSection>
         <VoteButton />
         <MoreButton menuItems={menuItems} />

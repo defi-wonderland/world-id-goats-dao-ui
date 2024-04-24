@@ -3,7 +3,7 @@ import { Tab, Tabs, Box, Typography, Divider } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import { useCustomTheme } from '~/hooks';
-import proposalData from '../../data/proposal.json';
+import proposalData from '~/data/proposal.json';
 
 export const ProposalDetail = () => {
   const [tabValue, setTabValue] = useState(0);
@@ -19,11 +19,14 @@ export const ProposalDetail = () => {
       <TitleContainer>
         <STitle variant='h6'>Proposal</STitle>
       </TitleContainer>
+
       <Divider sx={{ my: 2 }} />
+
       <StyledTabs value={tabValue} onChange={handleChange} aria-label='proposal detail tabs'>
         <StyledTab label='Description' />
         <StyledTab label='Executable Code' />
       </StyledTabs>
+
       {tabValue === 0 && (
         <TabPanel>
           <SectionTitle>Summary</SectionTitle>
@@ -32,6 +35,7 @@ export const ProposalDetail = () => {
           <SParagraph paragraph>{background}</SParagraph>
         </TabPanel>
       )}
+
       {tabValue === 1 && (
         <TabPanel>
           <SectionTitle>Executable Code</SectionTitle>

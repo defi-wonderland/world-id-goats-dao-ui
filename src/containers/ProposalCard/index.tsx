@@ -11,10 +11,12 @@ export const ProposalCard = () => {
       <HeaderSection>
         <ProposalHeader />
       </HeaderSection>
+
       <ContentSection>
         <LeftColumn>
           <ProposalDetail />
         </LeftColumn>
+
         <RightColumn>
           <ProposalPoll />
           <ProposalStatus />

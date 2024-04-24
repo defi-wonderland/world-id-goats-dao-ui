@@ -58,7 +58,9 @@ export const ProposalPoll = () => {
       <TitleContainer>
         <STitle variant='h6'>Current Votes</STitle>
       </TitleContainer>
+
       <Divider sx={{ my: 2 }} />
+
       <StatsContainer>
         <StatsInfoContainer>
           <CheckCircle />
@@ -66,6 +68,7 @@ export const ProposalPoll = () => {
         </StatsInfoContainer>
         <SText>{quorum}</SText>
       </StatsContainer>
+
       <StatsContainer>
         <StatsInfoContainer>
           <CheckCircle />
@@ -73,11 +76,13 @@ export const ProposalPoll = () => {
         </StatsInfoContainer>
         <SText>{majoritySupport}</SText>
       </StatsContainer>
+
       <OverallProgressContainer>
         {voteOffsets.map((vote, index) => (
           <ProgressSegment key={index} left={vote.offset} width={vote.percentage} backgroundColor={vote.color} />
         ))}
       </OverallProgressContainer>
+
       <VoteStatsContainer>
         {voteTypes.map((vote) => (
           <SBox key={vote.type}>

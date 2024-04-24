@@ -4,7 +4,6 @@ import { useCustomTheme } from '~/hooks/useTheme';
 export const Footer = () => {
   return (
     <FooterContainer>
-      <h1>{''}</h1>
       <Subtitle>
         <p>Made with 💜 by</p>
         <a href='https://defi.sucks'>Wonderland</a>
