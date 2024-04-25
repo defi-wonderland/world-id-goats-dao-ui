@@ -1,20 +1,21 @@
 //add imports useContract and useCallback
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Box, Typography, styled, Button, RadioGroup, FormControlLabel, Radio, TextField } from '@mui/material';
 import { IDKitWidget } from '@worldcoin/idkit';
 
 import BaseModal from '~/components/BaseModal';
-import { useCustomTheme, useModal } from '~/hooks';
+import { useContract, useCustomTheme, useModal } from '~/hooks';
 import { ModalType } from '~/types';
 import { getConfig } from '~/config';
+import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
 
 const { APP_ID, PROPOSAL_ID } = getConfig();
 
-// interface ISuccessResult {
-//   merkle_root: string;
-//   nullifier_hash: string;
-//   proof: string[];
-// }
+interface ISuccessResult {
+  merkle_root: string;
+  nullifier_hash: string;
+  proof: string;
+}
 
 export enum VerificationLevel {
   Orb = 'orb',
@@ -23,7 +24,7 @@ export enum VerificationLevel {
 
 export const VerifyModal = () => {
   const { setModalOpen, modalOpen, closeModal } = useModal();
-  // const { simulateCheckValidity } = useContract();
+  const { simulateCheckValidity } = useContract();
   const [vote, setVote] = useState('for');
   const [thoughts, setThoughts] = useState('');
   const [idKitOpen, setIdKitOpen] = useState(false);
@@ -37,36 +38,43 @@ export const VerifyModal = () => {
     closeModal();
   };
 
-  // const handleVerify = useCallback(
-  //   async (proof: ISuccessResult) => {
-  //     try {
-  //       // Get the proof data
-  //       const decodedRoot = decode<BigNumber>('uint256', merkle_root);
-  //       const decodedNulifierHash = decode<BigNumber>('uint256', nullifier_hash);
-  //       const decodedProof = decode<
-  //         [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]
-  //       >('uint256[8]', proof);
+  const handleVerify = useCallback(
+    async (result: ISuccessResult) => {
+      try {
+        // Get the proof data
+        const { merkle_root, nullifier_hash, proof } = result;
 
-  //       const proofData = encodePacked(decodedRoot, decodedNulifierHash, decodedProof);
-  //       const support = 1; // TODO: Add user input for voting power
+        const [decodedMerfleRoot] = decodeAbiParameters(parseAbiParameters('uint256 merkle_root'), merkle_root as Hex);
+        const [decodedNullifierHash] = decodeAbiParameters(
+          parseAbiParameters('uint256 nullifier_hash'),
+          nullifier_hash as Hex,
+        );
+        const [decodedProof] = decodeAbiParameters(parseAbiParameters('uint256[8] proof'), proof as Hex);
 
-  //       // Simulate or send transaction
-  //       const validityCheckSimulate = await simulateCheckValidity(BigInt(PROPOSAL_ID), support, proofData);
-  //       console.log('Validity check:', validityCheckSimulate);
-  //     } catch (error) {
-  //       console.error('Verification failed:', error);
-  //     }
-  //   },
-  //   [simulateCheckValidity],
-  // );
+        const proofData = encodePacked(
+          ['uint256', 'uint256', 'uint256[8]'],
+          [decodedMerfleRoot, decodedNullifierHash, decodedProof],
+        );
+        const support = 1; // TODO: Add user input for voting power
+
+        // Simulate or send transaction
+        const validityCheckSimulate = await simulateCheckValidity(BigInt(PROPOSAL_ID), support, proofData);
+        console.log('Validity check:', validityCheckSimulate);
+      } catch (error) {
+        console.error('Verification failed:', error);
+      }
+    },
+    [simulateCheckValidity],
+  );
 
   // const onSuccess = async (proof: ISuccessResult) => {
   //   // Get the proof data
-  //   const decodedRoot = decode<BigNumber>('uint256', merkle_root);
-  //   const decodedNulifierHash = decode<BigNumber>('uint256', nullifier_hash);
-  //   const decodedProof = decode<
-  //     [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]
-  //   >('uint256[8]', proof);
+  //   const decodedRoot = decode<bigint>('uint256', merkle_root);
+  //   const decodedNulifierHash = decode<bigint>('uint256', nullifier_hash);
+  //   const decodedProof = decode<[bigint, bigint, bigint, bigint, BigNumber, BigNumber, BigNumber, BigNumber]>(
+  //     'uint256[8]',
+  //     proof,
+  //   );
 
   //   const proofData = encodePacked(decodedRoot, decodedNulifierHash, decodedProof);
   //   const validityCheck = await checkValidity(BigInt(PROPOSAL_ID), support, proofData);
@@ -74,9 +82,9 @@ export const VerifyModal = () => {
   //   setModalOpen(ModalType.LOADING);
   // };
 
-  const handleVerify = () => {
-    console.log('verify');
-  };
+  // const handleVerify = () => {
+  //   console.log('verify');
+  // };
 
   const onSuccess = () => {
     console.log('success');
