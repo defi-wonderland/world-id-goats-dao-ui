@@ -86,7 +86,9 @@ export const ProposalPoll = () => {
           <CheckCircle />
           <Typography>Quorum</Typography>
         </StatsInfoContainer>
-        <SText>{quorum}</SText>
+        <SText>
+          {totalVotes} of {quorum}
+        </SText>
       </StatsContainer>
 
       <StatsContainer>

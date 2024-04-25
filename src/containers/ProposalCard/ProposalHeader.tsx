@@ -1,14 +1,44 @@
+import { useEffect, useState, useCallback } from 'react';
 import { Typography, Box, styled } from '@mui/material';
 import { OpenInNew } from '@mui/icons-material';
 
-import { useCustomTheme } from '~/hooks';
+import { useContract, useCustomTheme } from '~/hooks';
 import proposalData from '~/data/proposal.json';
-import { truncateValue } from '~/utils';
+import { truncateValue, formattedDate } from '~/utils';
 import { MoreButton } from '~/components';
 import { VoteButton } from './VoteButton';
+import { getConfig } from '~/config';
+
+const { PROPOSAL_ID, CONTRACT_ADDRESS } = getConfig();
 
 export const ProposalHeader = () => {
-  const { title, status, date, id } = proposalData.HEADER;
+  const { getProposalSnapshot, getProposalState } = useContract();
+  const [status, setStatus] = useState<string | null>(null); // default to "Pending" status
+  const [date, setDate] = useState('');
+  const { title } = proposalData.HEADER;
+
+  const fetchContractData = useCallback(async () => {
+    const statuses = ['Pending', 'Active', 'Canceled', 'Defeated', 'Succeeded', 'Queued', 'Expired', 'Executed'];
+    try {
+      const state = await getProposalState(BigInt(PROPOSAL_ID));
+      const snapshot = await getProposalSnapshot(BigInt(PROPOSAL_ID));
+
+      if (state) {
+        setStatus(statuses[state]); // Ensure `statuses` is stable or included in dependencies
+      }
+      if (snapshot) {
+        const timestamp = Number(snapshot);
+        const date = new Date(timestamp * 1000);
+        setDate(formattedDate(date));
+      }
+    } catch (error) {
+      console.error('Failed to fetch contract data:', error);
+    }
+  }, [getProposalState, getProposalSnapshot]);
+
+  useEffect(() => {
+    fetchContractData();
+  }, [fetchContractData]);
 
   const handleExplorer = (url: string) => {
     //navigate to block scan
@@ -20,23 +50,18 @@ export const ProposalHeader = () => {
   const menuItems = [
     {
       label: 'View on block explorer',
-      onClick: () => handleExplorer('https://optimistic.etherscan.io/'),
+      onClick: () => handleExplorer(`https://optimistic.etherscan.io/address/${CONTRACT_ADDRESS}`),
       icon: <OpenInNew />,
     },
   ];
 
-  /*
-  TBD: Add more status/dynamic
-  active - executed - defeated
-  */
-
   return (
     <HeaderContainer>
       <LeftSection>
-        <StatusBadge>{status}</StatusBadge>
+        {status && <StatusBadge>{status}</StatusBadge>}
         <Title variant='h5'>{title}</Title>
         <IDDateBox>
-          <Typography variant='subtitle2'>ID {truncateValue(id)}</Typography>
+          <Typography variant='subtitle2'>ID {truncateValue(PROPOSAL_ID)}</Typography>
           <Typography variant='subtitle2'>Proposed on: {date}</Typography>
         </IDDateBox>
       </LeftSection>

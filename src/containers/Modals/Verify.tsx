@@ -93,6 +93,7 @@ export const VerifyModal = () => {
             <StyledFormControlLabel value='against' control={<Radio />} label='Against' />
             <StyledFormControlLabel value='abstain' control={<Radio />} label='Abstain' />
           </StyledRadioGroup>
+
           <StyledTextField
             fullWidth
             multiline
@@ -102,7 +103,9 @@ export const VerifyModal = () => {
             onChange={(e) => setThoughts(e.target.value)}
             margin='normal'
           />
+
           <Typography variant='subtitle1'>Verify and cast your vote</Typography>
+
           <StyledButton onClick={handlSdk}>Verify</StyledButton>
         </ModalBody>
       </BaseModal>

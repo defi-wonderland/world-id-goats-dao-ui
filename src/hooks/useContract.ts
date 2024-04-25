@@ -96,6 +96,19 @@ export function useContract() {
     [publicClient],
   );
 
+  const getProposalState = useCallback(
+    async (proposalId: ProposalID) => {
+      if (!publicClient) return;
+      return await publicClient.readContract({
+        abi: goatsDaoAbi,
+        address: CONTRACT_ADDRESS as Address,
+        functionName: 'state',
+        args: [proposalId],
+      });
+    },
+    [publicClient],
+  );
+
   const getVotingDealay = useCallback(async () => {
     if (!publicClient) return;
     return await publicClient.readContract({
@@ -127,5 +140,6 @@ export function useContract() {
     getProposalDeadline,
     getProposalSnapshot,
     simulateCheckValidity,
+    getProposalState,
   };
 }
