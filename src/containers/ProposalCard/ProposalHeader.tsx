@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Typography, Box, styled } from '@mui/material';
 import { OpenInNew } from '@mui/icons-material';
+import { useAccount } from 'wagmi';
 
 import { useContract, useCustomTheme } from '~/hooks';
 import proposalData from '~/data/proposal.json';
@@ -13,7 +14,8 @@ const { PROPOSAL_ID, CONTRACT_ADDRESS } = getConfig();
 
 export const ProposalHeader = () => {
   const { getProposalSnapshot, getProposalState } = useContract();
-  const [status, setStatus] = useState<string | null>(null); // default to "Pending" status
+  const { address: currentAddress } = useAccount();
+  const [status, setStatus] = useState<string | null>(null);
   const [date, setDate] = useState('');
   const { title } = proposalData.HEADER;
 
@@ -24,7 +26,7 @@ export const ProposalHeader = () => {
       const snapshot = await getProposalSnapshot(BigInt(PROPOSAL_ID));
 
       if (state) {
-        setStatus(statuses[state]); // Ensure `statuses` is stable or included in dependencies
+        setStatus(statuses[state]);
       }
       if (snapshot) {
         const timestamp = Number(snapshot);
@@ -67,7 +69,7 @@ export const ProposalHeader = () => {
       </LeftSection>
 
       <RightSection>
-        <VoteButton />
+        {status === 'Active' && currentAddress && <VoteButton />}
         <MoreButton menuItems={menuItems} />
       </RightSection>
     </HeaderContainer>

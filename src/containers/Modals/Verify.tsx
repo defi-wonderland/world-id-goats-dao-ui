@@ -44,7 +44,6 @@ export const VerifyModal = () => {
     async (result: ISuccessResult) => {
       try {
         // Get the proof data
-        console.log('proof:', result);
         const { merkle_root, nullifier_hash, proof } = result;
 
         const [decodedMerfleRoot] = decodeAbiParameters(parseAbiParameters('uint256 merkle_root'), merkle_root as Hex);
