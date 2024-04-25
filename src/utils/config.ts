@@ -3,7 +3,7 @@ import { optimism } from 'wagmi/chains';
 import { rainbowWallet, walletConnectWallet, injectedWallet } from '@rainbow-me/rainbowkit/wallets';
 import { connectorsForWallets } from '@rainbow-me/rainbowkit';
 
-import { getConfig } from '../config';
+import { getConfig } from '~/config';
 
 const { PROJECT_ID } = getConfig();
 

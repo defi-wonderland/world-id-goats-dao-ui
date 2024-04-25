@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Typography, Divider, TypographyProps, styled } from '@mui/material';
 import { CheckCircle, Circle } from '@mui/icons-material';
 
@@ -26,26 +26,31 @@ interface Vote {
 }
 
 export const ProposalPoll = () => {
-  const { getQuorumThreshold } = useContract();
-
-  const info = async () => {
-    await getQuorumThreshold(BigInt(PROPOSAL_ID)).then((res) => console.log(res));
-  };
+  const { getQuorumThreshold, getProposalVotes } = useContract();
+  const [quorum, setQuorum] = useState('');
+  const [votes, setVotes] = useState({ for: 0, against: 0, abstain: 0 });
+  const [majoritySupport, setMajoritySupport] = useState('No');
 
   useEffect(() => {
-    info();
-  }, []);
+    async function fetchContractData() {
+      const quorumThreshold = await getQuorumThreshold(BigInt(PROPOSAL_ID));
+      const voteCounts = await getProposalVotes(BigInt(PROPOSAL_ID));
 
-  // Dummy data to simulate the props
-  const quorum = '141.71M of 104.64M';
-  const majoritySupport = 'Yes';
+      if (quorumThreshold !== undefined && voteCounts !== undefined) {
+        setQuorum(quorumThreshold.toString()); // Convert BigInt to String for display
+        setVotes({
+          for: Number(voteCounts[0]), // Convert BigInt to Number for calculations
+          against: Number(voteCounts[1]),
+          abstain: Number(voteCounts[2]),
+        });
 
-  // Parse num pending
-  const votes = {
-    for: 138000000,
-    against: 25801100,
-    abstain: 2000000,
-  };
+        // Check if the "For" votes exceed the quorum threshold
+        setMajoritySupport(voteCounts[0] > quorumThreshold ? 'Yes' : 'No');
+      }
+    }
+
+    fetchContractData();
+  }, [getQuorumThreshold, getProposalVotes]);
 
   const voteTypes = [
     { type: 'For', count: votes.for, color: '#4aa16c' },
@@ -53,12 +58,12 @@ export const ProposalPoll = () => {
     { type: 'Abstain', count: votes.abstain, color: '#94969c' },
   ];
 
-  const totalVotes = Object.values(votes).reduce((total, num) => total + num, 0);
+  const totalVotes = votes.for + votes.against + votes.abstain;
 
   // Calculate the left offsets for each segment
   let accumulatedLeft = 0;
   const voteOffsets: Vote[] = voteTypes.map((vote) => {
-    const percentage = (vote.count / totalVotes) * 100;
+    const percentage = (Number(vote.count) / Number(totalVotes)) * 100;
     const offset = accumulatedLeft;
     accumulatedLeft += percentage; // Accumulate the width for the next item's offset
     return {

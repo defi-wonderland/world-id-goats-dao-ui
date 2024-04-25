@@ -4,6 +4,7 @@ export interface Env {
   ALCHEMY_KEY: string;
   PROPOSAL_ID: string;
   CONTRACT_ADDRESS: string;
+  APP_ID: string;
 }
 
 export interface Constants {

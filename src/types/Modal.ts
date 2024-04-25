@@ -4,5 +4,6 @@ export enum ModalType {
   SUCCESS = 'SUCCESS',
   ERROR = 'ERROR',
   VERIFY = 'VERIFY',
+  WORLDID = 'WORLDID',
   // Add new modal types here...
 }

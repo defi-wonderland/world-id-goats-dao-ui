@@ -6,6 +6,7 @@ export const getEnv = (): Env => {
   const NEXT_PUBLIC_ALCHEMY_KEY = process.env.NEXT_PUBLIC_ALCHEMY_KEY;
   const NEXT_PUBLIC_PROPOSAL_ID = process.env.NEXT_PUBLIC_PROPOSAL_ID;
   const NEXT_PUBLIC_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
+  const NEXT_PUBLIC_APP_ID = process.env.NEXT_PUBLIC_APP_ID;
 
   return {
     RPC_URL: NEXT_PUBLIC_RPC_URL as string,
@@ -13,5 +14,6 @@ export const getEnv = (): Env => {
     ALCHEMY_KEY: NEXT_PUBLIC_ALCHEMY_KEY as string,
     PROPOSAL_ID: NEXT_PUBLIC_PROPOSAL_ID as string,
     CONTRACT_ADDRESS: NEXT_PUBLIC_CONTRACT_ADDRESS as string,
+    APP_ID: NEXT_PUBLIC_APP_ID as string,
   };
 };

@@ -1,47 +1,81 @@
 import React, { useState } from 'react';
 import { Box, Typography, styled, Button, RadioGroup, FormControlLabel, Radio, TextField } from '@mui/material';
+import { IDKitWidget } from '@worldcoin/idkit';
 
 import BaseModal from '~/components/BaseModal';
 import { useCustomTheme, useModal } from '~/hooks';
 import { ModalType } from '~/types';
+import { getConfig } from '~/config';
+
+const { APP_ID, PROPOSAL_ID } = getConfig();
+
+export enum VerificationLevel {
+  Orb = 'orb',
+  Device = 'device',
+}
 
 export const VerifyModal = () => {
-  const { setModalOpen } = useModal();
+  const { setModalOpen, modalOpen, closeModal } = useModal();
   const [vote, setVote] = useState('for');
   const [thoughts, setThoughts] = useState('');
+  const [idKitOpen, setIdKitOpen] = useState(false);
 
   const handleVoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setVote((event.target as HTMLInputElement).value);
   };
 
   const handleVerify = () => {
+    setIdKitOpen(true);
+    closeModal();
+  };
+
+  const handleIDKitSuccess = () => {
+    setIdKitOpen(false);
     setModalOpen(ModalType.LOADING);
   };
 
   return (
-    <BaseModal type={ModalType.VERIFY} title={'Vote'}>
-      <ModalBody>
-        <StyledRadioGroup value={vote} onChange={handleVoteChange}>
-          <StyledFormControlLabel value='for' control={<Radio />} label='For' />
-          <StyledFormControlLabel value='against' control={<Radio />} label='Against' />
-          <StyledFormControlLabel value='abstain' control={<Radio />} label='Abstain' />
-        </StyledRadioGroup>
-        <StyledTextField
-          fullWidth
-          multiline
-          placeholder='Tell the community your thoughts...'
-          minRows={1}
-          value={thoughts}
-          onChange={(e) => setThoughts(e.target.value)}
-          margin='normal'
-        />
-        <Typography variant='subtitle1'>Verify and cast your vote</Typography>
-        <StyledButton onClick={handleVerify}>Verify</StyledButton>
-      </ModalBody>
-    </BaseModal>
+    <>
+      <BaseModal type={ModalType.VERIFY} title={'Vote'}>
+        <ModalBody>
+          <StyledRadioGroup value={vote} onChange={handleVoteChange}>
+            <StyledFormControlLabel value='for' control={<Radio />} label='For' />
+            <StyledFormControlLabel value='against' control={<Radio />} label='Against' />
+            <StyledFormControlLabel value='abstain' control={<Radio />} label='Abstain' />
+          </StyledRadioGroup>
+          <StyledTextField
+            fullWidth
+            multiline
+            placeholder='Tell the community your thoughts...'
+            minRows={1}
+            value={thoughts}
+            onChange={(e) => setThoughts(e.target.value)}
+            margin='normal'
+          />
+          <Typography variant='subtitle1'>Verify and cast your vote</Typography>
+          <StyledButton onClick={handleVerify}>Verify</StyledButton>
+        </ModalBody>
+      </BaseModal>
+      {idKitOpen && (
+        <IDKitWidget
+          app_id={`app_${APP_ID}`}
+          action={PROPOSAL_ID.toString()}
+          signal='user_value'
+          onSuccess={handleIDKitSuccess}
+          verification_level={VerificationLevel.Device}
+        >
+          {({ open }) => {
+            // Automatically open the IDKitWidget if idKitOpen state is true
+            if (modalOpen === ModalType.NONE) {
+              open();
+            }
+            return <></>; // Render nothing since open() is called automatically
+          }}
+        </IDKitWidget>
+      )}
+    </>
   );
 };
-
 const ModalBody = styled(Box)(() => {
   const { currentTheme } = useCustomTheme();
 
