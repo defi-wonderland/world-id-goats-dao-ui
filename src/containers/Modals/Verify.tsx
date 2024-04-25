@@ -1,13 +1,12 @@
-//add imports useContract and useCallback
 import React, { useCallback, useState } from 'react';
 import { Box, Typography, styled, Button, RadioGroup, FormControlLabel, Radio, TextField } from '@mui/material';
 import { IDKitWidget } from '@worldcoin/idkit';
+import { getConfig } from '~/config';
+import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
 
 import BaseModal from '~/components/BaseModal';
 import { useContract, useCustomTheme, useModal } from '~/hooks';
 import { ModalType } from '~/types';
-import { getConfig } from '~/config';
-import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
 
 //APP_ID for production
 const { APP_ID, PROPOSAL_ID } = getConfig();
