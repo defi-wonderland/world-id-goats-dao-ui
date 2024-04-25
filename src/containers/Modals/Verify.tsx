@@ -10,7 +10,7 @@ import { getConfig } from '~/config';
 import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
 
 //APP_ID for production
-const { PROPOSAL_ID } = getConfig();
+const { APP_ID, PROPOSAL_ID } = getConfig();
 
 interface ISuccessResult {
   merkle_root: string;
@@ -31,20 +31,11 @@ export const VerifyModal = () => {
   const [idKitOpen, setIdKitOpen] = useState(false);
 
   const handleVoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // Map the string input value to the respective uint8 value from contract config
-    const voteMap: Record<string, number> = {
-      Against: 0,
-      For: 1,
-      Abstain: 2,
-    };
-
     const voteType = event.target.value;
-    const numericVote = voteMap[voteType];
-
-    setVote(numericVote);
+    setVote(Number(voteType));
   };
 
-  const handlSdk = () => {
+  const handlWidget = () => {
     setIdKitOpen(true);
     closeModal();
   };
@@ -72,7 +63,7 @@ export const VerifyModal = () => {
 
         if (isValid) {
           const castVote = await simulateCastVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
-          console.log('cast vote: ', castVote);
+          console.log('Cast vote: ', castVote);
           setIdKitOpen(false);
           setModalOpen(ModalType.LOADING);
         } else {
@@ -93,9 +84,9 @@ export const VerifyModal = () => {
       <BaseModal type={ModalType.VERIFY} title={'Vote'}>
         <ModalBody>
           <StyledRadioGroup value={vote} onChange={handleVoteChange}>
-            <StyledFormControlLabel value='for' control={<Radio />} label='For' />
-            <StyledFormControlLabel value='against' control={<Radio />} label='Against' />
-            <StyledFormControlLabel value='abstain' control={<Radio />} label='Abstain' />
+            <StyledFormControlLabel value={1} control={<Radio />} label='For' />
+            <StyledFormControlLabel value={2} control={<Radio />} label='Against' />
+            <StyledFormControlLabel value={0} control={<Radio />} label='Abstain' />
           </StyledRadioGroup>
 
           <StyledTextField
@@ -110,18 +101,17 @@ export const VerifyModal = () => {
 
           <Typography variant='subtitle1'>Verify and cast your vote</Typography>
 
-          <StyledButton onClick={handlSdk}>Verify</StyledButton>
+          <StyledButton onClick={handlWidget}>Verify</StyledButton>
         </ModalBody>
       </BaseModal>
       {idKitOpen && (
         <IDKitWidget
-          // app_id={`app_${APP_ID}`}
-          // action={PROPOSAL_ID.toString()}
-          app_id='app_staging_307e13a954c9da4c89d6238c53b20797'
-          action='vote'
+          app_id={`app_${APP_ID}`}
+          action={PROPOSAL_ID.toString()}
+          signal={vote.toString()}
           onSuccess={onSuccess}
           //Device verification
-          verification_level={VerificationLevel.Orb}
+          verification_level={VerificationLevel.Device}
         >
           {({ open }) => {
             // Automatically open the IDKitWidget if idKitOpen state is true

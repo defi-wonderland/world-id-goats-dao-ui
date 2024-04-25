@@ -483,8 +483,22 @@ export const goatsDaoAbi = [
   {
     stateMutability: 'nonpayable',
     type: 'function',
+    inputs: [{ name: '_newVotingDelay', internalType: 'uint48', type: 'uint48' }],
+    name: 'setVotingDelayOwner',
+    outputs: [],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
     inputs: [{ name: '_newVotingPeriod', internalType: 'uint32', type: 'uint32' }],
     name: 'setVotingPeriod',
+    outputs: [],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [{ name: '_newVotingPeriod', internalType: 'uint32', type: 'uint32' }],
+    name: 'setVotingPeriodOwner',
     outputs: [],
   },
   {
