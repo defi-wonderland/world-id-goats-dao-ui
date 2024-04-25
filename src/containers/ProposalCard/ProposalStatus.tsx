@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Box,
   Typography,
@@ -100,14 +101,14 @@ export const ProposalStatus = () => {
 
       <List>
         {statusItems.map((item, index) => (
-          <>
+          <React.Fragment key={index}>
             {item.primary === 'Execute' && <Divider sx={{ my: 2 }} />}
             <ListItem key={index}>
               <SIcon status={item.status}>{item.icon}</SIcon>
               <ListItemText primary={<SText status={item.status}>{item.primary}</SText>} secondary={item.secondary} />
               {item.menuItems && <MoreButton menuItems={item.menuItems} />}
             </ListItem>
-          </>
+          </React.Fragment>
         ))}
       </List>
     </StatusContainer>

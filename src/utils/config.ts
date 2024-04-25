@@ -1,9 +1,9 @@
 import { createConfig, http, cookieStorage, createStorage } from 'wagmi';
-import { localhost, sepolia } from 'wagmi/chains';
+import { optimism } from 'wagmi/chains';
 import { rainbowWallet, walletConnectWallet, injectedWallet } from '@rainbow-me/rainbowkit/wallets';
 import { connectorsForWallets } from '@rainbow-me/rainbowkit';
 
-import { getConfig } from '../config';
+import { getConfig } from '~/config';
 
 const { PROJECT_ID } = getConfig();
 
@@ -29,14 +29,13 @@ const connectors = connectorsForWallets(
 );
 
 export const config = createConfig({
-  chains: [localhost, sepolia],
+  chains: [optimism],
   ssr: true,
   storage: createStorage({
     storage: cookieStorage,
   }),
   transports: {
-    [localhost.id]: http(),
-    [sepolia.id]: http(),
+    [optimism.id]: http(),
   },
   batch: { multicall: true },
   connectors,
