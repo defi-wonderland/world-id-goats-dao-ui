@@ -30,8 +30,7 @@ export const ProposalHeader = () => {
       }
       if (snapshot) {
         const timestamp = Number(snapshot);
-        const date = new Date(timestamp * 1000);
-        setDate(formattedDate(date));
+        setDate(formattedDate(timestamp));
       }
     } catch (error) {
       console.error('Failed to fetch contract data:', error);

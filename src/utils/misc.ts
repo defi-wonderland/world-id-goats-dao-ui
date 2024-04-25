@@ -2,7 +2,8 @@ export const truncateValue = (value: string) => {
   return `${value?.slice(0, 6)}...${value?.slice(-4)}`;
 };
 
-export const formattedDate = (date: Date): string => {
+export const formattedDate = (timestamp: number): string => {
+  const date = new Date(timestamp * 1000);
   const nth = (day: number): string => {
     if (day > 3 && day < 21) return 'th';
     switch (day % 10) {
