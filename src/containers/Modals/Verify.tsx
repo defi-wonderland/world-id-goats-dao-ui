@@ -1,3 +1,4 @@
+//add imports useContract and useCallback
 import React, { useState } from 'react';
 import { Box, Typography, styled, Button, RadioGroup, FormControlLabel, Radio, TextField } from '@mui/material';
 import { IDKitWidget } from '@worldcoin/idkit';
@@ -9,6 +10,12 @@ import { getConfig } from '~/config';
 
 const { APP_ID, PROPOSAL_ID } = getConfig();
 
+// interface ISuccessResult {
+//   merkle_root: string;
+//   nullifier_hash: string;
+//   proof: string[];
+// }
+
 export enum VerificationLevel {
   Orb = 'orb',
   Device = 'device',
@@ -16,6 +23,7 @@ export enum VerificationLevel {
 
 export const VerifyModal = () => {
   const { setModalOpen, modalOpen, closeModal } = useModal();
+  // const { simulateCheckValidity } = useContract();
   const [vote, setVote] = useState('for');
   const [thoughts, setThoughts] = useState('');
   const [idKitOpen, setIdKitOpen] = useState(false);
@@ -24,12 +32,54 @@ export const VerifyModal = () => {
     setVote((event.target as HTMLInputElement).value);
   };
 
-  const handleVerify = () => {
+  const handlSdk = () => {
     setIdKitOpen(true);
     closeModal();
   };
 
-  const handleIDKitSuccess = () => {
+  // const handleVerify = useCallback(
+  //   async (proof: ISuccessResult) => {
+  //     try {
+  //       // Get the proof data
+  //       const decodedRoot = decode<BigNumber>('uint256', merkle_root);
+  //       const decodedNulifierHash = decode<BigNumber>('uint256', nullifier_hash);
+  //       const decodedProof = decode<
+  //         [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]
+  //       >('uint256[8]', proof);
+
+  //       const proofData = encodePacked(decodedRoot, decodedNulifierHash, decodedProof);
+  //       const support = 1; // TODO: Add user input for voting power
+
+  //       // Simulate or send transaction
+  //       const validityCheckSimulate = await simulateCheckValidity(BigInt(PROPOSAL_ID), support, proofData);
+  //       console.log('Validity check:', validityCheckSimulate);
+  //     } catch (error) {
+  //       console.error('Verification failed:', error);
+  //     }
+  //   },
+  //   [simulateCheckValidity],
+  // );
+
+  // const onSuccess = async (proof: ISuccessResult) => {
+  //   // Get the proof data
+  //   const decodedRoot = decode<BigNumber>('uint256', merkle_root);
+  //   const decodedNulifierHash = decode<BigNumber>('uint256', nullifier_hash);
+  //   const decodedProof = decode<
+  //     [BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]
+  //   >('uint256[8]', proof);
+
+  //   const proofData = encodePacked(decodedRoot, decodedNulifierHash, decodedProof);
+  //   const validityCheck = await checkValidity(BigInt(PROPOSAL_ID), support, proofData);
+  //   setIdKitOpen(false);
+  //   setModalOpen(ModalType.LOADING);
+  // };
+
+  const handleVerify = () => {
+    console.log('verify');
+  };
+
+  const onSuccess = () => {
+    console.log('success');
     setIdKitOpen(false);
     setModalOpen(ModalType.LOADING);
   };
@@ -53,7 +103,7 @@ export const VerifyModal = () => {
             margin='normal'
           />
           <Typography variant='subtitle1'>Verify and cast your vote</Typography>
-          <StyledButton onClick={handleVerify}>Verify</StyledButton>
+          <StyledButton onClick={handlSdk}>Verify</StyledButton>
         </ModalBody>
       </BaseModal>
       {idKitOpen && (
@@ -61,7 +111,8 @@ export const VerifyModal = () => {
           app_id={`app_${APP_ID}`}
           action={PROPOSAL_ID.toString()}
           signal='user_value'
-          onSuccess={handleIDKitSuccess}
+          onSuccess={onSuccess}
+          handleVerify={handleVerify}
           verification_level={VerificationLevel.Device}
         >
           {({ open }) => {

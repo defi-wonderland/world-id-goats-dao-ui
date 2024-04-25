@@ -30,6 +30,20 @@ export function useContract() {
     [walletClient],
   );
 
+  const simulateCheckValidity = useCallback(
+    async (proposalId: ProposalID, support: SupportType, proofData: ProofData) => {
+      if (!publicClient) return;
+
+      return await publicClient.simulateContract({
+        abi: goatsDaoAbi,
+        address: CONTRACT_ADDRESS as Address,
+        functionName: 'checkVoteValidity',
+        args: [support, proposalId, proofData],
+      });
+    },
+    [publicClient],
+  );
+
   const getQuorumThreshold = useCallback(
     async (proposalId: ProposalID) => {
       if (!publicClient) return;
@@ -112,5 +126,6 @@ export function useContract() {
     getProposalVotes,
     getProposalDeadline,
     getProposalSnapshot,
+    simulateCheckValidity,
   };
 }
