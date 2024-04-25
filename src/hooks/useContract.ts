@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { getConfig } from '~/config';
 import { usePublicClient, useWalletClient } from 'wagmi';
 import { Address, Hex } from 'viem';
@@ -9,12 +9,13 @@ const { CONTRACT_ADDRESS } = getConfig();
 type ProposalID = bigint;
 type SupportType = number;
 type ProofData = Hex;
-type Reason = Hex;
+type Reason = string;
 type Params = Hex;
 
 export function useContract() {
   const { data: walletClient } = useWalletClient();
   const publicClient = usePublicClient();
+  const [txHash, setTxHash] = useState();
 
   const checkValidity = useCallback(
     async (proposalId: ProposalID, support: SupportType, proofData: ProofData) => {
@@ -131,6 +132,19 @@ export function useContract() {
     [walletClient],
   );
 
+  const simulateCastVote = useCallback(
+    async (proposalId: ProposalID, support: SupportType, reason: Reason, params: Params) => {
+      if (!publicClient) return;
+      return await publicClient.simulateContract({
+        abi: goatsDaoAbi,
+        address: CONTRACT_ADDRESS as Address,
+        functionName: 'castVoteWithReasonAndParams',
+        args: [proposalId, support, reason, params],
+      });
+    },
+    [publicClient],
+  );
+
   return {
     checkValidity,
     getQuorumThreshold,
@@ -141,5 +155,8 @@ export function useContract() {
     getProposalSnapshot,
     simulateCheckValidity,
     getProposalState,
+    simulateCastVote,
+    setTxHash,
+    txHash,
   };
 }

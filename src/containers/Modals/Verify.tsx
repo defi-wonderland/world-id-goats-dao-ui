@@ -9,7 +9,8 @@ import { ModalType } from '~/types';
 import { getConfig } from '~/config';
 import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
 
-const { APP_ID, PROPOSAL_ID } = getConfig();
+//APP_ID for production
+const { PROPOSAL_ID } = getConfig();
 
 interface ISuccessResult {
   merkle_root: string;
@@ -24,13 +25,23 @@ export enum VerificationLevel {
 
 export const VerifyModal = () => {
   const { setModalOpen, modalOpen, closeModal } = useModal();
-  const { simulateCheckValidity } = useContract();
-  const [vote, setVote] = useState('for');
+  const { simulateCheckValidity, simulateCastVote } = useContract();
+  const [vote, setVote] = useState<number>(1);
   const [thoughts, setThoughts] = useState('');
   const [idKitOpen, setIdKitOpen] = useState(false);
 
   const handleVoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setVote((event.target as HTMLInputElement).value);
+    // Map the string input value to the respective uint8 value from contract config
+    const voteMap: Record<string, number> = {
+      Against: 0,
+      For: 1,
+      Abstain: 2,
+    };
+
+    const voteType = event.target.value;
+    const numericVote = voteMap[voteType];
+
+    setVote(numericVote);
   };
 
   const handlSdk = () => {
@@ -38,10 +49,11 @@ export const VerifyModal = () => {
     closeModal();
   };
 
-  const handleVerify = useCallback(
+  const onSuccess = useCallback(
     async (result: ISuccessResult) => {
       try {
         // Get the proof data
+        console.log('proof:', result);
         const { merkle_root, nullifier_hash, proof } = result;
 
         const [decodedMerfleRoot] = decodeAbiParameters(parseAbiParameters('uint256 merkle_root'), merkle_root as Hex);
@@ -55,42 +67,26 @@ export const VerifyModal = () => {
           ['uint256', 'uint256', 'uint256[8]'],
           [decodedMerfleRoot, decodedNullifierHash, decodedProof],
         );
-        const support = 1; // TODO: Add user input for voting power
 
-        // Simulate or send transaction
-        const validityCheckSimulate = await simulateCheckValidity(BigInt(PROPOSAL_ID), support, proofData);
-        console.log('Validity check:', validityCheckSimulate);
+        const isValid = await simulateCheckValidity(BigInt(PROPOSAL_ID), vote, proofData);
+
+        if (isValid) {
+          const castVote = await simulateCastVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
+          console.log('cast vote: ', castVote);
+          setIdKitOpen(false);
+          setModalOpen(ModalType.LOADING);
+        } else {
+          setIdKitOpen(false);
+          setModalOpen(ModalType.ERROR);
+        }
       } catch (error) {
-        console.error('Verification failed:', error);
+        console.error('Cast failed:', error);
+        setIdKitOpen(false);
+        setModalOpen(ModalType.ERROR);
       }
     },
-    [simulateCheckValidity],
+    [simulateCheckValidity, vote, simulateCastVote, thoughts, setModalOpen],
   );
-
-  // const onSuccess = async (proof: ISuccessResult) => {
-  //   // Get the proof data
-  //   const decodedRoot = decode<bigint>('uint256', merkle_root);
-  //   const decodedNulifierHash = decode<bigint>('uint256', nullifier_hash);
-  //   const decodedProof = decode<[bigint, bigint, bigint, bigint, BigNumber, BigNumber, BigNumber, BigNumber]>(
-  //     'uint256[8]',
-  //     proof,
-  //   );
-
-  //   const proofData = encodePacked(decodedRoot, decodedNulifierHash, decodedProof);
-  //   const validityCheck = await checkValidity(BigInt(PROPOSAL_ID), support, proofData);
-  //   setIdKitOpen(false);
-  //   setModalOpen(ModalType.LOADING);
-  // };
-
-  // const handleVerify = () => {
-  //   console.log('verify');
-  // };
-
-  const onSuccess = () => {
-    console.log('success');
-    setIdKitOpen(false);
-    setModalOpen(ModalType.LOADING);
-  };
 
   return (
     <>
@@ -119,12 +115,13 @@ export const VerifyModal = () => {
       </BaseModal>
       {idKitOpen && (
         <IDKitWidget
-          app_id={`app_${APP_ID}`}
-          action={PROPOSAL_ID.toString()}
-          signal='user_value'
+          // app_id={`app_${APP_ID}`}
+          // action={PROPOSAL_ID.toString()}
+          app_id='app_staging_307e13a954c9da4c89d6238c53b20797'
+          action='vote'
           onSuccess={onSuccess}
-          handleVerify={handleVerify}
-          verification_level={VerificationLevel.Device}
+          //Device verification
+          verification_level={VerificationLevel.Orb}
         >
           {({ open }) => {
             // Automatically open the IDKitWidget if idKitOpen state is true
@@ -138,6 +135,7 @@ export const VerifyModal = () => {
     </>
   );
 };
+
 const ModalBody = styled(Box)(() => {
   const { currentTheme } = useCustomTheme();
 
