@@ -1,4 +1,4 @@
-import { parseAbi } from 'viem';
+import { parseAbi, Abi } from 'viem';
 
 /**
  * @notice Checks the validity of a vote
@@ -36,8 +36,16 @@ export const castVoteWithReasonAndParams = parseAbi([
  * @notice module:core
  * @dev Current state of a proposal, following Compound's convention
  */
-// temporary disabled
-// export const state = parseAbi(['function state(uint256 proposalId) external view returns (ProposalState)']);
+
+export const state = [
+  {
+    type: 'function',
+    inputs: [{ name: 'proposalId', internalType: 'uint256', type: 'uint256' }],
+    name: 'state',
+    outputs: [{ name: '', internalType: 'enum IGovernor.ProposalState', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+] as Abi;
 
 /**
  * @notice module:core

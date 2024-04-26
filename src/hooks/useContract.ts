@@ -3,7 +3,6 @@ import { usePublicClient, useWalletClient } from 'wagmi';
 import { Address, Hex } from 'viem';
 
 import { getConfig } from '~/config';
-import { goatsDaoAbi } from '~/utils';
 import {
   castVoteWithReasonAndParams,
   checkVoteValidity,
@@ -11,6 +10,7 @@ import {
   proposalSnapshot,
   proposalVotes,
   proposalsQuorumThreshold,
+  state,
   votingDelay,
 } from '~/utils/parsedAbi';
 
@@ -111,7 +111,7 @@ export function useContract() {
     async (proposalId: ProposalID) => {
       if (!publicClient) return;
       return await publicClient.readContract({
-        abi: goatsDaoAbi,
+        abi: state,
         address: CONTRACT_ADDRESS as Address,
         functionName: 'state',
         args: [proposalId],
