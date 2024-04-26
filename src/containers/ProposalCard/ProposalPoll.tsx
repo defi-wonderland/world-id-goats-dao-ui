@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Box, Typography, Divider, TypographyProps, styled } from '@mui/material';
 import { CheckCircle, Circle } from '@mui/icons-material';
 
@@ -17,62 +17,49 @@ interface ProgressSegmentProps {
   backgroundColor: string;
 }
 
-interface Vote {
-  type: string;
-  count: number;
-  color: string;
-  percentage: number;
-  offset: number;
-}
-
 export const ProposalPoll = () => {
   const { getQuorumThreshold, getProposalVotes } = useContract();
-  const [quorum, setQuorum] = useState('');
   const [votes, setVotes] = useState({ for: 0, against: 0, abstain: 0 });
-  const [majoritySupport, setMajoritySupport] = useState('No');
+  const [quorum, setQuorum] = useState('');
 
   useEffect(() => {
     async function fetchContractData() {
       const quorumThreshold = await getQuorumThreshold(BigInt(PROPOSAL_ID));
       const voteCounts = await getProposalVotes(BigInt(PROPOSAL_ID));
-
-      if (quorumThreshold !== undefined && voteCounts !== undefined) {
-        setQuorum(quorumThreshold.toString()); // Convert BigInt to String for display
+      if (voteCounts) {
         setVotes({
-          for: Number(voteCounts[0]), // Convert BigInt to Number for calculations
+          for: Number(voteCounts[0]),
           against: Number(voteCounts[1]),
           abstain: Number(voteCounts[2]),
         });
-
-        // Check if the "For" votes exceed the quorum threshold
-        setMajoritySupport(voteCounts[0] > quorumThreshold ? 'Yes' : 'No');
+      }
+      if (quorumThreshold) {
+        setQuorum(quorumThreshold.toString());
       }
     }
-
     fetchContractData();
-  }, [getQuorumThreshold, getProposalVotes]);
+  }, [getProposalVotes, getQuorumThreshold]);
 
-  const voteTypes = [
-    { type: 'For', count: votes.for, color: '#4aa16c' },
-    { type: 'Against', count: votes.against, color: '#D92D20' },
-    { type: 'Abstain', count: votes.abstain, color: '#94969c' },
-  ];
+  const totalVotes = useMemo(() => votes.for + votes.against + votes.abstain, [votes]);
 
-  const totalVotes = votes.for + votes.against + votes.abstain;
+  const voteTypes = useMemo(
+    () => [
+      { type: 'For', count: votes.for, color: '#4aa16c' },
+      { type: 'Against', count: votes.against, color: '#D92D20' },
+      { type: 'Abstain', count: votes.abstain, color: '#94969c' },
+    ],
+    [votes],
+  );
 
-  // Calculate the left offsets for each segment
-  let accumulatedLeft = 0;
-  const voteOffsets: Vote[] = voteTypes.map((vote) => {
-    const percentage = (Number(vote.count) / Number(totalVotes)) * 100;
-    const offset = accumulatedLeft;
-    accumulatedLeft += percentage; // Accumulate the width for the next item's offset
-    return {
-      ...vote,
-      percentage,
-      offset,
-    };
-  });
-
+  const voteOffsets = useMemo(() => {
+    let accumulatedLeft = 0;
+    return voteTypes.map((vote) => {
+      const percentage = totalVotes > 0 ? (vote.count / totalVotes) * 100 : 0;
+      const offset = accumulatedLeft;
+      accumulatedLeft += percentage;
+      return { ...vote, percentage, offset };
+    });
+  }, [voteTypes, totalVotes]);
   return (
     <PollContainer>
       <TitleContainer>
@@ -89,14 +76,6 @@ export const ProposalPoll = () => {
         <SText>
           {totalVotes} of {quorum}
         </SText>
-      </StatsContainer>
-
-      <StatsContainer>
-        <StatsInfoContainer>
-          <CheckCircle />
-          <Typography>Majority support</Typography>
-        </StatsInfoContainer>
-        <SText>{majoritySupport}</SText>
       </StatsContainer>
 
       <OverallProgressContainer>
