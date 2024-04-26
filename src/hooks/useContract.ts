@@ -1,7 +1,8 @@
 import { useCallback, useState } from 'react';
-import { getConfig } from '~/config';
 import { usePublicClient, useWalletClient } from 'wagmi';
 import { Address, Hex } from 'viem';
+
+import { getConfig } from '~/config';
 import { goatsDaoAbi } from '~/utils';
 
 const { CONTRACT_ADDRESS } = getConfig();
@@ -15,7 +16,7 @@ type Params = Hex;
 export function useContract() {
   const { data: walletClient } = useWalletClient();
   const publicClient = usePublicClient();
-  const [txHash, setTxHash] = useState();
+  const [txHash, setTxHash] = useState<Hex>();
 
   const checkValidity = useCallback(
     async (proposalId: ProposalID, support: SupportType, proofData: ProofData) => {

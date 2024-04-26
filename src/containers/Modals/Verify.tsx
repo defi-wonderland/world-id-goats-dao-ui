@@ -1,12 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { Box, Typography, styled, Button, RadioGroup, FormControlLabel, Radio, TextField } from '@mui/material';
 import { IDKitWidget } from '@worldcoin/idkit';
-import { getConfig } from '~/config';
+// import { usePublicClient } from 'wagmi';
 import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
 
 import BaseModal from '~/components/BaseModal';
 import { useContract, useCustomTheme, useModal } from '~/hooks';
 import { ModalType } from '~/types';
+import { getConfig } from '~/config';
 
 //APP_ID for production
 const { APP_ID, PROPOSAL_ID } = getConfig();
@@ -24,7 +25,9 @@ export enum VerificationLevel {
 
 export const VerifyModal = () => {
   const { setModalOpen, modalOpen, closeModal } = useModal();
-  const { simulateCheckValidity, simulateCastVote } = useContract();
+  //castVote, checkValidity,
+  const { simulateCheckValidity, simulateCastVote, setTxHash } = useContract();
+  // const publicClient = usePublicClient();
   const [vote, setVote] = useState<number>(1);
   const [thoughts, setThoughts] = useState('');
   const [idKitOpen, setIdKitOpen] = useState(false);
@@ -57,14 +60,41 @@ export const VerifyModal = () => {
           [decodedMerfleRoot, decodedNullifierHash, decodedProof],
         );
 
+        //STAGING
         const isValid = await simulateCheckValidity(BigInt(PROPOSAL_ID), vote, proofData);
-
         if (isValid) {
-          const castVote = await simulateCastVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
-          console.log('Cast vote: ', castVote);
-          setIdKitOpen(false);
-          setModalOpen(ModalType.LOADING);
-        } else {
+          const request = await simulateCastVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
+          if (request) {
+            setIdKitOpen(false);
+            setModalOpen(ModalType.LOADING);
+          }
+
+          // Simulate transaction processing delay
+          setTimeout(() => {
+            setTxHash('0xabcd');
+            setModalOpen(ModalType.SUCCESS);
+          }, 3000);
+        }
+        //PRODUCTION
+        // const isValid = await simulateCheckValidity(BigInt(PROPOSAL_ID), vote, proofData);
+        // const validate = await checkValidity(BigInt(PROPOSAL_ID), vote, proofData);
+
+        // if (validate) {
+        //   const request = await simulateCastVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
+        //   const hash = await castVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
+        //   if (!hash) throw new Error('No hash returned');
+        //   setIdKitOpen(false);
+        //   setModalOpen(ModalType.LOADING);
+        //   if (!publicClient) return;
+        //   const receipt = await publicClient.waitForTransactionReceipt({
+        //     hash: hash as Hex,
+        //   });
+        //   setTxHash(receipt.transactionHash);
+        //   if (receipt) {
+        //     setModalOpen(ModalType.SUCCESS);
+        //   }
+        //}
+        else {
           setIdKitOpen(false);
           setModalOpen(ModalType.ERROR);
         }
@@ -74,7 +104,7 @@ export const VerifyModal = () => {
         setModalOpen(ModalType.ERROR);
       }
     },
-    [simulateCheckValidity, vote, simulateCastVote, thoughts, setModalOpen],
+    [simulateCheckValidity, vote, simulateCastVote, thoughts, setTxHash, setModalOpen],
   );
 
   return (
