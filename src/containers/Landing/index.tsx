@@ -1,11 +1,14 @@
 import { styled } from '@mui/material/styles';
-
-import { ProposalCard } from '~/containers';
+import { GoatGuy, ProposalDetail, TweetCard, VotingCard } from '~/containers';
 
 export const Landing = () => {
   return (
     <LandingContainer>
-      <ProposalCard />
+      <VotingCard />
+      <GoatGuy />
+      <TweetCard />
+      <ProposalDetail />
+      <VotingCard />
     </LandingContainer>
   );
 };

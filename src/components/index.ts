@@ -1,3 +1,4 @@
 export * from './Theme';
 export * from './BaseModal';
-export * from './MoreButton';
+export * from './ProposalPoll';
+export * from './Voting';
