@@ -1,19 +1,16 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { styled } from '@mui/material/styles';
-import { IconButton, Box } from '@mui/material';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
+import { Box, Typography, styled } from '@mui/material';
 
 import { useCustomTheme } from '~/hooks/useTheme';
 
 export const Header = () => {
-  const { changeTheme, theme } = useCustomTheme();
-
   return (
     <StyledHeader>
-      <Logo>GoatDAO</Logo>
+      <Box>
+        <Typography>Made with 💜 by Wonderland</Typography>
+        <Typography>Powered by World ID</Typography>
+      </Box>
       <ControlsBox>
-        <SIconButton onClick={changeTheme}>{theme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}</SIconButton>
         <ConnectButton showBalance={false} accountStatus='address' chainStatus='none' />
       </ControlsBox>
     </StyledHeader>
@@ -38,18 +35,8 @@ const StyledHeader = styled('header')(() => {
   };
 });
 
-const Logo = styled('h1')({
-  fontSize: '1.5rem',
-  fontWeight: 'bold',
-  cursor: 'pointer',
-});
-
 const ControlsBox = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   gap: '1rem',
-});
-
-const SIconButton = styled(IconButton)({
-  color: 'inherit',
 });

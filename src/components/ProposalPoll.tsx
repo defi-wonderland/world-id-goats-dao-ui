@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
-import { Box, Typography, Divider, TypographyProps, styled } from '@mui/material';
-import { CheckCircle, Circle } from '@mui/icons-material';
+import { Box, Typography, TypographyProps, styled } from '@mui/material';
+import { Circle } from '@mui/icons-material';
 
 import { useCustomTheme, useContract } from '~/hooks';
 import { getConfig } from '~/config';
@@ -62,15 +62,8 @@ export const ProposalPoll = () => {
   }, [voteTypes, totalVotes]);
   return (
     <PollContainer>
-      <TitleContainer>
-        <STitle variant='h6'>Current Votes</STitle>
-      </TitleContainer>
-
-      <Divider sx={{ my: 2 }} />
-
       <StatsContainer>
         <StatsInfoContainer>
-          <CheckCircle />
           <Typography>Quorum</Typography>
         </StatsInfoContainer>
         <SText>
@@ -102,19 +95,10 @@ const PollContainer = styled(Box)(() => {
   return {
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: currentTheme.backgroundSecondary,
     color: currentTheme.textPrimary,
-    borderRadius: '0.8rem',
-    margin: '1rem 0',
-    padding: '2rem',
-    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
     gap: '0.5rem',
     fontWeight: 800,
   };
-});
-
-const TitleContainer = styled(Box)({
-  paddingBottom: '0.5rem',
 });
 
 const StatsContainer = styled(Box)({
@@ -154,10 +138,6 @@ const SBox = styled(Box)({
   width: '100%',
   margin: '8px 0',
   padding: '4px',
-});
-
-const STitle = styled(Typography)({
-  fontWeight: 800,
 });
 
 const SText = styled(Typography)(() => {

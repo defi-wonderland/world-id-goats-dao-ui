@@ -1,13 +1,19 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, styled } from '@mui/material';
 import { Tweet } from 'react-tweet';
 
 export const TweetCard = () => {
   return (
     <Box>
       <Typography></Typography>
-      <Box>
+      <SBox className='dark'>
+        <Tweet id='1774728635145965672' />
         <Tweet id='1775775458598306029' />
-      </Box>
+      </SBox>
     </Box>
   );
 };
+
+const SBox = styled(Box)({
+  zIndex: 100,
+  position: 'relative',
+});

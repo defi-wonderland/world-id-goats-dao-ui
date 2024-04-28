@@ -1,13 +1,13 @@
-import { styled } from '@mui/material/styles';
+import { styled, Box, Typography } from '@mui/material';
 import { useCustomTheme } from '~/hooks/useTheme';
 
 export const Footer = () => {
   return (
     <FooterContainer>
-      <Subtitle>
-        <p>Made with 💜 by</p>
-        <a href='https://defi.sucks'>Wonderland</a>
-      </Subtitle>
+      <Box>
+        <Typography>Made with 💜 by Wonderland</Typography>
+        <Typography>Powered by World ID</Typography>
+      </Box>
     </FooterContainer>
   );
 };
@@ -21,20 +21,6 @@ const FooterContainer = styled('footer')(() => {
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: currentTheme.backgroundPrimary,
-    borderTop: currentTheme.border,
     width: '100%',
   };
-});
-
-const Subtitle = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.8rem',
-  '& p': {
-    display: 'inline-block',
-  },
-  '& a': {
-    textDecoration: 'none',
-    color: 'inherit',
-  },
 });

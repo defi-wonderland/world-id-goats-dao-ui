@@ -7,7 +7,7 @@ import proposalData from '~/data/proposal.json';
 
 export const ProposalDetail = () => {
   const [tabValue, setTabValue] = useState(0);
-  const { summary, background } = proposalData.DESCRIPTION;
+  const { summary } = proposalData.DESCRIPTION;
   const { data } = proposalData.CODE;
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
@@ -31,8 +31,6 @@ export const ProposalDetail = () => {
         <TabPanel>
           <SectionTitle>Summary</SectionTitle>
           <SParagraph paragraph>{summary}</SParagraph>
-          <SectionTitle>Background</SectionTitle>
-          <SParagraph paragraph>{background}</SParagraph>
         </TabPanel>
       )}
 
@@ -46,24 +44,24 @@ export const ProposalDetail = () => {
   );
 };
 
-const DetailContainer = styled(Box)(() => {
-  const { currentTheme } = useCustomTheme();
-  return {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    margin: '1rem 0',
-    backgroundColor: currentTheme.backgroundSecondary,
-    color: currentTheme.textPrimary,
-    borderRadius: currentTheme.borderRadius,
-    padding: '2rem',
-    boxShadow: currentTheme.boxShadow,
-    width: '50rem',
-    '@media (max-width: 600px)': {
-      width: 'inherit',
-    },
-  };
-});
+const DetailContainer = styled(Box)(() => ({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  margin: '1rem 0',
+  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+  backdropFilter: 'blur(4px)',
+  WebkitBackdropFilter: 'blur(4px)', // For Safari compatibility
+  color: '#fff',
+  borderRadius: '16px',
+  padding: '2rem',
+  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.2)', // Subtle shadow
+  width: '50rem',
+  border: '0.5px solid rgba(0, 0, 0, 0.2)',
+  '@media (max-width: 600px)': {
+    width: 'inherit',
+  },
+}));
 
 const TitleContainer = styled(Box)({
   paddingBottom: '0.5rem',

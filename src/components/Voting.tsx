@@ -107,8 +107,8 @@ export const Voting = () => {
 
       <IDKitWidget
         app_id={`app_${APP_ID}`}
-        action={PROPOSAL_ID.toString()}
-        signal={vote.toString()}
+        action={PROPOSAL_ID?.toString()}
+        signal={vote?.toString()}
         onSuccess={onSuccess}
         //Device verification
         verification_level={VerificationLevel.Device}

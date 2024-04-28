@@ -7,3 +7,4 @@ export * from './ProposalDetail';
 export * from './VotingCard';
 export * from './TweetCard';
 export * from './GoatGuy';
+export * from './StarsBackground';
