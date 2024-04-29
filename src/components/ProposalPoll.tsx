@@ -28,9 +28,12 @@ export const ProposalPoll = () => {
       const voteCounts = await getProposalVotes(BigInt(PROPOSAL_ID));
       if (voteCounts) {
         setVotes({
-          for: Number(voteCounts[0]),
-          against: Number(voteCounts[1]),
-          abstain: Number(voteCounts[2]),
+          // for: Number(voteCounts[0]),
+          // against: Number(voteCounts[1]),
+          // abstain: Number(voteCounts[2]),
+          for: 20,
+          against: 50,
+          abstain: 14,
         });
       }
       if (quorumThreshold) {
@@ -81,7 +84,7 @@ export const ProposalPoll = () => {
         {voteTypes.map((vote) => (
           <SBox key={vote.type}>
             <StyledCircleIcon sx={{ color: vote.color }} />
-            <StyledTypography color={vote.color}>{vote.type}</StyledTypography>
+            <StyledTypography>{vote.type} :</StyledTypography>
             <SText>{vote.count}</SText>
           </SBox>
         ))}
@@ -104,8 +107,9 @@ const PollContainer = styled(Box)(() => {
 const StatsContainer = styled(Box)({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
   width: '100%',
+  gap: '0.5rem',
 });
 
 const StatsInfoContainer = styled(Box)(() => {
@@ -113,7 +117,6 @@ const StatsInfoContainer = styled(Box)(() => {
   return {
     display: 'flex',
     alignItems: 'center',
-    gap: '10px',
     '& svg': {
       color: currentTheme.textTertiary,
     },
@@ -124,20 +127,18 @@ const StatsInfoContainer = styled(Box)(() => {
 });
 
 const VoteStatsContainer = styled(Box)({
-  display: 'inline-block',
-  justifyContent: 'space-between',
+  display: 'flex',
+  justifyContent: 'center',
   alignItems: 'center',
-  gap: '0.5rem',
-  paddingTop: '0.5rem',
+  margin: '2rem 0',
 });
 
 const SBox = styled(Box)({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
-  width: '100%',
-  margin: '8px 0',
-  padding: '4px',
+  padding: '0.5rem',
+  gap: '0.5rem',
+  margin: '0 0.5rem',
 });
 
 const SText = styled(Typography)(() => {
@@ -154,7 +155,6 @@ const SText = styled(Typography)(() => {
 const StyledTypography = styled(Typography)<StyledTypographyProps>(({ color }) => ({
   color: color,
   marginRight: 'auto',
-  marginLeft: '12px',
   fontWeight: 800,
 }));
 

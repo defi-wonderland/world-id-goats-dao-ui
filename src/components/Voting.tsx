@@ -99,11 +99,11 @@ export const Voting = () => {
 
   return (
     <>
-      <Box>
-        <Button onClick={() => handleVote(1)}> For </Button>
-        <Button onClick={() => handleVote(2)}> Against </Button>
-        <Button onClick={() => handleVote(0)}> Abstain </Button>
-      </Box>
+      <SBox>
+        <SButtonFor onClick={() => handleVote(1)}> 🐐 For 🐐 </SButtonFor>
+        <SButton onClick={() => handleVote(2)}> Against </SButton>
+        <SButton onClick={() => handleVote(0)}> Abstain </SButton>
+      </SBox>
 
       <IDKitWidget
         app_id={`app_${APP_ID}`}
@@ -117,21 +117,46 @@ export const Voting = () => {
   );
 };
 
-export const StyledButton = styled(Button)(({ theme }) => {
+export const SBox = styled(Box)(() => {
   return {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-    padding: '0.5rem 1rem',
-    borderRadius: '0.8rem',
-    textTransform: 'none',
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '2rem',
+    margin: '2rem 0',
+  };
+});
+
+export const SButton = styled(Button)(() => {
+  return {
     fontWeight: 600,
     fontSize: '1.1rem',
     boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
-    margin: '0.5rem 0',
+    margin: '0.5rem',
     width: '100%',
-    '&:hover': {
-      backgroundColor: theme.palette.primary.dark,
+    border: '1px solid #fff',
+    color: '#fff',
+    borderRadius: '2rem',
+    gap: '0.5rem',
+    textTransform: 'uppercase',
+    '@media (max-width: 600px)': {
+      fontSize: '1.6rem',
     },
+  };
+});
+
+export const SButtonFor = styled(Button)(() => {
+  return {
+    fontWeight: 600,
+    fontSize: '1.1rem',
+    boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+    margin: '0.5rem',
+    width: '100%',
+    border: '1px solid #fff',
+    color: '#fff',
+    borderRadius: '2rem',
+    gap: '0.5rem',
+    textTransform: 'uppercase',
+    background: 'linear-gradient(90deg, #FCCC50 0%, #C55FA3 42.5%, #935EB1 71%, #625CBF 100%)',
     '@media (max-width: 600px)': {
       fontSize: '1.6rem',
     },

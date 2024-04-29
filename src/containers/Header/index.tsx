@@ -7,8 +7,8 @@ export const Header = () => {
   return (
     <StyledHeader>
       <Box>
-        <Typography>Made with 💜 by Wonderland</Typography>
-        <Typography>Powered by World ID</Typography>
+        <SText>Made with 💜 by Wonderland</SText>
+        <SText>Powered by World ID</SText>
       </Box>
       <ControlsBox>
         <ConnectButton showBalance={false} accountStatus='address' chainStatus='none' />
@@ -39,4 +39,8 @@ const ControlsBox = styled(Box)({
   display: 'flex',
   alignItems: 'center',
   gap: '1rem',
+});
+
+const SText = styled(Typography)({
+  fontSize: '1rem',
 });

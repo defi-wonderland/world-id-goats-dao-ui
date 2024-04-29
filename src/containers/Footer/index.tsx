@@ -5,8 +5,8 @@ export const Footer = () => {
   return (
     <FooterContainer>
       <Box>
-        <Typography>Made with 💜 by Wonderland</Typography>
-        <Typography>Powered by World ID</Typography>
+        <SText>Made with 💜 by Wonderland</SText>
+        <SText>Powered by World ID</SText>
       </Box>
     </FooterContainer>
   );
@@ -23,4 +23,8 @@ const FooterContainer = styled('footer')(() => {
     backgroundColor: currentTheme.backgroundPrimary,
     width: '100%',
   };
+});
+
+const SText = styled(Typography)({
+  fontSize: '1rem',
 });
