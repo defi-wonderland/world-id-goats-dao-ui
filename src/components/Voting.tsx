@@ -123,16 +123,18 @@ export const SBox = styled(Box)(() => {
     justifyContent: 'center',
     gap: '2rem',
     margin: '2rem 0',
+    alignItems: 'center',
   };
 });
 
 export const SButton = styled(Button)(() => {
   return {
     fontWeight: 600,
-    fontSize: '1.1rem',
+    fontSize: '0.8rem',
     boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
     margin: '0.5rem',
-    width: '100%',
+    width: '80%',
+    height: '80%',
     border: '1px solid #fff',
     color: '#fff',
     borderRadius: '2rem',
