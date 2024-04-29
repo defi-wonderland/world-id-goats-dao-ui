@@ -40,11 +40,11 @@ const ModalBody = styled(Box)(() => {
 });
 
 const STitle = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     '&&': {
       display: 'block',
-      color: currentTheme.textPrimary,
+      color: darkTheme.textPrimary,
       fontSize: '1.5rem',
       fontWeight: 600,
     },
@@ -52,11 +52,11 @@ const STitle = styled(Typography)(() => {
 });
 
 const STypography = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     '&&': {
       display: 'block',
-      color: currentTheme.textSecondary,
+      color: darkTheme.textSecondary,
       fontSize: '1rem',
       fontWeight: 400,
     },
@@ -64,10 +64,10 @@ const STypography = styled(Typography)(() => {
 });
 
 const StyledLink = styled(Link)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     textDecoration: 'none',
-    color: currentTheme.textTertiary,
+    color: darkTheme.textTertiary,
     display: 'flex',
     alignItems: 'center',
     gap: '0.5rem',
@@ -78,7 +78,7 @@ const StyledLink = styled(Link)(() => {
     },
     '&:hover': {
       textDecoration: 'underline',
-      color: currentTheme.textTertiary,
+      color: darkTheme.textTertiary,
     },
   };
 });

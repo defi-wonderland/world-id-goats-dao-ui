@@ -91,11 +91,11 @@ export const ProposalPoll = () => {
 };
 
 const PollContainer = styled(Box)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     display: 'flex',
     flexDirection: 'column',
-    color: currentTheme.textPrimary,
+    color: darkTheme.textPrimary,
     gap: '0.5rem',
     fontWeight: 800,
     margin: '0 3.75rem',
@@ -113,12 +113,12 @@ const StatsContainer = styled(Box)({
 });
 
 const StatsInfoContainer = styled(Box)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     display: 'flex',
     alignItems: 'center',
     '& svg': {
-      color: currentTheme.textTertiary,
+      color: darkTheme.textTertiary,
     },
     '& .MuiTypography-root': {
       fontWeight: 800,
@@ -142,10 +142,10 @@ const SBox = styled(Box)({
 });
 
 const SText = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     fontWeight: 800,
-    color: currentTheme.textSecondary,
+    color: darkTheme.textSecondary,
     '@media (max-width: 1200px)': {
       fontSize: '0.75rem',
     },

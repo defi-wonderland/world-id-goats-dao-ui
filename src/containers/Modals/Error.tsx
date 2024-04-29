@@ -29,11 +29,11 @@ const ModalBody = styled(Box)(() => {
 });
 
 const STitle = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     '&&': {
       display: 'block',
-      color: currentTheme.textPrimary,
+      color: darkTheme.textPrimary,
       fontSize: '1.5rem',
       fontWeight: 600,
     },

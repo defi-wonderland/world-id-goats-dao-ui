@@ -13,14 +13,14 @@ export const Footer = () => {
 };
 
 const FooterContainer = styled('footer')(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     display: 'flex',
     height: '5rem',
     padding: '0 8rem',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: currentTheme.backgroundPrimary,
+    backgroundColor: darkTheme.backgroundPrimary,
     width: '100%',
   };
 });

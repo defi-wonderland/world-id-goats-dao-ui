@@ -65,14 +65,14 @@ export const StyledBackdrop = styled(Backdrop)`
 `;
 
 export const SModal = styled(Box)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     width: '28rem',
     minHeight: '25rem',
     maxHeight: '40rem',
-    borderRadius: currentTheme.borderRadius,
-    backgroundColor: currentTheme.backgroundSecondary,
-    border: currentTheme.border,
+    borderRadius: darkTheme.borderRadius,
+    backgroundColor: darkTheme.backgroundSecondary,
+    border: darkTheme.border,
     display: 'flex',
     padding: '2rem 3.2rem 3.2rem 3.2rem',
     flexDirection: 'column',
@@ -119,11 +119,11 @@ export const ModalHeader = styled(Box)(() => {
 });
 
 const Title = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     fontSize: '1rem',
     alignItems: 'center',
     fontWeight: 800,
-    color: currentTheme.textSecondary,
+    color: darkTheme.textSecondary,
   };
 });

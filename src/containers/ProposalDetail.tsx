@@ -68,15 +68,15 @@ const TitleContainer = styled(Box)({
 });
 
 const StyledTabs = styled(Tabs)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     '& .MuiTabs-indicator': {
-      backgroundColor: currentTheme.textPrimary,
+      backgroundColor: darkTheme.textPrimary,
     },
     '& .MuiTab-root': {
       color: '#999',
       '&.Mui-selected': {
-        color: currentTheme.textPrimary,
+        color: darkTheme.textPrimary,
         fontWeight: 'bold',
       },
     },
@@ -86,11 +86,11 @@ const StyledTabs = styled(Tabs)(() => {
 const StyledTab = styled(Tab)({});
 
 const SectionTitle = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     fontWeight: 'bold',
     margin: '1rem 0',
-    color: currentTheme.textPrimary,
+    color: darkTheme.textPrimary,
   };
 });
 
@@ -99,15 +99,15 @@ const TabPanel = styled(Box)({
 });
 
 const CodeSnippet = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
-    background: currentTheme.backgroundPrimary,
+    background: darkTheme.backgroundPrimary,
     padding: '16px',
     borderRadius: '8px',
     fontFamily: 'source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace',
     overflow: 'auto',
     whiteSpace: 'pre',
-    color: currentTheme.textPrimary,
+    color: darkTheme.textPrimary,
     '@media (max-width: 600px)': {
       maxWidth: '18rem',
     },

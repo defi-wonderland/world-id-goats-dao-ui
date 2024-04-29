@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material';
 import { Theme, ThemeName } from '~/types';
 
-export const getMuiThemeConfig = (currentTheme: Theme, themeName: ThemeName) => {
+export const getMuiThemeConfig = (darkTheme: Theme, themeName: ThemeName) => {
   return createTheme({
     palette: {
       mode: themeName,
@@ -10,8 +10,8 @@ export const getMuiThemeConfig = (currentTheme: Theme, themeName: ThemeName) => 
       MuiCssBaseline: {
         styleOverrides: {
           body: {
-            background: currentTheme.backgroundPrimary,
-            color: currentTheme.textPrimary,
+            background: darkTheme.backgroundPrimary,
+            color: darkTheme.textPrimary,
           },
         },
       },
