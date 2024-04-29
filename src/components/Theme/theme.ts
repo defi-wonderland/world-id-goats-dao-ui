@@ -18,9 +18,9 @@ export const darkTheme: Theme = {
 
   primaryColor: 'rgba(0, 115, 230, 0.8)',
   accentColor: '#ececec',
-  disabledColor: '#85888E',
+  disabledColor: '#94969c',
 
-  errorPrimary: '#F04438',
+  errorPrimary: '#D92D20',
   warningPrimary: '#FFD27A',
-  successPrimary: '#86D5A5',
+  successPrimary: '#4aa16c',
 };

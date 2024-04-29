@@ -8,7 +8,7 @@ export const LoadingModal = () => {
   return (
     <BaseModal type={ModalType.LOADING} title={'CASTING VOTE'}>
       <ModalBody>
-        <CircularProgress size='3rem' variant='indeterminate' thickness={4} style={{ color: '#625CBF' }} />
+        <SIcon size='3rem' variant='indeterminate' thickness={4} />
         <STitle variant='h4'> Casting your vote... </STitle>
         <STypography variant='body1'>You can safely close this modal</STypography>
       </ModalBody>
@@ -49,5 +49,12 @@ const STypography = styled(Typography)(() => {
       fontSize: '1rem',
       fontWeight: 400,
     },
+  };
+});
+
+const SIcon = styled(CircularProgress)(() => {
+  const { darkTheme } = useCustomTheme();
+  return {
+    color: darkTheme.primaryColor,
   };
 });

@@ -35,7 +35,6 @@ const TextStyled = styled(Typography)({
 });
 
 const ArrowBox = styled(Box)({
-  position: 'absolute',
-  bottom: '-20rem',
-  right: '35rem',
+  position: 'relative',
+  bottom: '-3rem',
 });

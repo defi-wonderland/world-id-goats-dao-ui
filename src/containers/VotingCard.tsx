@@ -33,7 +33,7 @@ export const VotingCard = () => {
         {isConnected && <Voting />}
         {!isConnected && (
           <ConnectContainer>
-            <ConnectButton showBalance={false} accountStatus='address' chainStatus='none' />{' '}
+            <ConnectButton showBalance={false} accountStatus='address' chainStatus='none' />
           </ConnectContainer>
         )}
         <ProposalPoll />

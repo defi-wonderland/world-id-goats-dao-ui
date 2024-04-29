@@ -19,6 +19,7 @@ interface ProgressSegmentProps {
 
 export const ProposalPoll = () => {
   const { getQuorumThreshold, getProposalVotes } = useContract();
+  const { darkTheme } = useCustomTheme();
   const [votes, setVotes] = useState({ for: 0, against: 0, abstain: 0 });
   const [quorum, setQuorum] = useState('');
 
@@ -44,11 +45,11 @@ export const ProposalPoll = () => {
 
   const voteTypes = useMemo(
     () => [
-      { type: 'For', count: votes.for, color: '#4aa16c' },
-      { type: 'Against', count: votes.against, color: '#D92D20' },
-      { type: 'Abstain', count: votes.abstain, color: '#94969c' },
+      { type: 'For', count: votes.for, color: darkTheme.successPrimary },
+      { type: 'Against', count: votes.against, color: darkTheme.errorPrimary },
+      { type: 'Abstain', count: votes.abstain, color: darkTheme.disabledColor },
     ],
-    [votes],
+    [darkTheme, votes],
   );
 
   const voteOffsets = useMemo(() => {
@@ -60,6 +61,7 @@ export const ProposalPoll = () => {
       return { ...vote, percentage, offset };
     });
   }, [voteTypes, totalVotes]);
+
   return (
     <PollContainer>
       <StatsContainer>

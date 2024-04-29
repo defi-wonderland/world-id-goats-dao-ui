@@ -6,9 +6,9 @@ export const Landing = () => {
   return (
     <LandingContainer>
       <BackgroundContainer>
-        <BG_1 type='2' align='center' />
-        <BG_2 type='1' align='left' />
-        <BG_3 type='4' align='right' />
+        <BG1 type='2' align='center' />
+        <BG2 type='1' align='left' />
+        <BG3 type='4' align='right' />
       </BackgroundContainer>
       <VotingCard />
       <GoatGuy />
@@ -39,18 +39,18 @@ const BackgroundContainer = styled('div')`
   width: 100%;
 `;
 
-const BG_1 = styled(SectionBackground)`
+const BG1 = styled(SectionBackground)`
   top: 150rem;
   right: 0;
   width: 38%;
 `;
 
-const BG_2 = styled(SectionBackground)`
+const BG2 = styled(SectionBackground)`
   top: 100rem;
   width: 38%;
 `;
 
-const BG_3 = styled(SectionBackground)`
+const BG3 = styled(SectionBackground)`
   margin-left: auto;
   top: 50rem;
   right: 5rem;
