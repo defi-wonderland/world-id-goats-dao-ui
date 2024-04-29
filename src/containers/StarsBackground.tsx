@@ -134,12 +134,12 @@ export default function StarsBackground({ zIndex }: BackgroundProps) {
     <>
       {showBackground && (
         <StarsContainer smstars={700} mdstars={700} lgstars={50} zindex={zIndex}>
-          {/* <div className='stars'></div>
-          <div className='stars1'></div> */}
+          <div className='stars'></div>
+          <div className='stars1'></div>
           <div className='stars2'></div>
           <div className='stars3'></div>
-          {/* <div className='stars4'></div>
-          <div className='stars5'></div> */}
+          <div className='stars4'></div>
+          <div className='stars5'></div>
           <div className='stars6'></div>
         </StarsContainer>
       )}

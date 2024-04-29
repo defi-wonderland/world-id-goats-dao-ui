@@ -28,12 +28,9 @@ export const ProposalPoll = () => {
       const voteCounts = await getProposalVotes(BigInt(PROPOSAL_ID));
       if (voteCounts) {
         setVotes({
-          // for: Number(voteCounts[0]),
-          // against: Number(voteCounts[1]),
-          // abstain: Number(voteCounts[2]),
-          for: 20,
-          against: 50,
-          abstain: 14,
+          for: Number(voteCounts[0]),
+          against: Number(voteCounts[1]),
+          abstain: Number(voteCounts[2]),
         });
       }
       if (quorumThreshold) {
@@ -101,6 +98,7 @@ const PollContainer = styled(Box)(() => {
     color: currentTheme.textPrimary,
     gap: '0.5rem',
     fontWeight: 800,
+    margin: '0 3.75rem',
   };
 });
 
@@ -110,6 +108,8 @@ const StatsContainer = styled(Box)({
   justifyContent: 'center',
   width: '100%',
   gap: '0.5rem',
+  letterSpacing: '0.125rem',
+  textTransform: 'uppercase',
 });
 
 const StatsInfoContainer = styled(Box)(() => {

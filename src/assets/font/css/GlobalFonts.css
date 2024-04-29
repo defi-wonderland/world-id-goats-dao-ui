@@ -1,22 +1,14 @@
 @font-face {
-  font-family: 'SharpGrotesk';
+  font-family: 'SharpGroteskItalic';
   src: url('../fonts/SharpGrotesk-LightItalic10.otf') format('opentype');
 }
 
 @font-face {
-  font-family: 'SFProText';
-  src: url('../fonts/SFProText-Semibold.ttf') format('opentype');
-  font-weight: 200 700;
-  font-display: swap;
-  font-style: normal;
+  font-family: 'SharpGroteskMedium';
+  src: url('../fonts/SharpGrotesk-Medium15_bkp.otf') format('opentype');
 }
 
 @font-face {
-  font-family: 'Inter';
-  src:
-    url('../fonts/Inter-Italic.woff2') format('woff2'),
-    url('../fonts/Inter.ttf') format('ttf');
-  font-weight: 200 700;
-  font-display: swap;
-  font-style: normal;
+  font-family: 'SharpGroteskLight';
+  src: url('../fonts/SharpGrotesk-Light15.otf') format('opentype');
 }

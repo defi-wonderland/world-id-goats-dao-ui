@@ -1,8 +1,6 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Box, Typography, styled } from '@mui/material';
 
-import { useCustomTheme } from '~/hooks/useTheme';
-
 export const Header = () => {
   return (
     <StyledHeader>
@@ -19,7 +17,6 @@ export const Header = () => {
 
 // Styles
 const StyledHeader = styled('header')(() => {
-  const { currentTheme } = useCustomTheme();
   return {
     display: 'flex',
     height: '5rem',
@@ -28,7 +25,6 @@ const StyledHeader = styled('header')(() => {
     justifyContent: 'space-between',
     width: '100%',
     zIndex: '100',
-    boxShadow: currentTheme.boxShadow,
     '@media (max-width: 600px)': {
       padding: '0 1rem',
     },

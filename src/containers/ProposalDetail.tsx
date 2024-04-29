@@ -17,7 +17,7 @@ export const ProposalDetail = () => {
   return (
     <DetailContainer>
       <TitleContainer>
-        <STitle variant='h6'>Proposal</STitle>
+        <STitle variant='h6'>PROPOSAL</STitle>
       </TitleContainer>
 
       <Divider sx={{ my: 2 }} />

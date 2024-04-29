@@ -20,8 +20,7 @@ export function WalletProvider({ children }: Props) {
         <RainbowKitProvider
           modalSize='compact'
           theme={darkTheme({
-            accentColor: '#7b3fe4',
-            accentColorForeground: 'white',
+            accentColor: '#625CBF',
           })}
         >
           {children}

@@ -67,6 +67,7 @@ export const Voting = () => {
             setModalOpen(ModalType.SUCCESS);
           }, 3000);
         }
+
         //PRODUCTION
         // const isValid = await simulateCheckValidity(BigInt(PROPOSAL_ID), vote, proofData);
         // const validate = await checkValidity(BigInt(PROPOSAL_ID), vote, proofData);
@@ -75,7 +76,6 @@ export const Voting = () => {
         //   const request = await simulateCastVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
         //   const hash = await castVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
         //   if (!hash) throw new Error('No hash returned');
-        //   setIdKitOpen(false);
         //   setModalOpen(ModalType.LOADING);
         //   if (!publicClient) return;
         //   const receipt = await publicClient.waitForTransactionReceipt({
@@ -85,16 +85,15 @@ export const Voting = () => {
         //   if (receipt) {
         //     setModalOpen(ModalType.SUCCESS);
         //   }
-        //}
-        else {
-          setModalOpen(ModalType.ERROR);
-        }
+        // } else {
+        //   setModalOpen(ModalType.ERROR);
+        // }
       } catch (error) {
         console.error('Cast failed:', error);
         setModalOpen(ModalType.ERROR);
       }
     },
-    [simulateCheckValidity, vote, simulateCastVote, setTxHash, setModalOpen],
+    [simulateCheckValidity, vote, simulateCastVote, setModalOpen, setTxHash],
   );
 
   return (
@@ -129,17 +128,19 @@ export const SBox = styled(Box)(() => {
 
 export const SButton = styled(Button)(() => {
   return {
+    padding: '0.2rem 2.75rem',
     fontWeight: 600,
-    fontSize: '0.8rem',
+    fontSize: '1.2rem',
     boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
     margin: '0.5rem',
-    width: '80%',
-    height: '80%',
+    width: 'auto',
     border: '1px solid #fff',
     color: '#fff',
     borderRadius: '2rem',
     gap: '0.5rem',
     textTransform: 'uppercase',
+    letterSpacing: '0.3rem',
+    lineHeigth: '0.9rem',
     '@media (max-width: 600px)': {
       fontSize: '1.6rem',
     },
@@ -148,19 +149,18 @@ export const SButton = styled(Button)(() => {
 
 export const SButtonFor = styled(Button)(() => {
   return {
-    fontWeight: 600,
-    fontSize: '1.1rem',
+    padding: '0.1rem 2.7rem',
+    fontWeight: 800,
+    fontSize: '1.75rem',
     boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
     margin: '0.5rem',
-    width: '100%',
-    border: '1px solid #fff',
+    width: 'auto',
     color: '#fff',
     borderRadius: '2rem',
+    letterSpacing: '0.3rem',
     gap: '0.5rem',
     textTransform: 'uppercase',
     background: 'linear-gradient(90deg, #FCCC50 0%, #C55FA3 42.5%, #935EB1 71%, #625CBF 100%)',
-    '@media (max-width: 600px)': {
-      fontSize: '1.6rem',
-    },
+    lineHeigth: '0.9rem',
   };
 });
