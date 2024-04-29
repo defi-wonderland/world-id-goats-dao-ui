@@ -95,7 +95,7 @@ const PollContainer = styled(Box)(() => {
   return {
     display: 'flex',
     flexDirection: 'column',
-    color: darkTheme.textPrimary,
+    color: darkTheme.textPrimaryOpposite,
     gap: '0.5rem',
     fontWeight: 800,
     margin: '0 3.75rem',

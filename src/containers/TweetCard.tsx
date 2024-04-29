@@ -8,6 +8,7 @@ export const TweetCard = () => {
         Thanks to Worldcoin, Richard was able to buy his first 🐐 After that, he went viral on Twitter Now we want to
         help him get more goats
       </SText>
+
       <SBox className='dark'>
         <Tweet id='1774728635145965672' />
         <Tweet id='1775775458598306029' />

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 import Image from 'next/image';
 
 type backgroundType = '1' | '2' | '3' | '4';

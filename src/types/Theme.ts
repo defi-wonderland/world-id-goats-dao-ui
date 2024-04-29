@@ -2,12 +2,13 @@ export type ThemeName = 'light' | 'dark';
 
 export interface Theme {
   type: ThemeName;
-  textPrimary: string;
+  textPrimaryOpposite: string;
   textSecondary: string;
   textTertiary: string;
   backgroundPrimary: string;
   backgroundSecondary: string;
-  titleColor: string;
+  backgroundModal: string;
+  textPrimary: string;
   titleFontFamily: string;
   textFontFamily: string;
   borderRadius: string;

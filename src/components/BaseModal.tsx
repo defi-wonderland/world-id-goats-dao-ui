@@ -25,7 +25,9 @@ const BaseModal = ({ children, type, title, fixedHeight }: BaseModalProps) => {
             <CloseIcon />
           </IconButton>
         </ModalHeader>
+
         <Divider />
+
         {children}
       </SModal>
     </StyledModal>
@@ -61,18 +63,16 @@ export const StyledBackdrop = styled(Backdrop)`
   inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(0.05rem);
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: textPrimaryOpposite;
 `;
 
 export const SModal = styled(Box)(() => {
   const { darkTheme } = useCustomTheme();
   return {
     width: '28rem',
-    minHeight: '25rem',
-    maxHeight: '40rem',
+    minHeight: '35rem',
     borderRadius: darkTheme.borderRadius,
-    backgroundColor: darkTheme.backgroundSecondary,
-    border: darkTheme.border,
+    backgroundColor: darkTheme.backgroundModal,
     display: 'flex',
     padding: '2rem 3.2rem 3.2rem 3.2rem',
     flexDirection: 'column',
@@ -124,6 +124,6 @@ const Title = styled(Typography)(() => {
     fontSize: '1rem',
     alignItems: 'center',
     fontWeight: 800,
-    color: darkTheme.textSecondary,
+    color: darkTheme.textPrimary,
   };
 });

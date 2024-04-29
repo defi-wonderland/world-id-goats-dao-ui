@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>GoatDAO</title>
+        <title>GoatsDao</title>
       </Head>
       <Landing />
     </>

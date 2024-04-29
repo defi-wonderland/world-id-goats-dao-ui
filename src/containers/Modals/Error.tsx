@@ -7,7 +7,7 @@ import { ModalType } from '~/types';
 
 export const ErrorModal = () => {
   return (
-    <BaseModal type={ModalType.ERROR} title={'Error'}>
+    <BaseModal type={ModalType.ERROR} title={'ERROR'}>
       <ModalBody>
         <SErrorIcon />
         <STitle variant='h4'> Something went wrong</STitle>
@@ -33,7 +33,7 @@ const STitle = styled(Typography)(() => {
   return {
     '&&': {
       display: 'block',
-      color: darkTheme.textPrimary,
+      color: darkTheme.textPrimaryOpposite,
       fontSize: '1.5rem',
       fontWeight: 600,
     },

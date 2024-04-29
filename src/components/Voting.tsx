@@ -3,6 +3,7 @@ import { Box, styled, Button } from '@mui/material';
 import { IDKitWidget, useIDKit } from '@worldcoin/idkit';
 // import { usePublicClient } from 'wagmi';
 import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
+import JSConfetti from 'js-confetti';
 
 import { useContract, useModal } from '~/hooks';
 import { ModalType } from '~/types';
@@ -65,6 +66,12 @@ export const Voting = () => {
           setTimeout(() => {
             setTxHash('0xabcd');
             setModalOpen(ModalType.SUCCESS);
+            const jsConfetti = new JSConfetti();
+            jsConfetti?.addConfetti({
+              emojis: ['🐐', '🌈', '✨'],
+              emojiSize: 100,
+              confettiNumber: 85,
+            });
           }, 3000);
         }
 

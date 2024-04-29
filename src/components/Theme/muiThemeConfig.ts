@@ -11,7 +11,7 @@ export const getMuiThemeConfig = (darkTheme: Theme, themeName: ThemeName) => {
         styleOverrides: {
           body: {
             background: darkTheme.backgroundPrimary,
-            color: darkTheme.textPrimary,
+            color: darkTheme.textPrimaryOpposite,
           },
         },
       },

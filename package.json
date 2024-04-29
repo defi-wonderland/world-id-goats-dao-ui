@@ -1,5 +1,5 @@
 {
-  "name": "GoatDAO",
+  "name": "GoatsDao",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -41,11 +41,12 @@
     "@tanstack/react-query": "5.28.0",
     "@worldcoin/idkit": "1.2.0",
     "clsx": "2.1.0",
+    "js-confetti": "0.12.0",
     "next": "14.1.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.15.0",
-    "react-tweet": "^3.2.1",
+    "react-tweet": "3.2.1",
     "viem": "2.8.6",
     "wagmi": "2.5.7"
   },

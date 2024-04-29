@@ -6,9 +6,9 @@ import { ModalType } from '~/types';
 
 export const LoadingModal = () => {
   return (
-    <BaseModal type={ModalType.LOADING} title={'Vote'}>
+    <BaseModal type={ModalType.LOADING} title={'CASTING VOTE'}>
       <ModalBody>
-        <CircularProgress size='3rem' variant='indeterminate' thickness={4} />
+        <CircularProgress size='3rem' variant='indeterminate' thickness={4} style={{ color: '#625CBF' }} />
         <STitle variant='h4'> Casting your vote... </STitle>
         <STypography variant='body1'>You can safely close this modal</STypography>
       </ModalBody>
@@ -33,7 +33,7 @@ const STitle = styled(Typography)(() => {
   return {
     '&&': {
       display: 'block',
-      color: darkTheme.textPrimary,
+      color: darkTheme.textPrimaryOpposite,
       fontSize: '1.5rem',
       fontWeight: 600,
     },
@@ -45,7 +45,7 @@ const STypography = styled(Typography)(() => {
   return {
     '&&': {
       display: 'block',
-      color: darkTheme.textSecondary,
+      color: darkTheme.textPrimaryOpposite,
       fontSize: '1rem',
       fontWeight: 400,
     },

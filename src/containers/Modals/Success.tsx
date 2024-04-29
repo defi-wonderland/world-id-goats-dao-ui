@@ -11,7 +11,7 @@ export const SuccessModal = () => {
   const hash = '0x';
 
   return (
-    <BaseModal type={ModalType.SUCCESS} title={'Vote'}>
+    <BaseModal type={ModalType.SUCCESS} title={'SUCCESSFUL VOTE'}>
       <ModalBody>
         <SCheckIcon />
         <STitle variant='h4'> Vote Succeed! </STitle>
@@ -56,7 +56,7 @@ const STypography = styled(Typography)(() => {
   return {
     '&&': {
       display: 'block',
-      color: darkTheme.textSecondary,
+      color: darkTheme.textPrimary,
       fontSize: '1rem',
       fontWeight: 400,
     },

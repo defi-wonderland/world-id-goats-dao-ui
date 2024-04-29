@@ -41,6 +41,9 @@ dependencies:
   clsx:
     specifier: 2.1.0
     version: 2.1.0
+  js-confetti:
+    specifier: 0.12.0
+    version: 0.12.0
   next:
     specifier: 14.1.3
     version: 14.1.3(@babel/core@7.24.1)(react-dom@18.2.0)(react@18.2.0)
@@ -54,7 +57,7 @@ dependencies:
     specifier: 6.15.0
     version: 6.15.0(react-dom@18.2.0)(react@18.2.0)
   react-tweet:
-    specifier: ^3.2.1
+    specifier: 3.2.1
     version: 3.2.1(react-dom@18.2.0)(react@18.2.0)
   viem:
     specifier: 2.8.6
@@ -7936,6 +7939,10 @@ packages:
       '@sideway/address': 4.1.5
       '@sideway/formula': 3.0.1
       '@sideway/pinpoint': 2.0.0
+    dev: false
+
+  /js-confetti@0.12.0:
+    resolution: {integrity: sha512-1R0Akxn3Zn82pMqW65N1V2NwKkZJ75bvBN/VAb36Ya0YHwbaSiAJZVRr/19HBxH/O8x2x01UFAbYI18VqlDN6g==}
     dev: false
 
   /js-cookie@2.2.1:
