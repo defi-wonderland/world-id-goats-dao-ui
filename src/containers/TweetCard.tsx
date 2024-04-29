@@ -4,10 +4,11 @@ import { Tweet } from 'react-tweet';
 export const TweetCard = () => {
   return (
     <TweetContainer>
+      <SText> Thanks to Worldcoin, Richard was able to buy his 🐐 </SText>
       <SText>
-        Thanks to Worldcoin, Richard was able to buy his first 🐐 After that, he went viral on Twitter Now we want to
-        help him get more goats
+        After that, he went viral on Twitter, when he named his goat Sam (after Sam Altman, founder of Worldcoin){' '}
       </SText>
+      <SText>Now we want to help him get even more goats! </SText>
 
       <SBox className='dark'>
         <Tweet id='1774728635145965672' />
@@ -20,15 +21,17 @@ export const TweetCard = () => {
 const TweetContainer = styled(Box)({
   display: 'block',
   justifyContent: 'center',
+  width: '35rem',
 });
 
 const SText = styled(Typography)({
-  width: '35rem',
   textAlign: 'center',
-  lineHeight: '3rem',
+  lineHeight: '3.25rem',
 });
 
 const SBox = styled(Box)({
   zIndex: 100,
   position: 'relative',
+  display: 'inline-block',
+  justifyContent: 'center',
 });
