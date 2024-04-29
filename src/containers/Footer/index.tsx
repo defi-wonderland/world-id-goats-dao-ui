@@ -22,6 +22,9 @@ const FooterContainer = styled('footer')(() => {
     justifyContent: 'space-between',
     backgroundColor: darkTheme.backgroundPrimary,
     width: '100%',
+    '@media (max-width: 600px)': {
+      padding: '0 1rem',
+    },
   };
 });
 

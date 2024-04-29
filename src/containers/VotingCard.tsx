@@ -52,6 +52,10 @@ export const SBox = styled(Box)(() => {
     marginTop: '4rem',
     marginBottom: '5rem',
     width: '100%',
+    '@media (max-width: 600px)': {
+      marginBottom: '1rem',
+      marginTop: '2rem',
+    },
   };
 });
 

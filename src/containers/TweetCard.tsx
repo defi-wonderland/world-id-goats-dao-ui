@@ -22,6 +22,10 @@ const TweetContainer = styled(Box)({
   display: 'block',
   justifyContent: 'center',
   width: '35rem',
+  '@media (max-width: 600px)': {
+    width: '20rem',
+    margin: 'auto',
+  },
 });
 
 const SText = styled(Typography)({
@@ -32,6 +36,5 @@ const SText = styled(Typography)({
 const SBox = styled(Box)({
   zIndex: 100,
   position: 'relative',
-  display: 'inline-block',
   justifyContent: 'center',
 });

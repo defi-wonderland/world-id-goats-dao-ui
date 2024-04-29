@@ -34,6 +34,9 @@ export const getMuiThemeConfig = (darkTheme: Theme, themeName: ThemeName) => {
       body1: {
         fontSize: '1.2rem',
         letterSpacing: '0.125rem',
+        '@media (max-width: 600px)': {
+          fontSize: '1rem',
+        },
       },
     },
   });

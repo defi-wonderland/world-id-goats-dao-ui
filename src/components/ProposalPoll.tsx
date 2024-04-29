@@ -99,6 +99,9 @@ const PollContainer = styled(Box)(() => {
     gap: '0.5rem',
     fontWeight: 800,
     margin: '0 3.75rem',
+    '@media (max-width: 600px)': {
+      marginTop: '1.5rem',
+    },
   };
 });
 
@@ -122,6 +125,9 @@ const StatsInfoContainer = styled(Box)(() => {
     },
     '& .MuiTypography-root': {
       fontWeight: 800,
+      '@media (max-width: 600px)': {
+        fontSize: '0.9rem',
+      },
     },
   };
 });
@@ -131,6 +137,9 @@ const VoteStatsContainer = styled(Box)({
   justifyContent: 'center',
   alignItems: 'center',
   margin: '2rem 0',
+  '@media (max-width: 600px)': {
+    margin: '0',
+  },
 });
 
 const SBox = styled(Box)({
@@ -146,7 +155,7 @@ const SText = styled(Typography)(() => {
   return {
     fontWeight: 800,
     color: darkTheme.textSecondary,
-    '@media (max-width: 1200px)': {
+    '@media (max-width: 600px)': {
       fontSize: '0.75rem',
     },
   };
@@ -156,10 +165,18 @@ const StyledTypography = styled(Typography)<StyledTypographyProps>(({ color }) =
   color: color,
   marginRight: 'auto',
   fontWeight: 800,
+  '@media (max-width: 600px)': {
+    fontSize: '0.7rem',
+    margin: '0',
+    width: 'max-content',
+  },
 }));
 
 const StyledCircleIcon = styled(Circle)(({ color }) => ({
   color: color,
+  '@media (max-width: 600px)': {
+    fontSize: '0.75rem',
+  },
 }));
 
 const OverallProgressContainer = styled('div')({
@@ -170,6 +187,9 @@ const OverallProgressContainer = styled('div')({
   overflow: 'hidden',
   backgroundColor: '#E0E0E0',
   marginTop: '1rem',
+  '@media (max-width: 600px)': {
+    marginTop: '0',
+  },
 });
 
 const ProgressSegment = styled('div')<ProgressSegmentProps>(({ left, width, backgroundColor }) => ({

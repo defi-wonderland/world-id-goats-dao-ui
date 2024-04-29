@@ -130,6 +130,10 @@ export const SBox = styled(Box)(() => {
     gap: '2rem',
     margin: '2rem 0',
     alignItems: 'center',
+    '@media (max-width: 600px)': {
+      gap: '0rem',
+      margin: '0rem',
+    },
   };
 });
 
@@ -149,7 +153,9 @@ export const SButton = styled(Button)(() => {
     letterSpacing: '0.3rem',
     lineHeigth: '0.9rem',
     '@media (max-width: 600px)': {
-      fontSize: '1.6rem',
+      fontSize: '0.75rem',
+      padding: '0.2rem 1.75rem',
+      letterSpacing: '0.125rem',
     },
   };
 });
@@ -169,5 +175,11 @@ export const SButtonFor = styled(Button)(() => {
     textTransform: 'uppercase',
     background: 'linear-gradient(90deg, #FCCC50 0%, #C55FA3 42.5%, #935EB1 71%, #625CBF 100%)',
     lineHeigth: '0.9rem',
+    '@media (max-width: 600px)': {
+      fontSize: '0.9rem',
+      padding: '0.2rem 1rem',
+      gap: '0rem',
+      margin: '0rem',
+    },
   };
 });

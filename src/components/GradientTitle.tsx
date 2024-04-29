@@ -20,4 +20,7 @@ const GradientText = styled(Typography)({
   lineHeight: 'normal',
   textTransform: 'uppercase',
   padding: '0.5rem',
+  '@media (max-width: 600px)': {
+    fontSize: '2.5rem',
+  },
 });

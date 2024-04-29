@@ -24,18 +24,28 @@ export default GoatGuy;
 const GoatGuyContainer = styled(Box)({
   display: 'flex',
   justifyContent: 'flex-end',
-  height: '20rem',
+  height: 'max-content',
   width: '100%',
   alignItems: 'baseline',
+  '@media (max-width: 600px)': {
+    display: 'grid',
+    justifyContent: 'center',
+  },
 });
 
 const TextStyled = styled(Typography)({
-  width: 'fit-content',
+  width: 'max-content',
   margin: '0 1rem',
+  '@media (max-width: 600px)': {
+    margin: '0',
+  },
 });
 
 const ArrowBox = styled(Box)({
   position: 'absolute',
   bottom: '-20rem',
   right: '35rem',
+  '@media (max-width: 600px)': {
+    position: 'relative',
+  },
 });
