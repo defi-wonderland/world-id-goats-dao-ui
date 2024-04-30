@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { Box, styled, Button } from '@mui/material';
 import { IDKitWidget, useIDKit } from '@worldcoin/idkit';
 // import { usePublicClient } from 'wagmi';
@@ -6,7 +6,7 @@ import { useAccount } from 'wagmi';
 import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
 import JSConfetti from 'js-confetti';
 
-import { useContract, useCustomTheme, useModal } from '~/hooks';
+import { useContract, useCustomTheme, useModal, useVote } from '~/hooks';
 import { ModalType } from '~/types';
 import { getConfig } from '~/config';
 
@@ -26,18 +26,19 @@ export enum VerificationLevel {
 
 export const Voting = () => {
   const { setModalOpen } = useModal();
+  const { vote, setVote } = useVote();
   //castVote, checkValidity,
   const { simulateCheckValidity, simulateCastVote, setTxHash } = useContract();
   // const publicClient = usePublicClient();
   const { isConnected } = useAccount();
-  const [vote, setVote] = useState<number>(1);
   const { setOpen } = useIDKit();
   const thoughts = ''; // Empty since removed from UI design but required as contract arg
 
   const handleVote = (support: number) => {
-    setOpen(true);
     setVote(support);
+    setOpen(true);
   };
+
   const onSuccess = useCallback(
     async (result: ISuccessResult) => {
       try {
@@ -68,12 +69,14 @@ export const Voting = () => {
           setTimeout(() => {
             setTxHash('0xabcd');
             setModalOpen(ModalType.SUCCESS);
-            const jsConfetti = new JSConfetti();
-            jsConfetti?.addConfetti({
-              emojis: ['🐐', '🌈', '✨'],
-              emojiSize: 100,
-              confettiNumber: 85,
-            });
+            if (vote === 1) {
+              const jsConfetti = new JSConfetti();
+              jsConfetti?.addConfetti({
+                emojis: ['🐐', '🌈', '✨'],
+                emojiSize: 100,
+                confettiNumber: 85,
+              });
+            }
           }, 3000);
         }
 
