@@ -24,14 +24,17 @@ export default GoatGuy;
 const GoatGuyContainer = styled(Box)({
   display: 'flex',
   justifyContent: 'flex-end',
+  height: 'max-content',
   width: '100%',
   alignItems: 'baseline',
-  height: 'max-content',
-  margin: '0 0 5rem 0',
+  '@media (max-width: 600px)': {
+    display: 'grid',
+    justifyContent: 'center',
+  },
 });
 
 const TextStyled = styled(Typography)({
-  width: 'fit-content',
+  width: 'max-content',
   margin: '0 1rem',
   fontFamily: 'SharpGroteskLight',
 });
