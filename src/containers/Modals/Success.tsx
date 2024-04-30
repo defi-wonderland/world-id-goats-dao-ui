@@ -3,21 +3,21 @@ import { Box, Typography, styled } from '@mui/material';
 import { CheckCircle, OpenInNew } from '@mui/icons-material';
 
 import BaseModal from '~/components/BaseModal';
-import { useCustomTheme } from '~/hooks';
+import { useContract, useCustomTheme } from '~/hooks';
 import { ModalType } from '~/types';
 import { truncateValue } from '~/utils';
 
 export const SuccessModal = () => {
-  const hash = '0x';
+  const { txHash } = useContract();
 
   return (
     <BaseModal type={ModalType.SUCCESS} title={'SUCCESSFUL VOTE'}>
       <ModalBody>
         <SCheckIcon />
         <STitle variant='h4'> Vote Succeed! </STitle>
-        {hash && (
-          <StyledLink href={`https://optimistic.etherscan.io/tx/${hash}`} target='_blank'>
-            {truncateValue(hash)}
+        {txHash && (
+          <StyledLink href={`https://optimistic.etherscan.io/tx/${txHash}`} target='_blank'>
+            {truncateValue(txHash)}
             <OpenInNew />
           </StyledLink>
         )}

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { Box, styled, Button } from '@mui/material';
 import { IDKitWidget, useIDKit } from '@worldcoin/idkit';
-// import { usePublicClient } from 'wagmi';
+import { usePublicClient } from 'wagmi';
 import { useAccount } from 'wagmi';
 import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
 import JSConfetti from 'js-confetti';
@@ -27,12 +27,11 @@ export enum VerificationLevel {
 export const Voting = () => {
   const { setModalOpen } = useModal();
   const { vote, setVote } = useVote();
-  //castVote, checkValidity,
-  const { simulateCheckValidity, simulateCastVote, setTxHash } = useContract();
-  // const publicClient = usePublicClient();
+  const { setTxHash, castVote, checkValidity } = useContract();
+  const publicClient = usePublicClient();
   const { isConnected } = useAccount();
   const { setOpen } = useIDKit();
-  const thoughts = ''; // Empty since removed from UI design but required as contract arg
+  const thoughts = `Voting for: ${vote}`;
 
   const handleVote = (support: number) => {
     setVote(support);
@@ -43,6 +42,7 @@ export const Voting = () => {
     async (result: ISuccessResult) => {
       try {
         // Get the proof data
+        console.log(result);
         const { merkle_root, nullifier_hash, proof } = result;
 
         const [decodedMerfleRoot] = decodeAbiParameters(parseAbiParameters('uint256 merkle_root'), merkle_root as Hex);
@@ -57,17 +57,19 @@ export const Voting = () => {
           [decodedMerfleRoot, decodedNullifierHash, decodedProof],
         );
 
-        //STAGING
-        const isValid = await simulateCheckValidity(BigInt(PROPOSAL_ID), vote, proofData);
-        if (isValid) {
-          const request = await simulateCastVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
-          if (request) {
-            setModalOpen(ModalType.LOADING);
-          }
+        //PRODUCTION
+        const validate = await checkValidity(BigInt(PROPOSAL_ID), vote, proofData);
 
-          // Simulate transaction processing delay
-          setTimeout(() => {
-            setTxHash('0xabcd');
+        if (validate) {
+          const hash = await castVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
+          if (!hash) throw new Error('No hash returned');
+          setModalOpen(ModalType.LOADING);
+          if (!publicClient) return;
+          const receipt = await publicClient.waitForTransactionReceipt({
+            hash: hash as Hex,
+          });
+          setTxHash(receipt.transactionHash);
+          if (receipt) {
             setModalOpen(ModalType.SUCCESS);
             if (vote === 1) {
               const jsConfetti = new JSConfetti();
@@ -77,35 +79,16 @@ export const Voting = () => {
                 confettiNumber: 85,
               });
             }
-          }, 3000);
+          }
+        } else {
+          setModalOpen(ModalType.ERROR);
         }
-
-        //PRODUCTION
-        // const isValid = await simulateCheckValidity(BigInt(PROPOSAL_ID), vote, proofData);
-        // const validate = await checkValidity(BigInt(PROPOSAL_ID), vote, proofData);
-
-        // if (validate) {
-        //   const request = await simulateCastVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
-        //   const hash = await castVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
-        //   if (!hash) throw new Error('No hash returned');
-        //   setModalOpen(ModalType.LOADING);
-        //   if (!publicClient) return;
-        //   const receipt = await publicClient.waitForTransactionReceipt({
-        //     hash: hash as Hex,
-        //   });
-        //   setTxHash(receipt.transactionHash);
-        //   if (receipt) {
-        //     setModalOpen(ModalType.SUCCESS);
-        //   }
-        // } else {
-        //   setModalOpen(ModalType.ERROR);
-        // }
       } catch (error) {
         console.error('Cast failed:', error);
         setModalOpen(ModalType.ERROR);
       }
     },
-    [simulateCheckValidity, vote, simulateCastVote, setModalOpen, setTxHash],
+    [checkValidity, vote, castVote, thoughts, setModalOpen, publicClient, setTxHash],
   );
 
   return (
