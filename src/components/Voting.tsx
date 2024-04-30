@@ -27,7 +27,7 @@ export enum VerificationLevel {
 export const Voting = () => {
   const { setModalOpen } = useModal();
   const { vote, setVote } = useVote();
-  const { setTxHash, castVote, checkValidity } = useContract();
+  const { setTxHash, castVote, simulateCheckValidity } = useContract();
   const publicClient = usePublicClient();
   const { isConnected } = useAccount();
   const { setOpen } = useIDKit();
@@ -58,7 +58,7 @@ export const Voting = () => {
         );
 
         //PRODUCTION
-        const validate = await checkValidity(BigInt(PROPOSAL_ID), vote, proofData);
+        const validate = await simulateCheckValidity(BigInt(PROPOSAL_ID), vote, proofData);
 
         if (validate) {
           const hash = await castVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
@@ -88,7 +88,7 @@ export const Voting = () => {
         setModalOpen(ModalType.ERROR);
       }
     },
-    [checkValidity, vote, castVote, thoughts, setModalOpen, publicClient, setTxHash],
+    [simulateCheckValidity, vote, castVote, thoughts, setModalOpen, publicClient, setTxHash],
   );
 
   return (

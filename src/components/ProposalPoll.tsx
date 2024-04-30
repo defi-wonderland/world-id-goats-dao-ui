@@ -29,9 +29,9 @@ export const ProposalPoll = () => {
       const voteCounts = await getProposalVotes(BigInt(PROPOSAL_ID));
       if (voteCounts) {
         setVotes({
-          for: Number(voteCounts[0]),
-          against: Number(voteCounts[1]),
-          abstain: Number(voteCounts[2]),
+          for: Number(voteCounts[1]),
+          against: Number(voteCounts[2]),
+          abstain: Number(voteCounts[0]),
         });
       }
       if (quorumThreshold) {

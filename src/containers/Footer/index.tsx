@@ -1,4 +1,6 @@
 import { styled, Box } from '@mui/material';
+import Link from 'next/link';
+
 import { useCustomTheme } from '~/hooks';
 import { SText } from '~/containers';
 
@@ -6,8 +8,18 @@ export const Footer = () => {
   return (
     <FooterContainer>
       <Box>
-        <SText>Made with 💜 by Wonderland</SText>
-        <SText>Powered by World ID</SText>
+        <SText>
+          Made with 💜 by
+          <Link href='https://defi.sucks/' target='_blank'>
+            Wonderland
+          </Link>
+        </SText>
+        <SText>
+          Powered by
+          <Link href='https://worldcoin.org/world-id' target='_blank'>
+            World ID
+          </Link>
+        </SText>
       </Box>
     </FooterContainer>
   );
