@@ -100,7 +100,6 @@ const PollContainer = styled(Box)(() => {
     color: darkTheme.textPrimary,
     fontWeight: 800,
     margin: '0 3.75rem',
-    gap: '0.5rem',
     '@media (max-width: 600px)': {
       marginTop: '1.5rem',
     },
@@ -138,7 +137,6 @@ const VoteStatsContainer = styled(Box)({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  margin: '2rem 0',
   '@media (max-width: 600px)': {
     margin: '0',
   },
@@ -149,7 +147,6 @@ const SBox = styled(Box)({
   alignItems: 'center',
   padding: '0.5rem',
   gap: '0.5rem',
-  margin: '0 0.5rem',
 });
 
 const SText = styled(Typography)(() => {
@@ -188,7 +185,7 @@ const OverallProgressContainer = styled('div')({
   borderRadius: '5px',
   overflow: 'hidden',
   backgroundColor: '#E0E0E0',
-  marginTop: '1rem',
+  marginTop: '0.5rem',
   '@media (max-width: 600px)': {
     marginTop: '0',
   },

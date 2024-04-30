@@ -44,24 +44,27 @@ export const ProposalDetail = () => {
   );
 };
 
-const DetailContainer = styled(Box)(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  margin: '1rem 0',
-  backgroundColor: 'rgba(0, 0, 0, 0.1)',
-  backdropFilter: 'blur(4px)',
-  WebkitBackdropFilter: 'blur(4px)', // For Safari compatibility
-  color: '#fff',
-  borderRadius: '16px',
-  padding: '2rem',
-  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.2)', // Subtle shadow
-  width: '50rem',
-  border: '0.5px solid rgba(0, 0, 0, 0.2)',
-  '@media (max-width: 600px)': {
-    width: 'inherit',
-  },
-}));
+const DetailContainer = styled(Box)(() => {
+  const { darkTheme } = useCustomTheme();
+  return {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    margin: '1rem 0',
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    backdropFilter: 'blur(4px)',
+    WebkitBackdropFilter: 'blur(4px)', // For Safari compatibility
+    color: darkTheme.textPrimary,
+    borderRadius: '16px',
+    padding: '2rem',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.2)', // Subtle shadow
+    width: '50rem',
+    border: '0.5px solid rgba(0, 0, 0, 0.2)',
+    '@media (max-width: 600px)': {
+      width: 'inherit',
+    },
+  };
+});
 
 const TitleContainer = styled(Box)({
   paddingBottom: '0.5rem',
@@ -106,7 +109,8 @@ const CodeSnippet = styled(Typography)(() => {
     borderRadius: '8px',
     fontFamily: 'source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace',
     overflow: 'auto',
-    textPrimaryOppositeSpace: 'pre',
+    whiteSpace: 'pre-wrap',
+    fontSize: '1rem',
     color: darkTheme.textPrimary,
     '@media (max-width: 600px)': {
       maxWidth: '18rem',

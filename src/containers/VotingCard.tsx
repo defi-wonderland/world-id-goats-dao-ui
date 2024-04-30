@@ -42,11 +42,10 @@ export const SBox = styled(Box)(() => {
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '4rem',
-    marginBottom: '5rem',
+    marginBottom: '7rem',
     width: '100%',
     '@media (max-width: 600px)': {
-      marginBottom: '1rem',
-      marginTop: '2rem',
+      margin: '1rem',
     },
   };
 });

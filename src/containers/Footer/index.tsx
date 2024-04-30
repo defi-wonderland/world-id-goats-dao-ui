@@ -1,5 +1,6 @@
-import { styled, Box, Typography } from '@mui/material';
-import { useCustomTheme } from '~/hooks/useTheme';
+import { styled, Box } from '@mui/material';
+import { useCustomTheme } from '~/hooks';
+import { SText } from '~/containers';
 
 export const Footer = () => {
   return (
@@ -26,8 +27,4 @@ const FooterContainer = styled('footer')(() => {
       padding: '0 1rem',
     },
   };
-});
-
-const SText = styled(Typography)({
-  fontSize: '1rem',
 });

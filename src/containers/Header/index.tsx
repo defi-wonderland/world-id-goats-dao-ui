@@ -55,6 +55,9 @@ const ControlsBox = styled(Box)({
   gap: '1rem',
 });
 
-const SText = styled(Typography)({
+export const SText = styled(Typography)({
   fontSize: '1rem',
+  '@media (max-width: 600px)': {
+    fontSize: '0.75rem',
+  },
 });
