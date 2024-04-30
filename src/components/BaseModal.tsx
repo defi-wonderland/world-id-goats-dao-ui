@@ -63,7 +63,7 @@ export const StyledBackdrop = styled(Backdrop)`
   inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(0.05rem);
-  -webkit-tap-highlight-color: textPrimaryOpposite;
+  -webkit-tap-highlight-color: white;
 `;
 
 export const SModal = styled(Box)(() => {

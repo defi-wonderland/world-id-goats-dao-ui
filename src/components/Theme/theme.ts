@@ -16,7 +16,7 @@ export const darkTheme: Theme = {
   border: '0.1rem solid rgba(153, 164, 184, 0.1)',
   boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
 
-  primaryColor: 'rgba(0, 115, 230, 0.8)',
+  primaryColor: '#625CBF',
   accentColor: '#ececec',
   disabledColor: '#94969c',
 

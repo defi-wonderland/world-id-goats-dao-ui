@@ -9,7 +9,7 @@ export const LoadingModal = () => {
     <BaseModal type={ModalType.LOADING} title={'CASTING VOTE'}>
       <ModalBody>
         <SIcon size='3rem' variant='indeterminate' thickness={4} />
-        <STitle variant='h4'> Casting your vote... </STitle>
+        <STitle variant='h4'> Casting your vote 🐐 ... </STitle>
         <STypography variant='body1'>You can safely close this modal</STypography>
       </ModalBody>
     </BaseModal>
