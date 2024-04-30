@@ -2,10 +2,11 @@ import { useCallback, useState } from 'react';
 import { Box, styled, Button } from '@mui/material';
 import { IDKitWidget, useIDKit } from '@worldcoin/idkit';
 // import { usePublicClient } from 'wagmi';
+import { useAccount } from 'wagmi';
 import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
 import JSConfetti from 'js-confetti';
 
-import { useContract, useModal } from '~/hooks';
+import { useContract, useCustomTheme, useModal } from '~/hooks';
 import { ModalType } from '~/types';
 import { getConfig } from '~/config';
 
@@ -28,6 +29,7 @@ export const Voting = () => {
   //castVote, checkValidity,
   const { simulateCheckValidity, simulateCastVote, setTxHash } = useContract();
   // const publicClient = usePublicClient();
+  const { isConnected } = useAccount();
   const [vote, setVote] = useState<number>(1);
   const { setOpen } = useIDKit();
   const thoughts = ''; // Empty since removed from UI design but required as contract arg
@@ -106,9 +108,15 @@ export const Voting = () => {
   return (
     <>
       <SBox>
-        <SButtonFor onClick={() => handleVote(1)}> 🐐 For 🐐 </SButtonFor>
-        <SButton onClick={() => handleVote(2)}> Against </SButton>
-        <SButton onClick={() => handleVote(0)}> Abstain </SButton>
+        <SButtonFor onClick={() => handleVote(1)} disabled={!isConnected}>
+          🐐 For 🐐
+        </SButtonFor>
+        <SButton onClick={() => handleVote(2)} disabled={!isConnected}>
+          Against
+        </SButton>
+        <SButton onClick={() => handleVote(0)} disabled={!isConnected}>
+          Abstain
+        </SButton>
       </SBox>
 
       <IDKitWidget
@@ -134,6 +142,7 @@ export const SBox = styled(Box)(() => {
 });
 
 export const SButton = styled(Button)(() => {
+  const { darkTheme } = useCustomTheme();
   return {
     padding: '0.2rem 2.75rem',
     fontWeight: 600,
@@ -141,13 +150,16 @@ export const SButton = styled(Button)(() => {
     boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
     margin: '0.5rem',
     width: 'auto',
-    border: '1px solid #fff',
-    color: '#fff',
+    border: `1px solid ${darkTheme.textPrimary}`,
+    color: darkTheme.textPrimary,
     borderRadius: '2rem',
     gap: '0.5rem',
     textTransform: 'uppercase',
     letterSpacing: '0.3rem',
     lineHeigth: '0.9rem',
+    '&.Mui-disabled': {
+      border: `1px solid ${darkTheme.disabledColor}`,
+    },
     '@media (max-width: 600px)': {
       fontSize: '1.6rem',
     },
@@ -155,6 +167,7 @@ export const SButton = styled(Button)(() => {
 });
 
 export const SButtonFor = styled(Button)(() => {
+  const { darkTheme } = useCustomTheme();
   return {
     padding: '0.1rem 2.7rem',
     fontWeight: 800,
@@ -162,7 +175,7 @@ export const SButtonFor = styled(Button)(() => {
     boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
     margin: '0.5rem',
     width: 'auto',
-    color: '#fff',
+    color: darkTheme.textPrimary,
     borderRadius: '2rem',
     letterSpacing: '0.3rem',
     gap: '0.5rem',

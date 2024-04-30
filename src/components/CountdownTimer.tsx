@@ -40,5 +40,6 @@ export const CountdownContainer = styled(Box)(() => {
   return {
     display: 'flex',
     justifyContent: 'center',
+    marginTop: '3rem',
   };
 });

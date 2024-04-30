@@ -40,7 +40,7 @@ const StyledHeader = styled('header')(() => {
     zIndex: '100',
     a: {
       textDecoration: 'none',
-      color: darkTheme.textPrimaryOpposite,
+      color: darkTheme.textPrimary,
       marginLeft: '0.25rem',
     },
     '@media (max-width: 600px)': {

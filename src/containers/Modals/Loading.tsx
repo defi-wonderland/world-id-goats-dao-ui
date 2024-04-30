@@ -33,7 +33,7 @@ const STitle = styled(Typography)(() => {
   return {
     '&&': {
       display: 'block',
-      color: darkTheme.textPrimaryOpposite,
+      color: darkTheme.textPrimary,
       fontSize: '1.5rem',
       fontWeight: 600,
     },
@@ -45,7 +45,7 @@ const STypography = styled(Typography)(() => {
   return {
     '&&': {
       display: 'block',
-      color: darkTheme.textPrimaryOpposite,
+      color: darkTheme.textPrimary,
       fontSize: '1rem',
       fontWeight: 400,
     },

@@ -24,14 +24,16 @@ export default GoatGuy;
 const GoatGuyContainer = styled(Box)({
   display: 'flex',
   justifyContent: 'flex-end',
-  height: '20rem',
   width: '100%',
   alignItems: 'baseline',
+  height: 'max-content',
+  margin: '0 0 5rem 0',
 });
 
 const TextStyled = styled(Typography)({
   width: 'fit-content',
   margin: '0 1rem',
+  fontFamily: 'SharpGroteskLight',
 });
 
 const ArrowBox = styled(Box)({

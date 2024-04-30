@@ -26,7 +26,9 @@ const TweetContainer = styled(Box)({
 
 const SText = styled(Typography)({
   textAlign: 'center',
-  lineHeight: '3.25rem',
+  lineHeight: '2rem',
+  fontFamily: 'SharpGroteskLight',
+  fontSize: '1.5rem',
 });
 
 const SBox = styled(Box)({

@@ -2,13 +2,13 @@ import { Theme } from '~/types';
 
 export const darkTheme: Theme = {
   type: 'dark',
-  textPrimary: '#000000',
-  textPrimaryOpposite: '#FFFFFF',
+  textPrimary: '#FFFFFF',
+  textPrimaryOpposite: '#000000',
   textSecondary: '#99A4B8',
   textTertiary: '#625CBF',
   backgroundPrimary: '#0e152c',
   backgroundSecondary: '#0e152c',
-  backgroundModal: '#FFFFFF',
+  backgroundModal: '#0e152c',
   titleFontFamily: 'Open Sans',
   textFontFamily: 'Open Sans',
   borderRadius: '0.8rem',

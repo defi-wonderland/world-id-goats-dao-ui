@@ -97,10 +97,10 @@ const PollContainer = styled(Box)(() => {
   return {
     display: 'flex',
     flexDirection: 'column',
-    color: darkTheme.textPrimaryOpposite,
-    gap: '0.5rem',
+    color: darkTheme.textPrimary,
     fontWeight: 800,
     margin: '0 3.75rem',
+    gap: '0.5rem',
   };
 });
 
@@ -109,9 +109,9 @@ const StatsContainer = styled(Box)({
   alignItems: 'center',
   justifyContent: 'center',
   width: '100%',
-  gap: '0.5rem',
   letterSpacing: '0.125rem',
   textTransform: 'uppercase',
+  gap: '0.5rem',
 });
 
 const StatsInfoContainer = styled(Box)(() => {
@@ -132,7 +132,6 @@ const VoteStatsContainer = styled(Box)({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  margin: '2rem 0',
 });
 
 const SBox = styled(Box)({
@@ -171,7 +170,6 @@ const OverallProgressContainer = styled('div')({
   borderRadius: '5px',
   overflow: 'hidden',
   backgroundColor: '#E0E0E0',
-  marginTop: '1rem',
 });
 
 const ProgressSegment = styled('div')<ProgressSegmentProps>(({ left, width, backgroundColor }) => ({

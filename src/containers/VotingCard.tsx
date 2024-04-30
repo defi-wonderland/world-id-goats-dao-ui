@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Box, styled } from '@mui/material';
-import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 import { GradientTitle, ProposalPoll, Voting, CountdownTimer } from '~/components';
 import { useContract } from '~/hooks';
@@ -11,7 +9,6 @@ const { PROPOSAL_ID } = getConfig();
 
 export const VotingCard = () => {
   const { getProposalDeadline } = useContract();
-  const { isConnected } = useAccount();
   const [deadline, setDeadline] = useState<Date>();
 
   useEffect(() => {
@@ -30,12 +27,7 @@ export const VotingCard = () => {
       <GradientTitle title="Should Wonderland contribute 250 WLD to Richard's goat project?" />
 
       <VotingContainer>
-        {isConnected && <Voting />}
-        {!isConnected && (
-          <ConnectContainer>
-            <ConnectButton showBalance={false} accountStatus='address' chainStatus='none' />
-          </ConnectContainer>
-        )}
+        <Voting />
         <ProposalPoll />
         {deadline && <CountdownTimer targetDate={deadline} />}
       </VotingContainer>

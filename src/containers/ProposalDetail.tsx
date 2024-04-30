@@ -71,12 +71,12 @@ const StyledTabs = styled(Tabs)(() => {
   const { darkTheme } = useCustomTheme();
   return {
     '& .MuiTabs-indicator': {
-      backgroundColor: darkTheme.textPrimaryOpposite,
+      backgroundColor: darkTheme.textPrimary,
     },
     '& .MuiTab-root': {
       color: '#999',
       '&.Mui-selected': {
-        color: darkTheme.textPrimaryOpposite,
+        color: darkTheme.textPrimary,
         fontWeight: 'bold',
       },
     },
@@ -90,7 +90,7 @@ const SectionTitle = styled(Typography)(() => {
   return {
     fontWeight: 'bold',
     margin: '1rem 0',
-    color: darkTheme.textPrimaryOpposite,
+    color: darkTheme.textPrimary,
   };
 });
 
@@ -107,7 +107,7 @@ const CodeSnippet = styled(Typography)(() => {
     fontFamily: 'source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace',
     overflow: 'auto',
     textPrimaryOppositeSpace: 'pre',
-    color: darkTheme.textPrimaryOpposite,
+    color: darkTheme.textPrimary,
     '@media (max-width: 600px)': {
       maxWidth: '18rem',
     },
