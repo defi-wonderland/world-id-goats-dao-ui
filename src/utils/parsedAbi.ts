@@ -86,3 +86,12 @@ export const votingDelay = parseAbi(['function votingDelay() public view returns
 export const proposalVotes = parseAbi([
   'function proposalVotes(uint256 proposalId) public view returns (uint256 againstVotes, uint256 forVotes, uint256 abstainVotes)',
 ]);
+
+/**
+ * @notice module:voting
+ * @dev Returns whether `account` has cast a vote on `proposalId`.
+ */
+
+export const hasVoted = parseAbi([
+  'function hasVoted(uint256 proposalId, address account) external view returns (bool)',
+]);

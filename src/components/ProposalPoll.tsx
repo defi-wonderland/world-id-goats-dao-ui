@@ -18,7 +18,7 @@ interface ProgressSegmentProps {
 }
 
 export const ProposalPoll = () => {
-  const { getQuorumThreshold, getProposalVotes } = useContract();
+  const { getQuorumThreshold, getProposalVotes, txHash } = useContract();
   const { darkTheme } = useCustomTheme();
   const [votes, setVotes] = useState({ for: 0, against: 0, abstain: 0 });
   const [quorum, setQuorum] = useState('');
@@ -29,9 +29,9 @@ export const ProposalPoll = () => {
       const voteCounts = await getProposalVotes(BigInt(PROPOSAL_ID));
       if (voteCounts) {
         setVotes({
-          for: Number(voteCounts[0]),
-          against: Number(voteCounts[1]),
-          abstain: Number(voteCounts[2]),
+          for: Number(voteCounts[1]),
+          against: Number(voteCounts[2]),
+          abstain: Number(voteCounts[0]),
         });
       }
       if (quorumThreshold) {
@@ -39,7 +39,7 @@ export const ProposalPoll = () => {
       }
     }
     fetchContractData();
-  }, [getProposalVotes, getQuorumThreshold]);
+  }, [getProposalVotes, getQuorumThreshold, txHash]);
 
   const totalVotes = useMemo(() => votes.for + votes.against + votes.abstain, [votes]);
 

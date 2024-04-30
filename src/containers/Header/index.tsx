@@ -1,8 +1,8 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Box, Typography, styled } from '@mui/material';
 import Link from 'next/link';
 
 import { useCustomTheme } from '~/hooks';
+import { Connect } from '~/components/Connect';
 
 export const Header = () => {
   return (
@@ -22,7 +22,7 @@ export const Header = () => {
         </SText>
       </Box>
       <ControlsBox>
-        <ConnectButton showBalance={false} accountStatus='address' chainStatus='none' />
+        <Connect />
       </ControlsBox>
     </StyledHeader>
   );

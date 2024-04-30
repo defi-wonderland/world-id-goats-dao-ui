@@ -12,6 +12,7 @@ import {
   proposalsQuorumThreshold,
   state,
   votingDelay,
+  hasVoted,
 } from '~/utils/parsedAbi';
 
 const { CONTRACT_ADDRESS } = getConfig();
@@ -107,6 +108,19 @@ export function useContract() {
     [publicClient],
   );
 
+  const getHasVoted = useCallback(
+    async (proposalId: ProposalID, address: Address) => {
+      if (!publicClient) return;
+      return await publicClient.readContract({
+        abi: hasVoted,
+        address: CONTRACT_ADDRESS as Address,
+        functionName: 'hasVoted',
+        args: [proposalId, address],
+      });
+    },
+    [publicClient],
+  );
+
   const getProposalState = useCallback(
     async (proposalId: ProposalID) => {
       if (!publicClient) return;
@@ -166,6 +180,7 @@ export function useContract() {
     simulateCheckValidity,
     getProposalState,
     simulateCastVote,
+    getHasVoted,
     setTxHash,
     txHash,
   };

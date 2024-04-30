@@ -4,30 +4,39 @@ import { Box, styled } from '@mui/material';
 import { GradientTitle, ProposalPoll, Voting, CountdownTimer } from '~/components';
 import { useContract } from '~/hooks';
 import { getConfig } from '~/config';
+import { useAccount } from 'wagmi';
 
 const { PROPOSAL_ID } = getConfig();
 
 export const VotingCard = () => {
-  const { getProposalDeadline } = useContract();
+  const { getProposalDeadline, getHasVoted, getProposalState, txHash } = useContract();
+  const { address } = useAccount();
   const [deadline, setDeadline] = useState<Date>();
+  const [enableVote, setEnableVote] = useState<boolean>(true);
 
   useEffect(() => {
     async function fetchContractData() {
       const deadline = await getProposalDeadline(BigInt(PROPOSAL_ID));
+      const hasVoted = address && (await getHasVoted(BigInt(PROPOSAL_ID), address));
+      const active = await getProposalState(BigInt(PROPOSAL_ID));
       if (deadline) {
         const date = new Date(Number(deadline) * 1000);
         setDeadline(date);
       }
+      if (hasVoted && active) {
+        const votingActive = active === 'Active';
+        setEnableVote(!hasVoted && votingActive);
+      }
     }
     fetchContractData();
-  }, [getProposalDeadline]);
+  }, [address, getHasVoted, getProposalDeadline, getProposalState, txHash]);
 
   return (
     <SBox>
       <GradientTitle title="Should Wonderland contribute 250 WLD to Richard's goat project?" />
 
       <VotingContainer>
-        <Voting />
+        <Voting enableVote={enableVote} />
         <ProposalPoll />
         {deadline && <CountdownTimer targetDate={deadline} />}
       </VotingContainer>

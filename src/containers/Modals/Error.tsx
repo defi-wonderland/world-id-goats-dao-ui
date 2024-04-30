@@ -1,7 +1,7 @@
 import { Box, Typography, styled } from '@mui/material';
 import { Cancel } from '@mui/icons-material';
 
-import BaseModal from '~/components/BaseModal';
+import { BaseModal } from '~/components';
 import { useCustomTheme } from '~/hooks';
 import { ModalType } from '~/types';
 

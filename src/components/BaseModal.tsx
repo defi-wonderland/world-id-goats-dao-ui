@@ -14,7 +14,7 @@ interface BaseModalProps {
   image?: string;
 }
 
-const BaseModal = ({ children, type, title, fixedHeight }: BaseModalProps) => {
+export const BaseModal = ({ children, type, title, fixedHeight }: BaseModalProps) => {
   const { modalOpen, closeModal } = useModal();
   return (
     <StyledModal open={type === modalOpen} onClose={closeModal} slots={{ backdrop: StyledBackdrop }}>
@@ -33,8 +33,6 @@ const BaseModal = ({ children, type, title, fixedHeight }: BaseModalProps) => {
     </StyledModal>
   );
 };
-
-export default BaseModal;
 
 export const Backdrop = React.forwardRef<HTMLDivElement, { open?: boolean; className: string }>((props, ref) => {
   const { open, className, ...other } = props;

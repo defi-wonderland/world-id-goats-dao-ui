@@ -24,15 +24,14 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) =>
   const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
   const seconds = Math.floor((timeLeft / 1000) % 60);
 
-  // When the countdown is over
-  if (timeLeft < 0) {
-    return <span>🐐 🐐 🐐 THANK YOU FOR HELPING RICHARD OUT ! 🐐 🐐 🐐</span>;
-  }
-
   return (
-    <CountdownContainer>
-      <Typography> VOTING ENDS IN: {`${days}D ${hours}H ${minutes}M ${seconds}S`}</Typography>
-    </CountdownContainer>
+    <>
+      {timeLeft > 0 && (
+        <CountdownContainer>
+          <Typography> VOTING ENDS IN: {`${days}D ${hours}H ${minutes}M ${seconds}S`}</Typography>
+        </CountdownContainer>
+      )}
+    </>
   );
 };
 

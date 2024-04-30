@@ -1,5 +1,5 @@
 import { Box, CssBaseline, styled } from '@mui/material';
-import { Footer, Header, LoadingModal, SuccessModal, ErrorModal } from '~/containers';
+import { Footer, Header, LoadingModal, SuccessModal, ErrorModal, WalletConfirm, End } from '~/containers';
 
 export const Modals = () => {
   return (
@@ -8,6 +8,8 @@ export const Modals = () => {
       <LoadingModal />
       <SuccessModal />
       <ErrorModal />
+      <WalletConfirm />
+      <End />
     </>
   );
 };

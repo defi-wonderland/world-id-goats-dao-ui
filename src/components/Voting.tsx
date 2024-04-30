@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Box, styled, Button } from '@mui/material';
 import { IDKitWidget, useIDKit } from '@worldcoin/idkit';
 // import { usePublicClient } from 'wagmi';
@@ -13,6 +13,10 @@ import { getConfig } from '~/config';
 //APP_ID for production
 const { APP_ID, PROPOSAL_ID } = getConfig();
 
+interface VotingProps {
+  enableVote: boolean;
+}
+
 interface ISuccessResult {
   merkle_root: string;
   nullifier_hash: string;
@@ -24,7 +28,7 @@ export enum VerificationLevel {
   Device = 'device',
 }
 
-export const Voting = () => {
+export const Voting: React.FC<VotingProps> = ({ enableVote }) => {
   const { setModalOpen } = useModal();
   const { vote, setVote } = useVote();
   //castVote, checkValidity,
@@ -69,10 +73,29 @@ export const Voting = () => {
           setTimeout(() => {
             setTxHash('0xabcd');
             setModalOpen(ModalType.SUCCESS);
+            // for
             if (vote === 1) {
               const jsConfetti = new JSConfetti();
               jsConfetti?.addConfetti({
                 emojis: ['🐐', '🌈', '✨'],
+                emojiSize: 100,
+                confettiNumber: 85,
+              });
+            }
+            // against
+            if (vote === 2) {
+              const jsConfetti = new JSConfetti();
+              jsConfetti?.addConfetti({
+                emojis: ['❌', '😭', '👎'],
+                emojiSize: 100,
+                confettiNumber: 85,
+              });
+            }
+            // abstain
+            if (vote === 0) {
+              const jsConfetti = new JSConfetti();
+              jsConfetti?.addConfetti({
+                emojis: ['🚫', '👍', '👎'],
                 emojiSize: 100,
                 confettiNumber: 85,
               });
@@ -111,13 +134,13 @@ export const Voting = () => {
   return (
     <>
       <SBox>
-        <SButtonFor onClick={() => handleVote(1)} disabled={!isConnected}>
+        <SButtonFor onClick={() => handleVote(1)} disabled={!isConnected || !enableVote}>
           🐐 For 🐐
         </SButtonFor>
-        <SButton onClick={() => handleVote(2)} disabled={!isConnected}>
+        <SButton onClick={() => handleVote(2)} disabled={!isConnected || !enableVote}>
           Against
         </SButton>
-        <SButton onClick={() => handleVote(0)} disabled={!isConnected}>
+        <SButton onClick={() => handleVote(0)} disabled={!isConnected || !enableVote}>
           Abstain
         </SButton>
       </SBox>

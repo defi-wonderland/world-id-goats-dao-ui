@@ -5,5 +5,7 @@ export enum ModalType {
   ERROR = 'ERROR',
   VERIFY = 'VERIFY',
   WORLDID = 'WORLDID',
+  WALLETCONFIRM = 'WALLETCONFIRM',
+  END = 'END',
   // Add new modal types here...
 }

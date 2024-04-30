@@ -120,6 +120,7 @@ const CodeSnippet = styled(Typography)(() => {
 
 const SParagraph = styled(Typography)({
   textAlign: 'justify',
+  whiteSpace: 'pre-wrap',
 });
 
 const STitle = styled(Typography)({

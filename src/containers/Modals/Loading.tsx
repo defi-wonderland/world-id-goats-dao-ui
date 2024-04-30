@@ -1,6 +1,6 @@
 import { Box, Typography, styled, CircularProgress } from '@mui/material';
 
-import BaseModal from '~/components/BaseModal';
+import { BaseModal } from '~/components';
 import { useCustomTheme } from '~/hooks';
 import { ModalType } from '~/types';
 
@@ -16,7 +16,7 @@ export const LoadingModal = () => {
   );
 };
 
-const ModalBody = styled(Box)(() => {
+export const ModalBody = styled(Box)(() => {
   return {
     display: 'flex',
     flexDirection: 'column',
@@ -28,7 +28,7 @@ const ModalBody = styled(Box)(() => {
   };
 });
 
-const STitle = styled(Typography)(() => {
+export const STitle = styled(Typography)(() => {
   const { darkTheme } = useCustomTheme();
   return {
     '&&': {
@@ -52,7 +52,7 @@ const STypography = styled(Typography)(() => {
   };
 });
 
-const SIcon = styled(CircularProgress)(() => {
+export const SIcon = styled(CircularProgress)(() => {
   const { darkTheme } = useCustomTheme();
   return {
     color: darkTheme.primaryColor,
