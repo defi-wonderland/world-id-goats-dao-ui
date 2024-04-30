@@ -22,7 +22,7 @@ export const ProposalHeader = () => {
   const fetchContractData = useCallback(async () => {
     const statuses = ['Pending', 'Active', 'Canceled', 'Defeated', 'Succeeded', 'Queued', 'Expired', 'Executed'];
     try {
-      const state = await getProposalState(BigInt(PROPOSAL_ID));
+      const state = (await getProposalState(BigInt(PROPOSAL_ID))) as number;
       const snapshot = await getProposalSnapshot(BigInt(PROPOSAL_ID));
 
       if (state) {

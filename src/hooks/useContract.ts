@@ -1,8 +1,18 @@
 import { useCallback, useState } from 'react';
-import { getConfig } from '~/config';
 import { usePublicClient, useWalletClient } from 'wagmi';
 import { Address, Hex } from 'viem';
-import { goatsDaoAbi } from '~/utils';
+
+import { getConfig } from '~/config';
+import {
+  castVoteWithReasonAndParams,
+  checkVoteValidity,
+  proposalDeadline,
+  proposalSnapshot,
+  proposalVotes,
+  proposalsQuorumThreshold,
+  state,
+  votingDelay,
+} from '~/utils/parsedAbi';
 
 const { CONTRACT_ADDRESS } = getConfig();
 
@@ -15,14 +25,14 @@ type Params = Hex;
 export function useContract() {
   const { data: walletClient } = useWalletClient();
   const publicClient = usePublicClient();
-  const [txHash, setTxHash] = useState();
+  const [txHash, setTxHash] = useState<Hex>();
 
   const checkValidity = useCallback(
     async (proposalId: ProposalID, support: SupportType, proofData: ProofData) => {
       if (!walletClient) return;
 
       return await walletClient.writeContract({
-        abi: goatsDaoAbi,
+        abi: checkVoteValidity,
         address: CONTRACT_ADDRESS as Address,
         functionName: 'checkVoteValidity',
         args: [support, proposalId, proofData],
@@ -36,7 +46,7 @@ export function useContract() {
       if (!publicClient) return;
 
       return await publicClient.simulateContract({
-        abi: goatsDaoAbi,
+        abi: checkVoteValidity,
         address: CONTRACT_ADDRESS as Address,
         functionName: 'checkVoteValidity',
         args: [support, proposalId, proofData],
@@ -49,7 +59,7 @@ export function useContract() {
     async (proposalId: ProposalID) => {
       if (!publicClient) return;
       return await publicClient.readContract({
-        abi: goatsDaoAbi,
+        abi: proposalsQuorumThreshold,
         address: CONTRACT_ADDRESS as Address,
         functionName: 'proposalsQuorumThreshold',
         args: [proposalId],
@@ -62,7 +72,7 @@ export function useContract() {
     async (proposalId: ProposalID) => {
       if (!publicClient) return;
       return await publicClient.readContract({
-        abi: goatsDaoAbi,
+        abi: proposalSnapshot,
         address: CONTRACT_ADDRESS as Address,
         functionName: 'proposalSnapshot',
         args: [proposalId],
@@ -75,7 +85,7 @@ export function useContract() {
     async (proposalId: ProposalID) => {
       if (!publicClient) return;
       return await publicClient.readContract({
-        abi: goatsDaoAbi,
+        abi: proposalDeadline,
         address: CONTRACT_ADDRESS as Address,
         functionName: 'proposalDeadline',
         args: [proposalId],
@@ -88,7 +98,7 @@ export function useContract() {
     async (proposalId: ProposalID) => {
       if (!publicClient) return;
       return await publicClient.readContract({
-        abi: goatsDaoAbi,
+        abi: proposalVotes,
         address: CONTRACT_ADDRESS as Address,
         functionName: 'proposalVotes',
         args: [proposalId],
@@ -101,7 +111,7 @@ export function useContract() {
     async (proposalId: ProposalID) => {
       if (!publicClient) return;
       return await publicClient.readContract({
-        abi: goatsDaoAbi,
+        abi: state,
         address: CONTRACT_ADDRESS as Address,
         functionName: 'state',
         args: [proposalId],
@@ -113,7 +123,7 @@ export function useContract() {
   const getVotingDealay = useCallback(async () => {
     if (!publicClient) return;
     return await publicClient.readContract({
-      abi: goatsDaoAbi,
+      abi: votingDelay,
       address: CONTRACT_ADDRESS as Address,
       functionName: 'votingDelay',
     });
@@ -123,7 +133,7 @@ export function useContract() {
     async (proposalId: ProposalID, support: SupportType, reason: Reason, params: Params) => {
       if (!walletClient) return;
       return await walletClient.writeContract({
-        abi: goatsDaoAbi,
+        abi: castVoteWithReasonAndParams,
         address: CONTRACT_ADDRESS as Address,
         functionName: 'castVoteWithReasonAndParams',
         args: [proposalId, support, reason, params],
@@ -136,7 +146,7 @@ export function useContract() {
     async (proposalId: ProposalID, support: SupportType, reason: Reason, params: Params) => {
       if (!publicClient) return;
       return await publicClient.simulateContract({
-        abi: goatsDaoAbi,
+        abi: castVoteWithReasonAndParams,
         address: CONTRACT_ADDRESS as Address,
         functionName: 'castVoteWithReasonAndParams',
         args: [proposalId, support, reason, params],
