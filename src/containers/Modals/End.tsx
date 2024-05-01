@@ -6,7 +6,7 @@ import { ModalType } from '~/types';
 
 export const End = () => {
   return (
-    <BaseModal type={ModalType.END} title={'GOAT'}>
+    <BaseModal type={ModalType.END} title='GOAT'>
       <ModalBody>
         <Typography> 🐐 </Typography>
         <STitle variant='h4'> THANK YOU FOR VOTING </STitle>

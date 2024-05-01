@@ -7,7 +7,7 @@ import { ModalType } from '~/types';
 
 export const ErrorModal = () => {
   return (
-    <BaseModal type={ModalType.ERROR} title={'ERROR'}>
+    <BaseModal type={ModalType.ERROR} title='ERROR'>
       <ModalBody>
         <SErrorIcon />
         <STitle variant='h4'> Something went wrong</STitle>
