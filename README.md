@@ -1,4 +1,4 @@
-# GoatDAO
+# GoatsDao
 
 ## Features
 

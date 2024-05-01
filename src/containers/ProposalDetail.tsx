@@ -7,7 +7,7 @@ import proposalData from '~/data/proposal.json';
 
 export const ProposalDetail = () => {
   const [tabValue, setTabValue] = useState(0);
-  const { summary, background } = proposalData.DESCRIPTION;
+  const { summary } = proposalData.DESCRIPTION;
   const { data } = proposalData.CODE;
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
@@ -17,7 +17,7 @@ export const ProposalDetail = () => {
   return (
     <DetailContainer>
       <TitleContainer>
-        <STitle variant='h6'>Proposal</STitle>
+        <STitle variant='h6'>PROPOSAL</STitle>
       </TitleContainer>
 
       <Divider sx={{ my: 2 }} />
@@ -31,8 +31,6 @@ export const ProposalDetail = () => {
         <TabPanel>
           <SectionTitle>Summary</SectionTitle>
           <SParagraph paragraph>{summary}</SParagraph>
-          <SectionTitle>Background</SectionTitle>
-          <SParagraph paragraph>{background}</SParagraph>
         </TabPanel>
       )}
 
@@ -47,18 +45,21 @@ export const ProposalDetail = () => {
 };
 
 const DetailContainer = styled(Box)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
     margin: '1rem 0',
-    backgroundColor: currentTheme.backgroundSecondary,
-    color: currentTheme.textPrimary,
-    borderRadius: currentTheme.borderRadius,
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    backdropFilter: 'blur(4px)',
+    WebkitBackdropFilter: 'blur(4px)', // For Safari compatibility
+    color: darkTheme.textPrimary,
+    borderRadius: '16px',
     padding: '2rem',
-    boxShadow: currentTheme.boxShadow,
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.2)', // Subtle shadow
     width: '50rem',
+    border: '0.5px solid rgba(0, 0, 0, 0.2)',
     '@media (max-width: 600px)': {
       width: 'inherit',
     },
@@ -70,15 +71,15 @@ const TitleContainer = styled(Box)({
 });
 
 const StyledTabs = styled(Tabs)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     '& .MuiTabs-indicator': {
-      backgroundColor: currentTheme.textPrimary,
+      backgroundColor: darkTheme.textPrimary,
     },
     '& .MuiTab-root': {
       color: '#999',
       '&.Mui-selected': {
-        color: currentTheme.textPrimary,
+        color: darkTheme.textPrimary,
         fontWeight: 'bold',
       },
     },
@@ -88,11 +89,11 @@ const StyledTabs = styled(Tabs)(() => {
 const StyledTab = styled(Tab)({});
 
 const SectionTitle = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     fontWeight: 'bold',
     margin: '1rem 0',
-    color: currentTheme.textPrimary,
+    color: darkTheme.textPrimary,
   };
 });
 
@@ -101,15 +102,16 @@ const TabPanel = styled(Box)({
 });
 
 const CodeSnippet = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
-    background: currentTheme.backgroundPrimary,
+    background: darkTheme.backgroundPrimary,
     padding: '16px',
     borderRadius: '8px',
     fontFamily: 'source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace',
     overflow: 'auto',
-    whiteSpace: 'pre',
-    color: currentTheme.textPrimary,
+    whiteSpace: 'pre-wrap',
+    fontSize: '1rem',
+    color: darkTheme.textPrimary,
     '@media (max-width: 600px)': {
       maxWidth: '18rem',
     },
@@ -118,6 +120,7 @@ const CodeSnippet = styled(Typography)(() => {
 
 const SParagraph = styled(Typography)({
   textAlign: 'justify',
+  whiteSpace: 'pre-wrap',
 });
 
 const STitle = styled(Typography)({

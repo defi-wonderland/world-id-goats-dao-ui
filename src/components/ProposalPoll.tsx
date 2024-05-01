@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
-import { Box, Typography, Divider, TypographyProps, styled } from '@mui/material';
-import { CheckCircle, Circle } from '@mui/icons-material';
+import { Box, Typography, TypographyProps, styled } from '@mui/material';
+import { Circle } from '@mui/icons-material';
 
 import { useCustomTheme, useContract } from '~/hooks';
 import { getConfig } from '~/config';
@@ -18,7 +18,8 @@ interface ProgressSegmentProps {
 }
 
 export const ProposalPoll = () => {
-  const { getQuorumThreshold, getProposalVotes } = useContract();
+  const { getQuorumThreshold, getProposalVotes, txHash } = useContract();
+  const { darkTheme } = useCustomTheme();
   const [votes, setVotes] = useState({ for: 0, against: 0, abstain: 0 });
   const [quorum, setQuorum] = useState('');
 
@@ -28,9 +29,9 @@ export const ProposalPoll = () => {
       const voteCounts = await getProposalVotes(BigInt(PROPOSAL_ID));
       if (voteCounts) {
         setVotes({
-          for: Number(voteCounts[0]),
-          against: Number(voteCounts[1]),
-          abstain: Number(voteCounts[2]),
+          for: Number(voteCounts[1]),
+          against: Number(voteCounts[2]),
+          abstain: Number(voteCounts[0]),
         });
       }
       if (quorumThreshold) {
@@ -38,17 +39,17 @@ export const ProposalPoll = () => {
       }
     }
     fetchContractData();
-  }, [getProposalVotes, getQuorumThreshold]);
+  }, [getProposalVotes, getQuorumThreshold, txHash]);
 
   const totalVotes = useMemo(() => votes.for + votes.against + votes.abstain, [votes]);
 
   const voteTypes = useMemo(
     () => [
-      { type: 'For', count: votes.for, color: '#4aa16c' },
-      { type: 'Against', count: votes.against, color: '#D92D20' },
-      { type: 'Abstain', count: votes.abstain, color: '#94969c' },
+      { type: 'For', count: votes.for, color: darkTheme.successPrimary },
+      { type: 'Against', count: votes.against, color: darkTheme.errorPrimary },
+      { type: 'Abstain', count: votes.abstain, color: darkTheme.disabledColor },
     ],
-    [votes],
+    [darkTheme, votes],
   );
 
   const voteOffsets = useMemo(() => {
@@ -60,17 +61,11 @@ export const ProposalPoll = () => {
       return { ...vote, percentage, offset };
     });
   }, [voteTypes, totalVotes]);
+
   return (
     <PollContainer>
-      <TitleContainer>
-        <STitle variant='h6'>Current Votes</STitle>
-      </TitleContainer>
-
-      <Divider sx={{ my: 2 }} />
-
       <StatsContainer>
         <StatsInfoContainer>
-          <CheckCircle />
           <Typography>Quorum</Typography>
         </StatsInfoContainer>
         <SText>
@@ -88,7 +83,7 @@ export const ProposalPoll = () => {
         {voteTypes.map((vote) => (
           <SBox key={vote.type}>
             <StyledCircleIcon sx={{ color: vote.color }} />
-            <StyledTypography color={vote.color}>{vote.type}</StyledTypography>
+            <StyledTypography>{vote.type} :</StyledTypography>
             <SText>{vote.count}</SText>
           </SBox>
         ))}
@@ -98,74 +93,68 @@ export const ProposalPoll = () => {
 };
 
 const PollContainer = styled(Box)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: currentTheme.backgroundSecondary,
-    color: currentTheme.textPrimary,
-    borderRadius: '0.8rem',
-    margin: '1rem 0',
-    padding: '2rem',
-    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-    gap: '0.5rem',
+    color: darkTheme.textPrimary,
     fontWeight: 800,
+    margin: '0 3.75rem',
+    '@media (max-width: 600px)': {
+      marginTop: '1.5rem',
+    },
   };
-});
-
-const TitleContainer = styled(Box)({
-  paddingBottom: '0.5rem',
 });
 
 const StatsContainer = styled(Box)({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
   width: '100%',
+  letterSpacing: '0.125rem',
+  textTransform: 'uppercase',
+  gap: '0.5rem',
 });
 
 const StatsInfoContainer = styled(Box)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     display: 'flex',
     alignItems: 'center',
-    gap: '10px',
     '& svg': {
-      color: currentTheme.textTertiary,
+      color: darkTheme.textTertiary,
     },
     '& .MuiTypography-root': {
       fontWeight: 800,
+      '@media (max-width: 600px)': {
+        fontSize: '0.9rem',
+      },
     },
   };
 });
 
 const VoteStatsContainer = styled(Box)({
-  display: 'inline-block',
-  justifyContent: 'space-between',
+  display: 'flex',
+  justifyContent: 'center',
   alignItems: 'center',
-  gap: '0.5rem',
-  paddingTop: '0.5rem',
+  '@media (max-width: 600px)': {
+    margin: '0',
+  },
 });
 
 const SBox = styled(Box)({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
-  width: '100%',
-  margin: '8px 0',
-  padding: '4px',
-});
-
-const STitle = styled(Typography)({
-  fontWeight: 800,
+  padding: '0.5rem',
+  gap: '0.5rem',
 });
 
 const SText = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     fontWeight: 800,
-    color: currentTheme.textSecondary,
-    '@media (max-width: 1200px)': {
+    color: darkTheme.textSecondary,
+    '@media (max-width: 600px)': {
       fontSize: '0.75rem',
     },
   };
@@ -174,12 +163,19 @@ const SText = styled(Typography)(() => {
 const StyledTypography = styled(Typography)<StyledTypographyProps>(({ color }) => ({
   color: color,
   marginRight: 'auto',
-  marginLeft: '12px',
   fontWeight: 800,
+  '@media (max-width: 600px)': {
+    fontSize: '0.7rem',
+    margin: '0',
+    width: 'max-content',
+  },
 }));
 
 const StyledCircleIcon = styled(Circle)(({ color }) => ({
   color: color,
+  '@media (max-width: 600px)': {
+    fontSize: '0.75rem',
+  },
 }));
 
 const OverallProgressContainer = styled('div')({
@@ -189,7 +185,10 @@ const OverallProgressContainer = styled('div')({
   borderRadius: '5px',
   overflow: 'hidden',
   backgroundColor: '#E0E0E0',
-  marginTop: '1rem',
+  marginTop: '0.5rem',
+  '@media (max-width: 600px)': {
+    marginTop: '0',
+  },
 });
 
 const ProgressSegment = styled('div')<ProgressSegmentProps>(({ left, width, backgroundColor }) => ({

@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'SharpGroteskItalic';
+  src: url('../fonts/SharpGrotesk-LightItalic10.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SharpGroteskMedium';
+  src: url('../fonts/SharpGrotesk-Medium15_bkp.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SharpGroteskLight';
+  src: url('../fonts/SharpGrotesk-Light15.otf') format('opentype');
+}

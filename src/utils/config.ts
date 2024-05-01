@@ -23,7 +23,7 @@ const connectors = connectorsForWallets(
     },
   ],
   {
-    appName: 'GoatDAO',
+    appName: 'GoatsDao',
     projectId: PROJECT_ID,
   },
 );

@@ -1,13 +1,13 @@
 import { Box, Typography, styled } from '@mui/material';
 import { Cancel } from '@mui/icons-material';
 
-import BaseModal from '~/components/BaseModal';
+import { BaseModal } from '~/components';
 import { useCustomTheme } from '~/hooks';
 import { ModalType } from '~/types';
 
 export const ErrorModal = () => {
   return (
-    <BaseModal type={ModalType.ERROR} title={'Error'}>
+    <BaseModal type={ModalType.ERROR} title='ERROR'>
       <ModalBody>
         <SErrorIcon />
         <STitle variant='h4'> Something went wrong</STitle>
@@ -29,11 +29,11 @@ const ModalBody = styled(Box)(() => {
 });
 
 const STitle = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     '&&': {
       display: 'block',
-      color: currentTheme.textPrimary,
+      color: darkTheme.textPrimary,
       fontSize: '1.5rem',
       fontWeight: 600,
     },

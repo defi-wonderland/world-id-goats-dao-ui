@@ -1,27 +1,21 @@
-import Link from 'next/link';
 import { Box, Typography, styled } from '@mui/material';
-import { CheckCircle, OpenInNew } from '@mui/icons-material';
+import { CheckCircle } from '@mui/icons-material';
 
-import BaseModal from '~/components/BaseModal';
-import { useCustomTheme } from '~/hooks';
+import { useCustomTheme, useModal } from '~/hooks';
 import { ModalType } from '~/types';
-import { truncateValue } from '~/utils';
+import { SButton, BaseModal } from '~/components';
 
 export const SuccessModal = () => {
-  const hash = '0x';
+  const { setModalOpen } = useModal();
 
   return (
-    <BaseModal type={ModalType.SUCCESS} title={'Vote'}>
+    <BaseModal type={ModalType.SUCCESS} title='SUCCESSFUL VOTE'>
       <ModalBody>
         <SCheckIcon />
         <STitle variant='h4'> Vote Succeed! </STitle>
-        {hash && (
-          <StyledLink href={`https://optimistic.etherscan.io/tx/${hash}`} target='_blank'>
-            {truncateValue(hash)}
-            <OpenInNew />
-          </StyledLink>
-        )}
+
         <STypography variant='body1'>You can safely close this modal</STypography>
+        <SButton onClick={() => setModalOpen(ModalType.NONE)}>Confirm</SButton>
       </ModalBody>
     </BaseModal>
   );
@@ -40,11 +34,11 @@ const ModalBody = styled(Box)(() => {
 });
 
 const STitle = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     '&&': {
       display: 'block',
-      color: currentTheme.textPrimary,
+      color: darkTheme.textPrimary,
       fontSize: '1.5rem',
       fontWeight: 600,
     },
@@ -52,33 +46,13 @@ const STitle = styled(Typography)(() => {
 });
 
 const STypography = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     '&&': {
       display: 'block',
-      color: currentTheme.textSecondary,
+      color: darkTheme.textPrimary,
       fontSize: '1rem',
       fontWeight: 400,
-    },
-  };
-});
-
-const StyledLink = styled(Link)(() => {
-  const { currentTheme } = useCustomTheme();
-  return {
-    textDecoration: 'none',
-    color: currentTheme.textTertiary,
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-    fontWeight: 800,
-    '& svg': {
-      fontSize: '1.2rem',
-      color: 'inherit',
-    },
-    '&:hover': {
-      textDecoration: 'underline',
-      color: currentTheme.textTertiary,
     },
   };
 });

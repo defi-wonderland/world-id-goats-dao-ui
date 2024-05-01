@@ -14,7 +14,7 @@ interface BaseModalProps {
   image?: string;
 }
 
-const BaseModal = ({ children, type, title, fixedHeight }: BaseModalProps) => {
+export const BaseModal = ({ children, type, title, fixedHeight }: BaseModalProps) => {
   const { modalOpen, closeModal } = useModal();
   return (
     <StyledModal open={type === modalOpen} onClose={closeModal} slots={{ backdrop: StyledBackdrop }}>
@@ -25,14 +25,14 @@ const BaseModal = ({ children, type, title, fixedHeight }: BaseModalProps) => {
             <CloseIcon />
           </IconButton>
         </ModalHeader>
+
         <Divider />
+
         {children}
       </SModal>
     </StyledModal>
   );
 };
-
-export default BaseModal;
 
 export const Backdrop = React.forwardRef<HTMLDivElement, { open?: boolean; className: string }>((props, ref) => {
   const { open, className, ...other } = props;
@@ -61,18 +61,16 @@ export const StyledBackdrop = styled(Backdrop)`
   inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(0.05rem);
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: white;
 `;
 
 export const SModal = styled(Box)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     width: '28rem',
-    minHeight: '25rem',
-    maxHeight: '40rem',
-    borderRadius: currentTheme.borderRadius,
-    backgroundColor: currentTheme.backgroundSecondary,
-    border: currentTheme.border,
+    minHeight: '35rem',
+    borderRadius: darkTheme.borderRadius,
+    backgroundColor: darkTheme.backgroundModal,
     display: 'flex',
     padding: '2rem 3.2rem 3.2rem 3.2rem',
     flexDirection: 'column',
@@ -119,11 +117,11 @@ export const ModalHeader = styled(Box)(() => {
 });
 
 const Title = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     fontSize: '1rem',
     alignItems: 'center',
     fontWeight: 800,
-    color: currentTheme.textSecondary,
+    color: darkTheme.textPrimary,
   };
 });

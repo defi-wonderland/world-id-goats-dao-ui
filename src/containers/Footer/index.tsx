@@ -1,40 +1,47 @@
-import { styled } from '@mui/material/styles';
-import { useCustomTheme } from '~/hooks/useTheme';
+import { styled, Box } from '@mui/material';
+import Link from 'next/link';
+
+import { useCustomTheme } from '~/hooks';
+import { SText } from '~/containers';
 
 export const Footer = () => {
   return (
     <FooterContainer>
-      <Subtitle>
-        <p>Made with 💜 by</p>
-        <a href='https://defi.sucks'>Wonderland</a>
-      </Subtitle>
+      <Box>
+        <SText>
+          Made with 💜 by
+          <Link href='https://defi.sucks/' target='_blank'>
+            Wonderland
+          </Link>
+        </SText>
+        <SText>
+          Powered by
+          <Link href='https://worldcoin.org/world-id' target='_blank'>
+            World ID
+          </Link>
+        </SText>
+      </Box>
     </FooterContainer>
   );
 };
 
 const FooterContainer = styled('footer')(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     display: 'flex',
     height: '5rem',
     padding: '0 8rem',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: currentTheme.backgroundPrimary,
-    borderTop: currentTheme.border,
+    backgroundColor: darkTheme.backgroundPrimary,
     width: '100%',
+    a: {
+      textDecoration: 'none',
+      color: darkTheme.textPrimary,
+      marginLeft: '0.25rem',
+    },
+    '@media (max-width: 600px)': {
+      padding: '0 1rem',
+    },
   };
-});
-
-const Subtitle = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.8rem',
-  '& p': {
-    display: 'inline-block',
-  },
-  '& a': {
-    textDecoration: 'none',
-    color: 'inherit',
-  },
 });

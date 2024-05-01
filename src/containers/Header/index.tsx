@@ -1,28 +1,35 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { styled } from '@mui/material/styles';
-import { IconButton, Box } from '@mui/material';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
+import { Box, Typography, styled } from '@mui/material';
+import Link from 'next/link';
 
-import { useCustomTheme } from '~/hooks/useTheme';
+import { useCustomTheme } from '~/hooks';
+import { Connect } from '~/components/Connect';
 
 export const Header = () => {
-  const { changeTheme, theme } = useCustomTheme();
-
   return (
     <StyledHeader>
-      <Logo>GoatDAO</Logo>
+      <Box>
+        <SText>
+          Made with 💜 by
+          <Link href='https://defi.sucks/' target='_blank'>
+            Wonderland
+          </Link>
+        </SText>
+        <SText>
+          Powered by
+          <Link href='https://worldcoin.org/world-id' target='_blank'>
+            World ID
+          </Link>
+        </SText>
+      </Box>
       <ControlsBox>
-        <SIconButton onClick={changeTheme}>{theme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}</SIconButton>
-        <ConnectButton showBalance={false} accountStatus='address' chainStatus='none' />
+        <Connect />
       </ControlsBox>
     </StyledHeader>
   );
 };
 
-// Styles
 const StyledHeader = styled('header')(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     display: 'flex',
     height: '5rem',
@@ -31,17 +38,15 @@ const StyledHeader = styled('header')(() => {
     justifyContent: 'space-between',
     width: '100%',
     zIndex: '100',
-    boxShadow: currentTheme.boxShadow,
+    a: {
+      textDecoration: 'none',
+      color: darkTheme.textPrimary,
+      marginLeft: '0.25rem',
+    },
     '@media (max-width: 600px)': {
       padding: '0 1rem',
     },
   };
-});
-
-const Logo = styled('h1')({
-  fontSize: '1.5rem',
-  fontWeight: 'bold',
-  cursor: 'pointer',
 });
 
 const ControlsBox = styled(Box)({
@@ -50,6 +55,9 @@ const ControlsBox = styled(Box)({
   gap: '1rem',
 });
 
-const SIconButton = styled(IconButton)({
-  color: 'inherit',
+export const SText = styled(Typography)({
+  fontSize: '1rem',
+  '@media (max-width: 600px)': {
+    fontSize: '0.75rem',
+  },
 });

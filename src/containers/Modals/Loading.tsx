@@ -1,22 +1,22 @@
 import { Box, Typography, styled, CircularProgress } from '@mui/material';
 
-import BaseModal from '~/components/BaseModal';
+import { BaseModal } from '~/components';
 import { useCustomTheme } from '~/hooks';
 import { ModalType } from '~/types';
 
 export const LoadingModal = () => {
   return (
-    <BaseModal type={ModalType.LOADING} title={'Vote'}>
+    <BaseModal type={ModalType.LOADING} title='CASTING VOTE'>
       <ModalBody>
-        <CircularProgress size='3rem' variant='indeterminate' thickness={4} />
-        <STitle variant='h4'> Casting your vote... </STitle>
+        <SIcon size='3rem' variant='indeterminate' thickness={4} />
+        <STitle variant='h4'> Casting your vote 🐐 ... </STitle>
         <STypography variant='body1'>You can safely close this modal</STypography>
       </ModalBody>
     </BaseModal>
   );
 };
 
-const ModalBody = styled(Box)(() => {
+export const ModalBody = styled(Box)(() => {
   return {
     display: 'flex',
     flexDirection: 'column',
@@ -28,12 +28,12 @@ const ModalBody = styled(Box)(() => {
   };
 });
 
-const STitle = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+export const STitle = styled(Typography)(() => {
+  const { darkTheme } = useCustomTheme();
   return {
     '&&': {
       display: 'block',
-      color: currentTheme.textPrimary,
+      color: darkTheme.textPrimary,
       fontSize: '1.5rem',
       fontWeight: 600,
     },
@@ -41,13 +41,20 @@ const STitle = styled(Typography)(() => {
 });
 
 const STypography = styled(Typography)(() => {
-  const { currentTheme } = useCustomTheme();
+  const { darkTheme } = useCustomTheme();
   return {
     '&&': {
       display: 'block',
-      color: currentTheme.textSecondary,
+      color: darkTheme.textPrimary,
       fontSize: '1rem',
       fontWeight: 400,
     },
+  };
+});
+
+export const SIcon = styled(CircularProgress)(() => {
+  const { darkTheme } = useCustomTheme();
+  return {
+    color: darkTheme.primaryColor,
   };
 });
