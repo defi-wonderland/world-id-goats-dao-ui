@@ -1,26 +1,12 @@
 import { Box, Typography, styled } from '@mui/material';
-import Link from 'next/link';
 
 import { useCustomTheme } from '~/hooks';
-import { Connect } from '~/components/Connect';
+import { Connect, Partner } from '~/components';
 
 export const Header = () => {
   return (
     <StyledHeader>
-      <Box>
-        <SText>
-          Made with 💜 by
-          <Link href='https://defi.sucks/' target='_blank'>
-            Wonderland
-          </Link>
-        </SText>
-        <SText>
-          Powered by
-          <Link href='https://worldcoin.org/world-id' target='_blank'>
-            World ID
-          </Link>
-        </SText>
-      </Box>
+      <Partner />
       <ControlsBox>
         <Connect />
       </ControlsBox>

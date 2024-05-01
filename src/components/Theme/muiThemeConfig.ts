@@ -19,7 +19,7 @@ export const getMuiThemeConfig = (darkTheme: Theme, themeName: ThemeName) => {
     typography: {
       // set your global font family here
       fontFamily: [
-        'SharpGroteskMedium',
+        'GeneralSans-Variable',
         '-apple-system',
         'BlinkMacSystemFont',
         '"Segoe UI"',

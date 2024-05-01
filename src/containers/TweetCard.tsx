@@ -21,7 +21,8 @@ export const TweetCard = () => {
 const TweetContainer = styled(Box)({
   display: 'grid',
   justifyContent: 'center',
-  width: '38rem',
+  width: '65rem',
+  gap: '1rem',
   '@media (max-width: 600px)': {
     width: '20rem',
     margin: 'auto',
@@ -30,9 +31,9 @@ const TweetContainer = styled(Box)({
 
 const SText = styled(Typography)({
   textAlign: 'center',
-  lineHeight: '2.5rem',
-  fontFamily: 'SharpGroteskLight',
-  fontSize: '1.5rem',
+  lineHeight: 'normal',
+  fontSize: '1.75rem',
+  fontWeight: 500,
 });
 
 const SBox = styled(Box)({

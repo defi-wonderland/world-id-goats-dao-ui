@@ -13,7 +13,7 @@ export const GoatGuy = () => {
       <Link href='https://twitter.com/OpanyRichard' target='_blank'>
         <Box>
           <TextStyled variant='body1'>Who is Richard Opany?</TextStyled>
-          <TextStyled variant='body1'>(aka Goat Guy)</TextStyled>
+          <TextStyled variant='body1'>(a.k.a Goat Guy)</TextStyled>
         </Box>
         <ArrowBox>
           <Image src={arrow} alt='Arrow' width={75} height={75} />
@@ -48,7 +48,7 @@ const GoatGuyContainer = styled(Box)(() => {
 const TextStyled = styled(Typography)({
   width: 'fit-content',
   margin: '0 10rem',
-  fontFamily: 'SharpGroteskLight',
+  fontSize: '1.125rem',
   '@media (max-width: 600px)': {
     margin: '0',
   },

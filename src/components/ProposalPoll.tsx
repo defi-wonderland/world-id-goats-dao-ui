@@ -98,7 +98,7 @@ const PollContainer = styled(Box)(() => {
     display: 'flex',
     flexDirection: 'column',
     color: darkTheme.textPrimary,
-    fontWeight: 800,
+    fontWeight: 500,
     margin: '0 3.75rem',
     '@media (max-width: 600px)': {
       marginTop: '1.5rem',
@@ -112,7 +112,7 @@ const StatsContainer = styled(Box)({
   justifyContent: 'center',
   width: '100%',
   letterSpacing: '0.125rem',
-  textTransform: 'uppercase',
+  fontSize: '1.125rem',
   gap: '0.5rem',
 });
 
@@ -125,7 +125,7 @@ const StatsInfoContainer = styled(Box)(() => {
       color: darkTheme.textTertiary,
     },
     '& .MuiTypography-root': {
-      fontWeight: 800,
+      fontWeight: 500,
       '@media (max-width: 600px)': {
         fontSize: '0.9rem',
       },
@@ -152,7 +152,7 @@ const SBox = styled(Box)({
 const SText = styled(Typography)(() => {
   const { darkTheme } = useCustomTheme();
   return {
-    fontWeight: 800,
+    fontWeight: 500,
     color: darkTheme.textSecondary,
     '@media (max-width: 600px)': {
       fontSize: '0.75rem',
@@ -163,7 +163,7 @@ const SText = styled(Typography)(() => {
 const StyledTypography = styled(Typography)<StyledTypographyProps>(({ color }) => ({
   color: color,
   marginRight: 'auto',
-  fontWeight: 800,
+  fontWeight: 500,
   '@media (max-width: 600px)': {
     fontSize: '0.7rem',
     margin: '0',

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Box, styled } from '@mui/material';
 
-import { GradientTitle, ProposalPoll, Voting, CountdownTimer } from '~/components';
+import { ProposalPoll, Voting, CountdownTimer, Title } from '~/components';
 import { useContract } from '~/hooks';
 import { getConfig } from '~/config';
 import { useAccount } from 'wagmi';
@@ -33,7 +33,7 @@ export const VotingCard = () => {
 
   return (
     <SBox>
-      <GradientTitle title="Should Wonderland contribute 250 WLD to Richard's goat project?" />
+      <Title title="Should Wonderland contribute 250 WLD to Richard's goat project?" />
 
       <VotingContainer>
         <Voting enableVote={enableVote} />

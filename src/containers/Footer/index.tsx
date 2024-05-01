@@ -1,25 +1,17 @@
-import { styled, Box } from '@mui/material';
-import Link from 'next/link';
+import { styled, Box, Typography, Divider } from '@mui/material';
 
 import { useCustomTheme } from '~/hooks';
-import { SText } from '~/containers';
+import proposalData from '~/data/proposal.json';
+import { Partner } from '~/components/Partner';
 
 export const Footer = () => {
+  const { terms } = proposalData.LEGAL;
   return (
     <FooterContainer>
+      <Partner />
+      <Divider />
       <Box>
-        <SText>
-          Made with 💜 by
-          <Link href='https://defi.sucks/' target='_blank'>
-            Wonderland
-          </Link>
-        </SText>
-        <SText>
-          Powered by
-          <Link href='https://worldcoin.org/world-id' target='_blank'>
-            World ID
-          </Link>
-        </SText>
+        <LegalTerms>Disclaimer: {terms}</LegalTerms>
       </Box>
     </FooterContainer>
   );
@@ -28,13 +20,11 @@ export const Footer = () => {
 const FooterContainer = styled('footer')(() => {
   const { darkTheme } = useCustomTheme();
   return {
-    display: 'flex',
-    height: '5rem',
+    display: 'grid',
     padding: '0 8rem',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     backgroundColor: darkTheme.backgroundPrimary,
     width: '100%',
+    gap: '0.5rem',
     a: {
       textDecoration: 'none',
       color: darkTheme.textPrimary,
@@ -43,5 +33,16 @@ const FooterContainer = styled('footer')(() => {
     '@media (max-width: 600px)': {
       padding: '0 1rem',
     },
+  };
+});
+
+const LegalTerms = styled(Typography)(() => {
+  const { darkTheme } = useCustomTheme();
+  return {
+    textAlign: 'justify',
+    whiteSpace: 'pre-wrap',
+    fontSize: '0.6rem',
+    color: darkTheme.disabledColor,
+    padding: '0 0 2rem 0',
   };
 });
