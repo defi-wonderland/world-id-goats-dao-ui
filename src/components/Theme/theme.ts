@@ -9,6 +9,8 @@ export const darkTheme: Theme = {
   backgroundPrimary: '#0e152c',
   backgroundSecondary: '#0e152c',
   backgroundModal: '#0e152c',
+  backgroundButton: '#252447',
+  backgroundButtonSecondary: '#383263',
   titleFontFamily: 'Open Sans',
   textFontFamily: 'Open Sans',
   borderRadius: '0.8rem',
