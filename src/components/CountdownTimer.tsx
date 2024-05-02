@@ -39,6 +39,12 @@ export const CountdownContainer = styled(Box)(() => {
   return {
     display: 'flex',
     justifyContent: 'center',
-    marginTop: '3rem',
+    '& .MuiTypography-root': {
+      fontWeight: 600,
+      fontSize: '1.125rem',
+      '@media (max-width: 600px)': {
+        fontSize: '0.9rem',
+      },
+    },
   };
 });

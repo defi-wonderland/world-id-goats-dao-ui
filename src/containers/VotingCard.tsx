@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, styled } from '@mui/material';
+import { Box, Typography, styled } from '@mui/material';
 
 import { ProposalPoll, Voting, CountdownTimer, Title } from '~/components';
 import { useContract } from '~/hooks';
@@ -12,20 +12,35 @@ export const VotingCard = () => {
   const { getProposalDeadline, getHasVoted, getProposalState, txHash } = useContract();
   const { address } = useAccount();
   const [deadline, setDeadline] = useState<Date>();
-  const [enableVote, setEnableVote] = useState<boolean>(true);
+  const [addressVoted, setAddressVoted] = useState<boolean>();
+  const [status, setStatus] = useState<number>();
 
   useEffect(() => {
     async function fetchContractData() {
       const deadline = await getProposalDeadline(BigInt(PROPOSAL_ID));
+      const proposalStatus = await getProposalState(BigInt(PROPOSAL_ID));
       const hasVoted = address && (await getHasVoted(BigInt(PROPOSAL_ID), address));
-      const active = await getProposalState(BigInt(PROPOSAL_ID));
       if (deadline) {
         const date = new Date(Number(deadline) * 1000);
         setDeadline(date);
       }
-      if (hasVoted && active) {
-        const votingActive = active === 'Active';
-        setEnableVote(!hasVoted && votingActive);
+      if (hasVoted) {
+        setAddressVoted(hasVoted);
+      }
+      if (proposalStatus) {
+        /* enum ProposalState {
+          Pending,
+          Active,
+          Canceled,
+          Defeated,
+          Succeeded,
+          Queued,
+          Expired,
+          Executed
+          }
+          returns the index position
+          */
+        setStatus(Number(proposalStatus));
       }
     }
     fetchContractData();
@@ -36,9 +51,17 @@ export const VotingCard = () => {
       <Title title="Should Wonderland contribute 250 WLD to Richard's goat project?" />
 
       <VotingContainer>
-        <Voting enableVote={enableVote} />
+        {!addressVoted && status === 1 && <Voting />}
+
         <ProposalPoll />
-        {deadline && <CountdownTimer targetDate={deadline} />}
+
+        {addressVoted && status === 1 && <SecondaryText>THANKS FOR YOUR VOTE</SecondaryText>}
+
+        {deadline && status === 1 && <CountdownTimer targetDate={deadline} />}
+
+        {status != 1 && <SecondaryText>VOTING ENDED</SecondaryText>}
+
+        {status != 1 && <EndText>🐐 THANKS FOR YOUR HELPING RICHARD OUT 🐐</EndText>}
       </VotingContainer>
     </SBox>
   );
@@ -50,7 +73,7 @@ export const SBox = styled(Box)(() => {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '4rem',
+    marginTop: '1.5rem',
     marginBottom: '7rem',
     width: '100%',
     '@media (max-width: 600px)': {
@@ -65,11 +88,25 @@ export const VotingContainer = styled(Box)(() => {
   };
 });
 
-export const ConnectContainer = styled(Box)(() => {
+export const SecondaryText = styled(Typography)(() => {
   return {
-    display: 'flex',
-    justifyContent: 'center',
-    width: '100%',
-    margin: '1rem 0 2rem',
+    fontSize: '1.8rem',
+    fontWeight: 800,
+    lineHeight: '2rem',
+    textAlign: 'center',
+    letterSpacing: '0.25rem',
+    textTransform: 'uppercase',
+    margin: '5rem 0 0 0',
+  };
+});
+
+export const EndText = styled(Typography)(() => {
+  return {
+    fontSize: '1rem',
+    fontWeight: 800,
+    lineHeight: '2rem',
+    textAlign: 'center',
+    letterSpacing: '0.25rem',
+    textTransform: 'uppercase',
   };
 });

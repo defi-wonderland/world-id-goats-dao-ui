@@ -20,6 +20,7 @@ export const GoatDAOProposal = () => {
 const ProposalContainer = styled(Box)({
   display: 'grid',
   gap: '1.5rem',
+  width: '55rem',
 });
 
 const CodeSnippet = styled(Typography)(() => {
@@ -51,7 +52,7 @@ const STitle = styled(Typography)({
   fontWeight: 800,
   textAlign: 'center',
   textTransform: 'uppercase',
-  fontSize: '4rem',
+  fontSize: '3rem',
   lineHeight: 'normal',
   alignSelf: 'strech',
   fontFamily: 'SharpGroteskMedium',

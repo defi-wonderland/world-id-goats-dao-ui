@@ -1,5 +1,6 @@
 import { Box, Typography, styled } from '@mui/material';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import tweet from '../assets/tweet.png';
 
@@ -7,13 +8,17 @@ export const TweetCard = () => {
   return (
     <TweetContainer>
       <SText>Thanks to Worldcoin, Richard was able to buy his 🐐</SText>
+
       <SText>
         After that, he went viral on Twitter, when he named his goat Sam (after Sam Altman, founder of Worldcoin)
       </SText>
+
       <SText>Now we want to help him get even more goats! </SText>
 
       <SBox>
-        <Tweet src={tweet} alt='tweet' />
+        <Link href='https://twitter.com/OpanyRichard/status/1774728635145965672' target='_blank'>
+          <Tweet src={tweet} alt='tweet' />
+        </Link>
       </SBox>
     </TweetContainer>
   );
@@ -33,7 +38,8 @@ const TweetContainer = styled(Box)({
 const SText = styled(Typography)({
   textAlign: 'center',
   lineHeight: 'normal',
-  fontSize: '1.75rem',
+  fontSize: '1.5rem',
+  width: '55rem',
   fontWeight: 500,
 });
 
@@ -42,10 +48,16 @@ const SBox = styled(Box)({
   display: 'grid',
   justifyContent: 'center',
   position: 'relative',
+  margin: '1.5rem 0 0 0',
 });
 
 const Tweet = styled(Image)({
   borderRadius: '1rem',
   width: '30rem',
   height: '40rem',
+  '@media (max-width: 600px)': {
+    width: '20rem',
+    height: '26rem',
+    margin: 'auto',
+  },
 });

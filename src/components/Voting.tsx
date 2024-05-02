@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { Box, styled, Button } from '@mui/material';
 import { IDKitWidget, useIDKit } from '@worldcoin/idkit';
 // import { usePublicClient } from 'wagmi';
@@ -14,10 +14,6 @@ import { getConfig } from '~/config';
 //APP_ID for production
 const { APP_ID, PROPOSAL_ID } = getConfig();
 
-interface VotingProps {
-  enableVote: boolean;
-}
-
 interface ISuccessResult {
   merkle_root: string;
   nullifier_hash: string;
@@ -29,7 +25,7 @@ export enum VerificationLevel {
   Device = 'device',
 }
 
-export const Voting: React.FC<VotingProps> = () => {
+export const Voting = () => {
   const { setModalOpen } = useModal();
   const { vote, setVote } = useVote();
   //castVote, checkValidity,
@@ -172,8 +168,8 @@ export const SBox = styled(Box)(() => {
   return {
     display: 'flex',
     justifyContent: 'center',
-    gap: '2rem',
-    margin: '2rem 0',
+    gap: '2.5rem',
+    margin: '0',
     alignItems: 'center',
     '@media (max-width: 600px)': {
       display: 'grid',
@@ -215,7 +211,7 @@ export const SButton = styled(Button)(() => {
 export const SButtonFor = styled(Button)(() => {
   const { darkTheme } = useCustomTheme();
   return {
-    padding: '0.1rem 2.7rem',
+    padding: '0.25rem 5rem',
     fontWeight: 800,
     fontSize: '1.75rem',
     boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
