@@ -44,5 +44,8 @@ const LegalTerms = styled(Typography)(() => {
     fontSize: '0.6rem',
     color: darkTheme.disabledColor,
     padding: '0 0 2rem 0',
+    '@media (max-width: 600px)': {
+      fontSize: '0.5rem',
+    },
   };
 });

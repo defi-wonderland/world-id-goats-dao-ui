@@ -20,6 +20,6 @@ const TitleText = styled(Typography)({
   padding: '0.5rem',
   margin: '0 2rem',
   '@media (max-width: 600px)': {
-    fontSize: '2.5rem',
+    fontSize: '2rem',
   },
 });

@@ -36,7 +36,6 @@ const StarsContainer = styled.div<StarsContainerProps>`
     width: 0.1rem;
     height: 0.1rem;
     box-shadow: ${(props) => generateStars(props.smstars)};
-    animation: animStar ${getRandomInt(2000) + 1000}ms linear infinite;
     z-index: 0;
   }
 
@@ -44,76 +43,12 @@ const StarsContainer = styled.div<StarsContainerProps>`
     width: 0.1rem;
     height: 0.1rem;
     box-shadow: ${(props) => generateStars(props.smstars)};
-    animation: animStar ${getRandomInt(2000) + 1000}ms linear infinite;
     z-index: 0;
-  }
-
-  & .stars2 {
-    width: 0.1rem;
-    height: 0.1rem;
-    box-shadow: ${(props) => generateStars(props.smstars)};
-    animation: animStar ${getRandomInt(2000) + 1000}ms linear infinite;
-    z-index: 0;
-  }
-
-  & .stars3 {
-    width: 0.1rem;
-    height: 0.1rem;
-    box-shadow: ${(props) => generateStars(props.smstars)};
-    animation: animStar ${getRandomInt(2000) + 1000}ms linear infinite;
-    z-index: 0;
-  }
-
-  & .stars4 {
-    width: 0.1rem;
-    height: 0.1rem;
-
-    box-shadow: ${(props) => generateStars(props.smstars)};
-    animation: animStar ${getRandomInt(2000) + 1000}ms linear infinite;
-    z-index: 0;
-  }
-
-  & .stars5 {
-    width: 0.2rem;
-    height: 0.2rem;
-    background: transparent;
-    box-shadow: ${(props) => generateStars(props.mdstars)};
-    animation: animStar 1213ms linear infinite;
-  }
-  & .stars6 {
-    width: 0.3rem;
-    height: 0.3rem;
-    background: transparent;
-    box-shadow: ${(props) => generateStars(props.lgstars)};
-    animation: animStar2 747ms linear infinite;
   }
 
   & div {
     border-radius: 100%;
   }
-
-  @keyframes animStar {
-    0% {
-      opacity: 0.1;
-    }
-    50% {
-      opacity: 0.7;
-    }
-    100% {
-      opacity: 0.1;
-    }
-  }
-
-  @keyframes animStar2 {
-    0% {
-      opacity: 0.5;
-    }
-    50% {
-      opacity: 0.1;
-    }
-    100% {
-      opacity: 0.5;
-    }
   }
 `;
 
@@ -136,11 +71,6 @@ export default function StarsBackground({ zIndex }: BackgroundProps) {
         <StarsContainer smstars={700} mdstars={700} lgstars={50} zindex={zIndex}>
           <div className='stars'></div>
           <div className='stars1'></div>
-          <div className='stars2'></div>
-          <div className='stars3'></div>
-          <div className='stars4'></div>
-          <div className='stars5'></div>
-          <div className='stars6'></div>
         </StarsContainer>
       )}
     </>

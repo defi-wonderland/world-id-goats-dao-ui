@@ -4,7 +4,7 @@ import { Tweet } from 'react-tweet';
 export const TweetCard = () => {
   return (
     <TweetContainer>
-      <SText> Thanks to Worldcoin, Richard was able to buy his 🐐 </SText>
+      <SText>Thanks to Worldcoin, Richard was able to buy his 🐐</SText>
       <SText>
         After that, he went viral on Twitter, when he named his goat Sam (after Sam Altman, founder of Worldcoin)
       </SText>
