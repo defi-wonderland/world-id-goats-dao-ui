@@ -1,5 +1,7 @@
 import { Box, Typography, styled } from '@mui/material';
-import { Tweet } from 'react-tweet';
+import Image from 'next/image';
+
+import tweet from '../assets/tweet.png';
 
 export const TweetCard = () => {
   return (
@@ -10,9 +12,8 @@ export const TweetCard = () => {
       </SText>
       <SText>Now we want to help him get even more goats! </SText>
 
-      <SBox className='dark'>
-        <Tweet id='1774728635145965672' />
-        <Tweet id='1775775458598306029' />
+      <SBox>
+        <Tweet src={tweet} alt='tweet' />
       </SBox>
     </TweetContainer>
   );
@@ -40,4 +41,10 @@ const SBox = styled(Box)({
   display: 'grid',
   justifyContent: 'center',
   position: 'relative',
+});
+
+const Tweet = styled(Image)({
+  borderRadius: '1rem',
+  width: '30rem',
+  height: '40rem',
 });
