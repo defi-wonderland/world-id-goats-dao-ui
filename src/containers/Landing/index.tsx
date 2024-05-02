@@ -2,10 +2,8 @@ import { styled } from '@mui/material/styles';
 import { GoatGuy, TweetCard, VotingCard } from '~/containers';
 import { SectionBackground } from '~/components/BackgroundCircle';
 import { GoatDAOProposal } from '../GoatDAOProposal';
-import { useContract } from '~/hooks';
 
 export const Landing = () => {
-  const { isLoading } = useContract();
   return (
     <>
       <BackgroundContainer>
@@ -14,15 +12,11 @@ export const Landing = () => {
         <BG3 type='4' align='right' />
       </BackgroundContainer>
       <LandingContainer>
-        {!isLoading && (
-          <>
-            <VotingCard />
-            <GoatGuy />
-            <TweetCard />
-            <GoatDAOProposal />
-            <VotingCard />
-          </>
-        )}
+        <VotingCard />
+        <GoatGuy />
+        <TweetCard />
+        <GoatDAOProposal />
+        <VotingCard />
       </LandingContainer>
     </>
   );

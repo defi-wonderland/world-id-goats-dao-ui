@@ -9,46 +9,32 @@ import { getConfig } from '~/config';
 const { PROPOSAL_ID } = getConfig();
 
 export const VotingCard = () => {
-  const { getProposalDeadline, getHasVoted, getProposalState, txHash } = useContract();
+  const { getProposalDeadline, getHasVoted, txHash } = useContract();
   const { address } = useAccount();
   const [deadline, setDeadline] = useState<Date>();
   const [addressVoted, setAddressVoted] = useState<boolean>();
-  const [status, setStatus] = useState<number>();
+  const [timeLeft, setTimeLeft] = useState<number>(0);
 
   useEffect(() => {
     async function fetchContractData() {
       const deadline = await getProposalDeadline(BigInt(PROPOSAL_ID));
-      const proposalStatus = await getProposalState(BigInt(PROPOSAL_ID));
       const hasVoted = address && (await getHasVoted(BigInt(PROPOSAL_ID), address));
       if (deadline) {
         const date = new Date(Number(deadline) * 1000);
+        const time = date.getTime() - new Date().getTime();
         setDeadline(date);
+        setTimeLeft(time);
       }
       if (hasVoted) {
         setAddressVoted(hasVoted);
       }
-      if (proposalStatus) {
-        /* enum ProposalState {
-          Pending,
-          Active,
-          Canceled,
-          Defeated,
-          Succeeded,
-          Queued,
-          Expired,
-          Executed
-          }
-          returns the index position
-          */
-        setStatus(Number(proposalStatus));
-      }
     }
     fetchContractData();
-  }, [address, getHasVoted, getProposalDeadline, getProposalState, txHash]);
+  }, [address, getHasVoted, getProposalDeadline, txHash]);
 
   return (
     <>
-      {status !== 1 && (
+      {timeLeft < 0 && (
         <GoatBgContainer>
           <Goat1>🐐</Goat1>
           <Goat2>🐐</Goat2>
@@ -58,17 +44,17 @@ export const VotingCard = () => {
       <SBox>
         <Title title="Should Wonderland contribute 250 WLD to Richard's goat project?" />
         <VotingContainer>
-          {!addressVoted && status === 1 && <Voting />}
+          {!addressVoted && timeLeft > 0 && <Voting />}
 
           <ProposalPoll />
 
-          {addressVoted && status === 1 && <SecondaryText>THANKS FOR YOUR VOTE</SecondaryText>}
+          {addressVoted && timeLeft > 0 && <SecondaryText>THANKS FOR YOUR VOTE</SecondaryText>}
 
-          {deadline && status === 1 && <CountdownTimer targetDate={deadline} />}
+          {deadline && timeLeft > 0 && <CountdownTimer targetDate={deadline} />}
 
-          {status != 1 && <SecondaryText>VOTING ENDED</SecondaryText>}
+          {timeLeft < 0 && <SecondaryText>VOTING ENDED</SecondaryText>}
 
-          {status != 1 && <EndText>🐐 THANKS FOR YOUR HELPING RICHARD OUT 🐐</EndText>}
+          {timeLeft < 0 && <EndText>🐐 THANKS FOR YOUR HELPING RICHARD OUT 🐐</EndText>}
         </VotingContainer>
       </SBox>
     </>
