@@ -1,58 +1,65 @@
 import { styled } from '@mui/material/styles';
-import { GoatGuy, ProposalDetail, TweetCard, VotingCard } from '~/containers';
+import { GoatGuy, TweetCard, VotingCard } from '~/containers';
 import { SectionBackground } from '~/components/BackgroundCircle';
+import { GoatDAOProposal } from '../GoatDAOProposal';
 
 export const Landing = () => {
   return (
-    <LandingContainer>
+    <>
       <BackgroundContainer>
         <BG1 type='2' align='center' />
         <BG2 type='1' align='left' />
         <BG3 type='4' align='right' />
       </BackgroundContainer>
-      <VotingCard />
-      <GoatGuy />
-      <TweetCard />
-      <ProposalDetail />
-      <VotingCard />
-    </LandingContainer>
+      <LandingContainer>
+        <VotingCard />
+        <GoatGuy />
+        <TweetCard />
+        <GoatDAOProposal />
+        <VotingCard />
+      </LandingContainer>
+    </>
   );
 };
 
 const LandingContainer = styled('div')({
   display: 'flex',
   flexDirection: 'column',
-  padding: '0 8rem',
+  padding: '0.625rem',
   alignItems: 'center',
   justifyContent: 'center',
-  width: '100%',
+  width: '66.25rem',
+  overflow: 'hidden',
+  gap: '6.25rem',
   '@media (max-width: 600px)': {
     padding: '0 1rem',
+    width: '100%',
+    margin: '1rem',
   },
 });
 
 const BackgroundContainer = styled('div')`
-  position: absolute;
+  position: relative;
   z-index: -1;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
 `;
 
 const BG1 = styled(SectionBackground)`
-  top: 150rem;
-  right: 0;
-  width: 38%;
+  top: 170rem;
+  right: -2rem;
+  width: 55%;
 `;
 
 const BG2 = styled(SectionBackground)`
-  top: 100rem;
-  width: 38%;
+  top: 110rem;
+  left: -15rem;
+  width: 55%;
 `;
 
 const BG3 = styled(SectionBackground)`
-  margin-left: auto;
-  top: 50rem;
-  right: 5rem;
-  width: 38%;
+  top: 80rem;
+  right: -23rem;
+  width: 45%;
 `;

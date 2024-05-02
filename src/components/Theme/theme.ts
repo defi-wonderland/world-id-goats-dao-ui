@@ -20,9 +20,9 @@ export const darkTheme: Theme = {
 
   primaryColor: '#625CBF',
   accentColor: '#ececec',
-  disabledColor: '#94969c',
+  disabledColor: '#AFAFAF',
 
-  errorPrimary: '#D92D20',
+  errorPrimary: '#DA5248',
   warningPrimary: '#FFD27A',
-  successPrimary: '#4aa16c',
+  successPrimary: '#00D252',
 };
