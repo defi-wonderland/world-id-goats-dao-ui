@@ -17,12 +17,7 @@ export function WalletProvider({ children }: Props) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider
-          modalSize='compact'
-          theme={darkTheme({
-            accentColor: '#625CBF',
-          })}
-        >
+        <RainbowKitProvider modalSize='compact' theme={darkTheme()}>
           {children}
         </RainbowKitProvider>
       </QueryClientProvider>
