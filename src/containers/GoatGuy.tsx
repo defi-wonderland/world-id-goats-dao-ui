@@ -13,7 +13,7 @@ export const GoatGuy = () => {
       <Link href='https://twitter.com/OpanyRichard' target='_blank'>
         <Box>
           <TextStyled variant='body1'>Who is Richard Opany?</TextStyled>
-          <TextStyled variant='body1'>(aka Goat Guy)</TextStyled>
+          <TextStyled variant='body1'>(a.k.a Goat Guy)</TextStyled>
         </Box>
         <ArrowBox>
           <Image src={arrow} alt='Arrow' width={75} height={75} />
@@ -28,11 +28,14 @@ export default GoatGuy;
 const GoatGuyContainer = styled(Box)(() => {
   const { darkTheme } = useCustomTheme();
   return {
-    display: 'flex',
+    position: 'relative',
+    top: '-22rem',
+    left: '45rem',
     justifyContent: 'flex-end',
+    height: '1rem',
     width: '100%',
     alignItems: 'baseline',
-    margin: '0 1rem 3rem 0',
+    margin: '0 1rem -3rem 0',
     a: {
       textDecoration: 'none',
       color: darkTheme.textPrimary,
@@ -40,36 +43,53 @@ const GoatGuyContainer = styled(Box)(() => {
     '@media (max-width: 600px)': {
       display: 'grid',
       justifyContent: 'center',
-      margin: '1rem 0',
+      alignItems: 'center',
+      top: '0',
+      left: '0',
     },
   };
 });
 
 const TextStyled = styled(Typography)({
   width: 'fit-content',
-  margin: '0 10rem',
-  fontFamily: 'SharpGroteskLight',
+  fontSize: '1rem',
+  position: 'relative',
+  bottom: '-3rem',
+  right: '5rem',
   '@media (max-width: 600px)': {
-    margin: '0',
+    fontSize: '0.75rem',
+    top: '0',
+    left: '0',
   },
 });
 
 const SImage = styled(Image)({
   position: 'relative',
-  bottom: '-2rem',
-  left: '35rem',
+  transform: 'rotate(10deg)',
+  borderRadius: '1.125rem',
+  bottom: '-10rem',
+  right: '-10rem',
   '@media (max-width: 600px)': {
-    bottom: '0',
+    transform: 'rotate(0deg)',
+    display: 'flex',
+    justifySelf: 'center',
+    width: '8rem',
+    height: '8rem',
+    top: '0',
     left: '0',
   },
 });
 
 const ArrowBox = styled(Box)({
   position: 'relative',
-  bottom: '2rem',
-  left: '3rem',
+  bottom: '1.5rem',
+  right: '10rem',
   '@media (max-width: 600px)': {
+    top: '-1rem',
     left: '5rem',
-    bottom: '0rem',
+    img: {
+      width: '8rem',
+      height: '3rem',
+    },
   },
 });

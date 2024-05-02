@@ -6,7 +6,7 @@ import tweet from '../assets/tweet.png';
 export const TweetCard = () => {
   return (
     <TweetContainer>
-      <SText> Thanks to Worldcoin, Richard was able to buy his 🐐 </SText>
+      <SText>Thanks to Worldcoin, Richard was able to buy his 🐐</SText>
       <SText>
         After that, he went viral on Twitter, when he named his goat Sam (after Sam Altman, founder of Worldcoin)
       </SText>
@@ -22,7 +22,8 @@ export const TweetCard = () => {
 const TweetContainer = styled(Box)({
   display: 'grid',
   justifyContent: 'center',
-  width: '38rem',
+  width: '65rem',
+  gap: '1rem',
   '@media (max-width: 600px)': {
     width: '20rem',
     margin: 'auto',
@@ -31,9 +32,9 @@ const TweetContainer = styled(Box)({
 
 const SText = styled(Typography)({
   textAlign: 'center',
-  lineHeight: '2.5rem',
-  fontFamily: 'SharpGroteskLight',
-  fontSize: '1.5rem',
+  lineHeight: 'normal',
+  fontSize: '1.75rem',
+  fontWeight: 500,
 });
 
 const SBox = styled(Box)({

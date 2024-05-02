@@ -5,6 +5,7 @@ import { IDKitWidget, useIDKit } from '@worldcoin/idkit';
 import { useAccount } from 'wagmi';
 import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
 import JSConfetti from 'js-confetti';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
 
 import { useContract, useCustomTheme, useModal, useVote } from '~/hooks';
 import { ModalType } from '~/types';
@@ -28,19 +29,33 @@ export enum VerificationLevel {
   Device = 'device',
 }
 
-export const Voting: React.FC<VotingProps> = ({ enableVote }) => {
+export const Voting: React.FC<VotingProps> = () => {
   const { setModalOpen } = useModal();
   const { vote, setVote } = useVote();
   //castVote, checkValidity,
   const { simulateCheckValidity, simulateCastVote, setTxHash } = useContract();
   // const publicClient = usePublicClient();
-  const { isConnected } = useAccount();
+  const { address } = useAccount();
+  const { openConnectModal } = useConnectModal();
   const { setOpen } = useIDKit();
   const thoughts = ''; // Empty since removed from UI design but required as contract arg
 
   const handleVote = (support: number) => {
-    setVote(support);
-    setOpen(true);
+    if (!address) {
+      openConnectModal?.();
+    } else {
+      setVote(support);
+      setOpen(true);
+    }
+  };
+
+  const handleGoatConfetti = () => {
+    const jsConfetti = new JSConfetti();
+    jsConfetti?.addConfetti({
+      emojis: ['🐐'],
+      emojiSize: 100,
+      confettiNumber: 20,
+    });
   };
 
   const onSuccess = useCallback(
@@ -134,15 +149,11 @@ export const Voting: React.FC<VotingProps> = ({ enableVote }) => {
   return (
     <>
       <SBox>
-        <SButtonFor onClick={() => handleVote(1)} disabled={!isConnected || !enableVote}>
-          🐐 For 🐐
+        <SButtonFor onClick={() => handleVote(1)} onMouseEnter={() => handleGoatConfetti()}>
+          For
         </SButtonFor>
-        <SButton onClick={() => handleVote(2)} disabled={!isConnected || !enableVote}>
-          Against
-        </SButton>
-        <SButton onClick={() => handleVote(0)} disabled={!isConnected || !enableVote}>
-          Abstain
-        </SButton>
+        <SButton onClick={() => handleVote(2)}>Against</SButton>
+        <SButton onClick={() => handleVote(0)}>Abstain</SButton>
       </SBox>
 
       <IDKitWidget
@@ -165,8 +176,9 @@ export const SBox = styled(Box)(() => {
     margin: '2rem 0',
     alignItems: 'center',
     '@media (max-width: 600px)': {
-      gap: '0rem',
-      margin: '0rem',
+      display: 'grid',
+      gap: '1rem',
+      margin: '1rem 0',
     },
   };
 });
@@ -194,6 +206,8 @@ export const SButton = styled(Button)(() => {
       fontSize: '0.75rem',
       padding: '0.2rem 1.75rem',
       letterSpacing: '0.125rem',
+      gap: '0',
+      margin: '0',
     },
   };
 });

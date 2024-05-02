@@ -9,6 +9,8 @@ export const darkTheme: Theme = {
   backgroundPrimary: '#0e152c',
   backgroundSecondary: '#0e152c',
   backgroundModal: '#0e152c',
+  backgroundButton: '#252447',
+  backgroundButtonSecondary: '#383263',
   titleFontFamily: 'Open Sans',
   textFontFamily: 'Open Sans',
   borderRadius: '0.8rem',
@@ -18,9 +20,9 @@ export const darkTheme: Theme = {
 
   primaryColor: '#625CBF',
   accentColor: '#ececec',
-  disabledColor: '#94969c',
+  disabledColor: '#AFAFAF',
 
-  errorPrimary: '#D92D20',
+  errorPrimary: '#DA5248',
   warningPrimary: '#FFD27A',
-  successPrimary: '#4aa16c',
+  successPrimary: '#00D252',
 };

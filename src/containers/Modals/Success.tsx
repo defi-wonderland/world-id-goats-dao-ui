@@ -40,7 +40,7 @@ const STitle = styled(Typography)(() => {
       display: 'block',
       color: darkTheme.textPrimary,
       fontSize: '1.5rem',
-      fontWeight: 600,
+      fontWeight: 500,
     },
   };
 });
@@ -52,7 +52,7 @@ const STypography = styled(Typography)(() => {
       display: 'block',
       color: darkTheme.textPrimary,
       fontSize: '1rem',
-      fontWeight: 400,
+      fontWeight: 300,
     },
   };
 });
