@@ -8,6 +8,8 @@ export interface Theme {
   backgroundPrimary: string;
   backgroundSecondary: string;
   backgroundModal: string;
+  backgroundButton: string;
+  backgroundButtonSecondary: string;
   textPrimary: string;
   titleFontFamily: string;
   textFontFamily: string;
