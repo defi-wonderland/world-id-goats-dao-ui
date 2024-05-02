@@ -93,24 +93,6 @@ export const Voting = () => {
                 confettiNumber: 85,
               });
             }
-            // against
-            if (vote === 2) {
-              const jsConfetti = new JSConfetti();
-              jsConfetti?.addConfetti({
-                emojis: ['❌', '😭', '👎'],
-                emojiSize: 100,
-                confettiNumber: 85,
-              });
-            }
-            // abstain
-            if (vote === 0) {
-              const jsConfetti = new JSConfetti();
-              jsConfetti?.addConfetti({
-                emojis: ['🚫', '👍', '👎'],
-                emojiSize: 100,
-                confettiNumber: 85,
-              });
-            }
           }, 3000);
         }
 

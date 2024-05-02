@@ -9,7 +9,7 @@ export const SuccessModal = () => {
   const { setModalOpen } = useModal();
 
   return (
-    <BaseModal type={ModalType.SUCCESS} title='SUCCESSFUL VOTE'>
+    <BaseModal type={ModalType.SUCCESS}>
       <ModalBody>
         <SCheckIcon />
         <STitle variant='h4'> Vote Succeed! </STitle>

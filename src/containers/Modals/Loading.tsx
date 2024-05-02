@@ -6,7 +6,7 @@ import { ModalType } from '~/types';
 
 export const LoadingModal = () => {
   return (
-    <BaseModal type={ModalType.LOADING} title='CASTING VOTE'>
+    <BaseModal type={ModalType.LOADING}>
       <ModalBody>
         <SIcon size='3rem' variant='indeterminate' thickness={4} />
         <STitle variant='h4'> Casting your vote 🐐 ... </STitle>

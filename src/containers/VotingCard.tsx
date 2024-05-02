@@ -1,14 +1,54 @@
+import { useEffect, useState } from 'react';
 import { Box, Typography, styled } from '@mui/material';
+import { useAccount } from 'wagmi';
 
 import { ProposalPoll, Voting, CountdownTimer, Title } from '~/components';
 import { useContract } from '~/hooks';
+import { getConfig } from '~/config';
+
+const { PROPOSAL_ID } = getConfig();
 
 export const VotingCard = () => {
-  const { deadline, status, addressVoted } = useContract();
+  const { getProposalDeadline, getHasVoted, getProposalState, txHash } = useContract();
+  const { address } = useAccount();
+  const [deadline, setDeadline] = useState<Date>();
+  const [addressVoted, setAddressVoted] = useState<boolean>();
+  const [status, setStatus] = useState<number>();
+
+  useEffect(() => {
+    async function fetchContractData() {
+      const deadline = await getProposalDeadline(BigInt(PROPOSAL_ID));
+      const proposalStatus = await getProposalState(BigInt(PROPOSAL_ID));
+      const hasVoted = address && (await getHasVoted(BigInt(PROPOSAL_ID), address));
+      if (deadline) {
+        const date = new Date(Number(deadline) * 1000);
+        setDeadline(date);
+      }
+      if (hasVoted) {
+        setAddressVoted(hasVoted);
+      }
+      if (proposalStatus) {
+        /* enum ProposalState {
+          Pending,
+          Active,
+          Canceled,
+          Defeated,
+          Succeeded,
+          Queued,
+          Expired,
+          Executed
+          }
+          returns the index position
+          */
+        setStatus(Number(proposalStatus));
+      }
+    }
+    fetchContractData();
+  }, [address, getHasVoted, getProposalDeadline, getProposalState, txHash]);
 
   return (
     <>
-      {status != 1 && (
+      {status !== 1 && (
         <GoatBgContainer>
           <Goat1>🐐</Goat1>
           <Goat2>🐐</Goat2>
