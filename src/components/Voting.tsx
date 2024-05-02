@@ -90,7 +90,7 @@ export const Voting = () => {
               jsConfetti?.addConfetti({
                 emojis: ['🐐', '🌈', '✨'],
                 emojiSize: 100,
-                confettiNumber: 85,
+                confettiNumber: 20,
               });
             }
           }, 3000);

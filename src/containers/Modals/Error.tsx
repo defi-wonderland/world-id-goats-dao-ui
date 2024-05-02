@@ -1,16 +1,20 @@
 import { Box, Typography, styled } from '@mui/material';
-import { Cancel } from '@mui/icons-material';
+import Image from 'next/image';
 
-import { BaseModal } from '~/components';
 import { useCustomTheme } from '~/hooks';
 import { ModalType } from '~/types';
+import { BaseModal, ModalButton } from '~/components';
+import iconError from '~/assets/iconerror.svg';
 
 export const ErrorModal = () => {
   return (
     <BaseModal type={ModalType.ERROR}>
       <ModalBody>
-        <SErrorIcon />
-        <STitle variant='h4'> Something went wrong</STitle>
+        <Image src={iconError} alt='Error' width={100} height={100} />
+        <STitle variant='h4'> Something went wrong </STitle>
+
+        <STypography variant='body1'>You can safely close this modal</STypography>
+        <ModalButton />
       </ModalBody>
     </BaseModal>
   );
@@ -18,13 +22,23 @@ export const ErrorModal = () => {
 
 const ModalBody = styled(Box)(() => {
   return {
+    marginTop: '-3.2rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     width: '100%',
-    gap: '4rem',
-    margin: 'auto',
+    gap: '0.5rem',
+
+    img: {
+      width: '7rem',
+      height: '7rem',
+      background: '#45110b', // fixed color
+      padding: '0.4rem',
+      borderRadius: '50%',
+      border: '1.3rem solid #30110d', // fixed color
+      marginBottom: '2rem',
+    },
   };
 });
 
@@ -40,7 +54,14 @@ const STitle = styled(Typography)(() => {
   };
 });
 
-const SErrorIcon = styled(Cancel)({
-  fontSize: '5rem',
-  color: '#D92D20',
+const STypography = styled(Typography)(() => {
+  const { darkTheme } = useCustomTheme();
+  return {
+    '&&': {
+      display: 'block',
+      color: darkTheme.textPrimary,
+      fontSize: '1rem',
+      fontWeight: 400,
+    },
+  };
 });

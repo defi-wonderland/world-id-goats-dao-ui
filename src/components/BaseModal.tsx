@@ -1,10 +1,12 @@
 import * as React from 'react';
 import clsx from 'clsx';
-import { Modal, styled, Box, IconButton, Divider } from '@mui/material';
+import { Modal, styled, Box, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import Image from 'next/image';
 
 import { useCustomTheme, useModal } from '~/hooks';
 import { ModalType } from '~/types';
+import { zIndex } from '~/utils';
 
 interface BaseModalProps {
   children: React.ReactNode;
@@ -14,18 +16,18 @@ interface BaseModalProps {
   image?: string;
 }
 
-export const BaseModal = ({ children, type, fixedHeight }: BaseModalProps) => {
+export const BaseModal = ({ children, type, image }: BaseModalProps) => {
   const { modalOpen, closeModal } = useModal();
   return (
     <StyledModal open={type === modalOpen} onClose={closeModal} slots={{ backdrop: StyledBackdrop }}>
-      <SModal className={fixedHeight ? 'big-modal' : ''}>
+      <SModal>
         <ModalHeader>
+          <Box>{image && <Image src={image} alt='' />}</Box>
+
           <IconButton onClick={closeModal} className='close-button'>
             <CloseIcon />
           </IconButton>
         </ModalHeader>
-
-        <Divider />
 
         {children}
       </SModal>
@@ -42,7 +44,7 @@ Backdrop.displayName = 'Backdrop';
 
 export const StyledModal = styled(Modal)`
   position: fixed;
-  z-index: 200;
+  z-index: ${zIndex.MODAL};
   inset: 0;
   display: flex;
   align-items: center;
@@ -55,26 +57,27 @@ export const StyledModal = styled(Modal)`
 `;
 
 export const StyledBackdrop = styled(Backdrop)`
-  z-index: -1;
+  z-index: ${zIndex.BACKDROP};
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(0.05rem);
-  -webkit-tap-highlight-color: white;
+  -webkit-tap-highlight-color: transparent;
 `;
 
 export const SModal = styled(Box)(() => {
   const { darkTheme } = useCustomTheme();
   return {
-    width: '28rem',
-    minHeight: '35rem',
+    width: '25rem',
+    minHeight: '25rem',
     borderRadius: darkTheme.borderRadius,
     backgroundColor: darkTheme.backgroundModal,
-    display: 'flex',
-    padding: '2rem 3.2rem 3.2rem 3.2rem',
+    border: darkTheme.borderModal,
+    display: 'grid',
+    padding: '2rem 3.2rem 3.2rem 2.4rem',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    gap: '0.5rem',
+    gap: '2rem',
 
     '&.big-modal': {
       minHeight: '38.6rem',
@@ -99,7 +102,7 @@ export const ModalHeader = styled(Box)(() => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'flex-start',
-      gap: '0.8rem',
+      gap: '0.6rem',
     },
     '.close-button': {
       padding: '0.4rem',
@@ -110,6 +113,10 @@ export const ModalHeader = styled(Box)(() => {
     '@media (max-width: 600px)': {
       h2: {
         fontSize: '1.8rem',
+      },
+      img: {
+        width: '2.4rem',
+        height: '2.4rem',
       },
     },
   };
