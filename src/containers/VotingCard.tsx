@@ -87,11 +87,8 @@ export const SBox = styled(Box)(() => {
     '@media (max-width: 600px)': {
       margin: '1rem',
     },
-    '@media (min-width: 601px) and (max-width: 1024px)': {
-      margin: '1.5rem 0 7rem 0',
-    },
-    '@media (min-width: 1025px) and (max-width: 1440px)': {
-      margin: '4rem 0 13rem 0',
+    '@media (min-width: 601px) and  (max-width: 1440px)': {
+      margin: '1rem 0 7rem 0',
     },
     '@media (min-width: 1441px)': {
       margin: '6rem 0 16rem 0',
