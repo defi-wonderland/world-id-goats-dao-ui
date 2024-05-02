@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { Box, styled, Button } from '@mui/material';
 import { IDKitWidget, useIDKit } from '@worldcoin/idkit';
-// import { usePublicClient } from 'wagmi';
+import { usePublicClient } from 'wagmi';
 import { useAccount } from 'wagmi';
 import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
 import JSConfetti from 'js-confetti';
@@ -11,7 +11,6 @@ import { useContract, useCustomTheme, useModal, useVote } from '~/hooks';
 import { ModalType } from '~/types';
 import { getConfig } from '~/config';
 
-//APP_ID for production
 const { APP_ID, PROPOSAL_ID } = getConfig();
 
 interface ISuccessResult {
@@ -28,9 +27,8 @@ export enum VerificationLevel {
 export const Voting = () => {
   const { setModalOpen } = useModal();
   const { vote, setVote } = useVote();
-  //castVote, checkValidity,
-  const { simulateCheckValidity, simulateCastVote, setTxHash } = useContract();
-  // const publicClient = usePublicClient();
+  const { simulateCheckValidity, castVote, setTxHash } = useContract();
+  const publicClient = usePublicClient();
   const { address } = useAccount();
   const { openConnectModal } = useConnectModal();
   const { setOpen } = useIDKit();
@@ -72,19 +70,21 @@ export const Voting = () => {
           [decodedMerfleRoot, decodedNullifierHash, decodedProof],
         );
 
-        //STAGING
+        //PRODUCTION
         const isValid = await simulateCheckValidity(BigInt(PROPOSAL_ID), vote, proofData);
-        if (isValid) {
-          const request = await simulateCastVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
-          if (request) {
-            setModalOpen(ModalType.LOADING);
-          }
 
-          // Simulate transaction processing delay
-          setTimeout(() => {
-            setTxHash('0xabcd');
+        if (isValid) {
+          setModalOpen(ModalType.WALLETCONFIRM);
+          const hash = await castVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
+          if (!hash) throw new Error('No hash returned');
+          setModalOpen(ModalType.LOADING);
+          if (!publicClient) return;
+          const receipt = await publicClient.waitForTransactionReceipt({
+            hash: hash as Hex,
+          });
+          setTxHash(receipt.transactionHash);
+          if (receipt) {
             setModalOpen(ModalType.SUCCESS);
-            // for
             if (vote === 1) {
               const jsConfetti = new JSConfetti();
               jsConfetti?.addConfetti({
@@ -93,35 +93,16 @@ export const Voting = () => {
                 confettiNumber: 20,
               });
             }
-          }, 3000);
+          }
+        } else {
+          setModalOpen(ModalType.ERROR);
         }
-
-        //PRODUCTION
-        // const isValid = await simulateCheckValidity(BigInt(PROPOSAL_ID), vote, proofData);
-        // const validate = await checkValidity(BigInt(PROPOSAL_ID), vote, proofData);
-
-        // if (validate) {
-        //   const request = await simulateCastVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
-        //   const hash = await castVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
-        //   if (!hash) throw new Error('No hash returned');
-        //   setModalOpen(ModalType.LOADING);
-        //   if (!publicClient) return;
-        //   const receipt = await publicClient.waitForTransactionReceipt({
-        //     hash: hash as Hex,
-        //   });
-        //   setTxHash(receipt.transactionHash);
-        //   if (receipt) {
-        //     setModalOpen(ModalType.SUCCESS);
-        //   }
-        // } else {
-        //   setModalOpen(ModalType.ERROR);
-        // }
       } catch (error) {
         console.error('Cast failed:', error);
         setModalOpen(ModalType.ERROR);
       }
     },
-    [simulateCheckValidity, vote, simulateCastVote, setModalOpen, setTxHash],
+    [simulateCheckValidity, vote, castVote, setModalOpen, publicClient, setTxHash],
   );
 
   return (
