@@ -1,11 +1,8 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Box, Typography, TypographyProps, styled } from '@mui/material';
 import { Circle } from '@mui/icons-material';
 
 import { useCustomTheme, useContract } from '~/hooks';
-import { getConfig } from '~/config';
-
-const { PROPOSAL_ID } = getConfig();
 
 interface StyledTypographyProps extends TypographyProps {
   color?: string;
@@ -18,28 +15,8 @@ interface ProgressSegmentProps {
 }
 
 export const ProposalPoll = () => {
-  const { getQuorumThreshold, getProposalVotes, txHash } = useContract();
+  const { votes, quorum } = useContract();
   const { darkTheme } = useCustomTheme();
-  const [votes, setVotes] = useState({ for: 0, against: 0, abstain: 0 });
-  const [quorum, setQuorum] = useState('');
-
-  useEffect(() => {
-    async function fetchContractData() {
-      const quorumThreshold = await getQuorumThreshold(BigInt(PROPOSAL_ID));
-      const voteCounts = await getProposalVotes(BigInt(PROPOSAL_ID));
-      if (voteCounts) {
-        setVotes({
-          for: Number(voteCounts[1]),
-          against: Number(voteCounts[2]),
-          abstain: Number(voteCounts[0]),
-        });
-      }
-      if (quorumThreshold) {
-        setQuorum(quorumThreshold.toString());
-      }
-    }
-    fetchContractData();
-  }, [getProposalVotes, getQuorumThreshold, txHash]);
 
   const totalVotes = useMemo(() => votes.for + votes.against + votes.abstain, [votes]);
 

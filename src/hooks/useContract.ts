@@ -1,5 +1,5 @@
-import { useCallback, useState } from 'react';
-import { usePublicClient, useWalletClient } from 'wagmi';
+import { useCallback, useState, useEffect } from 'react';
+import { usePublicClient, useWalletClient, useAccount } from 'wagmi';
 import { Address, Hex } from 'viem';
 
 import { getConfig } from '~/config';
@@ -15,7 +15,7 @@ import {
   hasVoted,
 } from '~/utils/parsedAbi';
 
-const { CONTRACT_ADDRESS } = getConfig();
+const { CONTRACT_ADDRESS, PROPOSAL_ID } = getConfig();
 
 type ProposalID = bigint;
 type SupportType = number;
@@ -27,6 +27,13 @@ export function useContract() {
   const { data: walletClient } = useWalletClient();
   const publicClient = usePublicClient();
   const [txHash, setTxHash] = useState<Hex>();
+  const [votes, setVotes] = useState({ for: 0, against: 0, abstain: 0 });
+  const [quorum, setQuorum] = useState('');
+  const { address } = useAccount();
+  const [deadline, setDeadline] = useState<Date>();
+  const [addressVoted, setAddressVoted] = useState<boolean>();
+  const [status, setStatus] = useState<number>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const checkValidity = useCallback(
     async (proposalId: ProposalID, support: SupportType, proofData: ProofData) => {
@@ -169,6 +176,48 @@ export function useContract() {
     [publicClient],
   );
 
+  const fetchContractData = useCallback(async () => {
+    const quorumThreshold = await getQuorumThreshold(BigInt(PROPOSAL_ID));
+    const voteCounts = await getProposalVotes(BigInt(PROPOSAL_ID));
+    const deadlineResponse = await getProposalDeadline(BigInt(PROPOSAL_ID));
+    const proposalStatus = await getProposalState(BigInt(PROPOSAL_ID));
+    const hasVotedResponse = address && (await getHasVoted(BigInt(PROPOSAL_ID), address));
+
+    if (deadlineResponse) {
+      const date = new Date(Number(deadlineResponse) * 1000);
+      setDeadline(date);
+    }
+    if (hasVotedResponse) {
+      setAddressVoted(hasVotedResponse);
+    }
+    if (proposalStatus) {
+      setStatus(Number(proposalStatus));
+    }
+    if (voteCounts) {
+      setVotes({
+        for: Number(voteCounts[1]),
+        against: Number(voteCounts[2]),
+        abstain: Number(voteCounts[0]),
+      });
+    }
+    if (quorumThreshold) {
+      setQuorum(quorumThreshold.toString());
+    }
+    if (
+      quorumThreshold !== undefined &&
+      voteCounts !== undefined &&
+      proposalStatus !== undefined &&
+      hasVotedResponse !== undefined &&
+      deadlineResponse !== undefined
+    ) {
+      setIsLoading(false);
+    }
+  }, [address, getQuorumThreshold, getProposalVotes, getProposalDeadline, getProposalState, getHasVoted]);
+
+  useEffect(() => {
+    fetchContractData();
+  }, [fetchContractData]);
+
   return {
     checkValidity,
     getQuorumThreshold,
@@ -183,5 +232,11 @@ export function useContract() {
     getHasVoted,
     setTxHash,
     txHash,
+    votes,
+    quorum,
+    addressVoted,
+    status,
+    deadline,
+    isLoading,
   };
 }
