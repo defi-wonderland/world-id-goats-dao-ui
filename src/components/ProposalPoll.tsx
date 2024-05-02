@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 import { Box, Typography, TypographyProps, styled } from '@mui/material';
 import { Circle } from '@mui/icons-material';
 
@@ -18,28 +18,29 @@ interface ProgressSegmentProps {
 }
 
 export const ProposalPoll = () => {
-  const { getQuorumThreshold, getProposalVotes, txHash } = useContract();
+  const { getQuorumThreshold, getProposalVotes, txDone } = useContract();
   const { darkTheme } = useCustomTheme();
   const [votes, setVotes] = useState({ for: 0, against: 0, abstain: 0 });
   const [quorum, setQuorum] = useState('');
 
-  useEffect(() => {
-    async function fetchContractData() {
-      const quorumThreshold = await getQuorumThreshold(BigInt(PROPOSAL_ID));
-      const voteCounts = await getProposalVotes(BigInt(PROPOSAL_ID));
-      if (voteCounts) {
-        setVotes({
-          for: Number(voteCounts[1]),
-          against: Number(voteCounts[2]),
-          abstain: Number(voteCounts[0]),
-        });
-      }
-      if (quorumThreshold) {
-        setQuorum(quorumThreshold.toString());
-      }
+  const fetchContractData = useCallback(async () => {
+    const quorumThreshold = await getQuorumThreshold(BigInt(PROPOSAL_ID));
+    const voteCounts = await getProposalVotes(BigInt(PROPOSAL_ID));
+    if (voteCounts) {
+      setVotes({
+        for: Number(voteCounts[1]),
+        against: Number(voteCounts[2]),
+        abstain: Number(voteCounts[0]),
+      });
     }
+    if (quorumThreshold) {
+      setQuorum(quorumThreshold.toString());
+    }
+  }, [getProposalVotes, getQuorumThreshold]);
+
+  useEffect(() => {
     fetchContractData();
-  }, [getProposalVotes, getQuorumThreshold, txHash]);
+  }, [fetchContractData, txDone]);
 
   const totalVotes = useMemo(() => votes.for + votes.against + votes.abstain, [votes]);
 

@@ -27,7 +27,7 @@ export enum VerificationLevel {
 export const Voting = () => {
   const { setModalOpen } = useModal();
   const { vote, setVote } = useVote();
-  const { simulateCheckValidity, castVote, setTxHash } = useContract();
+  const { simulateCheckValidity, castVote, setTxDone } = useContract();
   const publicClient = usePublicClient();
   const { address } = useAccount();
   const { openConnectModal } = useConnectModal();
@@ -82,8 +82,8 @@ export const Voting = () => {
           const receipt = await publicClient.waitForTransactionReceipt({
             hash: hash as Hex,
           });
-          setTxHash(receipt.transactionHash);
           if (receipt) {
+            setTxDone(true);
             setModalOpen(ModalType.SUCCESS);
             if (vote === 1) {
               const jsConfetti = new JSConfetti();
@@ -102,7 +102,7 @@ export const Voting = () => {
         setModalOpen(ModalType.ERROR);
       }
     },
-    [simulateCheckValidity, vote, castVote, setModalOpen, publicClient, setTxHash],
+    [simulateCheckValidity, vote, castVote, setModalOpen, publicClient, setTxDone],
   );
 
   return (

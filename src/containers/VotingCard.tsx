@@ -9,7 +9,7 @@ import { getConfig } from '~/config';
 const { PROPOSAL_ID } = getConfig();
 
 export const VotingCard = () => {
-  const { getProposalDeadline, getHasVoted, txHash } = useContract();
+  const { getProposalDeadline, getHasVoted, txDone } = useContract();
   const { address } = useAccount();
   const [deadline, setDeadline] = useState<Date>();
   const [addressVoted, setAddressVoted] = useState<boolean>();
@@ -30,7 +30,7 @@ export const VotingCard = () => {
       }
     }
     fetchContractData();
-  }, [address, getHasVoted, getProposalDeadline, txHash]);
+  }, [address, getHasVoted, getProposalDeadline, txDone]);
 
   return (
     <>
