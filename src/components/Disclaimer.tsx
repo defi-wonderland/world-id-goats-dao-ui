@@ -4,8 +4,8 @@ export const Disclaimer = () => {
   return (
     <Container>
       <Typography variant='h1'>
-        Disclaimer: This application is currently in beta. Please proceed at your own risk. Any funds lost through its
-        use are non-recoverable.
+        Disclaimer: This application is a beta version. Please proceed at your own risk. Any funds lost through its use
+        are non-recoverable.
       </Typography>
     </Container>
   );
@@ -17,7 +17,7 @@ export const Container = styled(Box)`
   align-items: center;
   justify-content: center;
   padding: 1rem 1rem;
-  min-height: 2rem;
+  height: 2rem;
   width: 100%;
   margin: 0 auto;
   background-color: white;

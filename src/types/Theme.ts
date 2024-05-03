@@ -10,6 +10,7 @@ export interface Theme {
   backgroundModal: string;
   backgroundButton: string;
   backgroundButtonSecondary: string;
+  backgroundCode: string;
   textPrimary: string;
   titleFontFamily: string;
   textFontFamily: string;

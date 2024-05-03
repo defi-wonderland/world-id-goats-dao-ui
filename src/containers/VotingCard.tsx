@@ -13,7 +13,7 @@ export const VotingCard = () => {
   const { address } = useAccount();
   const [deadline, setDeadline] = useState<Date>();
   const [addressVoted, setAddressVoted] = useState<boolean>();
-  const [timeLeft, setTimeLeft] = useState<number>(0);
+  const [timeLeft, setTimeLeft] = useState<number>(1);
   const votingActive = timeLeft > 0;
 
   useEffect(() => {
@@ -66,20 +66,11 @@ export const SBox = styled(Box)(() => {
   return {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: '1.5rem',
-    marginBottom: '7rem',
+    flex: 1,
     width: '100%',
-    '@media (max-width: 600px)': {
-      margin: '1rem',
-    },
-    '@media (min-width: 601px) and  (max-width: 1440px)': {
-      margin: '1rem 0 7rem 0',
-    },
-    '@media (min-width: 1441px)': {
-      margin: '6rem 0 16rem 0',
-    },
+    height: '75%',
+    justifyContent: 'center',
+    alignItems: 'center',
   };
 });
 
@@ -97,7 +88,6 @@ export const SecondaryText = styled(Typography)(() => {
     textAlign: 'center',
     letterSpacing: '0.25rem',
     textTransform: 'uppercase',
-    margin: '5rem 0 0 0',
   };
 });
 

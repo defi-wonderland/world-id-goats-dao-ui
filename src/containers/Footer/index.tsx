@@ -22,9 +22,9 @@ const FooterContainer = styled('footer')(() => {
   return {
     display: 'grid',
     padding: '0 8rem',
-    backgroundColor: darkTheme.backgroundPrimary,
     width: '100%',
     gap: '0.5rem',
+    marginTop: '6.25rem',
     a: {
       textDecoration: 'none',
       color: darkTheme.textPrimary,
@@ -41,7 +41,7 @@ const LegalTerms = styled(Typography)(() => {
   return {
     textAlign: 'justify',
     whiteSpace: 'pre-wrap',
-    fontSize: '0.6rem',
+    fontSize: '1rem',
     color: darkTheme.disabledColor,
     padding: '0 0 2rem 0',
     '@media (max-width: 600px)': {

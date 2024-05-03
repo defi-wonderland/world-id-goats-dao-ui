@@ -29,13 +29,10 @@ const GoatGuyContainer = styled(Box)(() => {
   const { darkTheme } = useCustomTheme();
   return {
     position: 'relative',
-    top: '-19.5rem',
-    left: '45rem',
+    top: '-12rem',
+    left: '55rem',
     justifyContent: 'flex-end',
-    height: '1rem',
     width: '100%',
-    alignItems: 'baseline',
-    margin: '0 1rem -3rem 0',
     a: {
       textDecoration: 'none',
       color: darkTheme.textPrimary,
