@@ -1,46 +1,63 @@
 import { useEffect, useState } from 'react';
-import { Box, styled } from '@mui/material';
+import { Box, Typography, styled } from '@mui/material';
+import { useAccount } from 'wagmi';
 
 import { ProposalPoll, Voting, CountdownTimer, Title } from '~/components';
 import { useContract } from '~/hooks';
 import { getConfig } from '~/config';
-import { useAccount } from 'wagmi';
 
 const { PROPOSAL_ID } = getConfig();
 
 export const VotingCard = () => {
-  const { getProposalDeadline, getHasVoted, getProposalState, txHash } = useContract();
+  const { getProposalDeadline, getHasVoted, txHash } = useContract();
   const { address } = useAccount();
   const [deadline, setDeadline] = useState<Date>();
-  const [enableVote, setEnableVote] = useState<boolean>(true);
+  const [addressVoted, setAddressVoted] = useState<boolean>();
+  const [timeLeft, setTimeLeft] = useState<number>(0);
 
   useEffect(() => {
     async function fetchContractData() {
       const deadline = await getProposalDeadline(BigInt(PROPOSAL_ID));
       const hasVoted = address && (await getHasVoted(BigInt(PROPOSAL_ID), address));
-      const active = await getProposalState(BigInt(PROPOSAL_ID));
       if (deadline) {
         const date = new Date(Number(deadline) * 1000);
+        const time = date.getTime() - new Date().getTime();
         setDeadline(date);
+        setTimeLeft(time);
       }
-      if (hasVoted && active) {
-        const votingActive = active === 'Active';
-        setEnableVote(!hasVoted && votingActive);
+      if (hasVoted) {
+        setAddressVoted(hasVoted);
       }
     }
     fetchContractData();
-  }, [address, getHasVoted, getProposalDeadline, getProposalState, txHash]);
+  }, [address, getHasVoted, getProposalDeadline, txHash]);
 
   return (
-    <SBox>
-      <Title title="Should Wonderland contribute 250 WLD to Richard's goat project?" />
+    <>
+      {timeLeft < 0 && (
+        <GoatBgContainer>
+          <Goat1>🐐</Goat1>
+          <Goat2>🐐</Goat2>
+        </GoatBgContainer>
+      )}
 
-      <VotingContainer>
-        <Voting enableVote={enableVote} />
-        <ProposalPoll />
-        {deadline && <CountdownTimer targetDate={deadline} />}
-      </VotingContainer>
-    </SBox>
+      <SBox>
+        <Title title="Should Wonderland contribute 250 WLD to Richard's goat project?" />
+        <VotingContainer>
+          {!addressVoted && timeLeft > 0 && <Voting />}
+
+          <ProposalPoll />
+
+          {addressVoted && timeLeft > 0 && <SecondaryText>THANKS FOR YOUR VOTE</SecondaryText>}
+
+          {deadline && timeLeft > 0 && <CountdownTimer targetDate={deadline} />}
+
+          {timeLeft < 0 && <SecondaryText>VOTING ENDED</SecondaryText>}
+
+          {timeLeft < 0 && <EndText>🐐 THANKS FOR YOUR HELPING RICHARD OUT 🐐</EndText>}
+        </VotingContainer>
+      </SBox>
+    </>
   );
 };
 
@@ -50,11 +67,17 @@ export const SBox = styled(Box)(() => {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '4rem',
+    marginTop: '1.5rem',
     marginBottom: '7rem',
     width: '100%',
     '@media (max-width: 600px)': {
       margin: '1rem',
+    },
+    '@media (min-width: 601px) and  (max-width: 1440px)': {
+      margin: '1rem 0 7rem 0',
+    },
+    '@media (min-width: 1441px)': {
+      margin: '6rem 0 16rem 0',
     },
   };
 });
@@ -65,11 +88,53 @@ export const VotingContainer = styled(Box)(() => {
   };
 });
 
-export const ConnectContainer = styled(Box)(() => {
+export const SecondaryText = styled(Typography)(() => {
   return {
-    display: 'flex',
-    justifyContent: 'center',
-    width: '100%',
-    margin: '1rem 0 2rem',
+    fontSize: '1.8rem',
+    fontWeight: 800,
+    lineHeight: '2rem',
+    textAlign: 'center',
+    letterSpacing: '0.25rem',
+    textTransform: 'uppercase',
+    margin: '5rem 0 0 0',
   };
+});
+
+export const EndText = styled(Typography)(() => {
+  return {
+    fontSize: '1rem',
+    fontWeight: 800,
+    lineHeight: '2rem',
+    textAlign: 'center',
+    letterSpacing: '0.25rem',
+    textTransform: 'uppercase',
+  };
+});
+
+const GoatBgContainer = styled(Box)({
+  position: 'absolute',
+  zIndex: -1,
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100vh',
+  overflow: 'hidden',
+  display: 'flex',
+  justifyContent: 'space-around',
+});
+
+const Goat1 = styled(Typography)({
+  fontSize: '17rem',
+  position: 'absolute',
+  transform: 'scaleX(-1) rotate(35deg)',
+  top: '16rem',
+  left: '4rem',
+});
+
+const Goat2 = styled(Typography)({
+  fontSize: '17rem',
+  position: 'absolute',
+  right: '-5rem',
+  top: '2rem',
+  transform: 'rotate(45deg)',
 });

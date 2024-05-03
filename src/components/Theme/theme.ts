@@ -8,7 +8,7 @@ export const darkTheme: Theme = {
   textTertiary: '#625CBF',
   backgroundPrimary: '#0e152c',
   backgroundSecondary: '#0e152c',
-  backgroundModal: '#0e152c',
+  backgroundModal: '#0A1022',
   backgroundButton: '#252447',
   backgroundButtonSecondary: '#383263',
   titleFontFamily: 'Open Sans',
@@ -17,6 +17,7 @@ export const darkTheme: Theme = {
   secondaryBorderRadius: '0.4rem',
   border: '0.1rem solid rgba(153, 164, 184, 0.1)',
   boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+  borderModal: '1px solid #292B2E',
 
   primaryColor: '#625CBF',
   accentColor: '#ececec',

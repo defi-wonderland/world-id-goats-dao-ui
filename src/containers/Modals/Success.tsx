@@ -1,21 +1,20 @@
 import { Box, Typography, styled } from '@mui/material';
-import { CheckCircle } from '@mui/icons-material';
+import Image from 'next/image';
 
-import { useCustomTheme, useModal } from '~/hooks';
+import { useCustomTheme } from '~/hooks';
 import { ModalType } from '~/types';
-import { SButton, BaseModal } from '~/components';
+import { BaseModal, ModalButton } from '~/components';
+import iconCheck from '~/assets/iconcheck.svg';
 
 export const SuccessModal = () => {
-  const { setModalOpen } = useModal();
-
   return (
-    <BaseModal type={ModalType.SUCCESS} title='SUCCESSFUL VOTE'>
+    <BaseModal type={ModalType.SUCCESS}>
       <ModalBody>
-        <SCheckIcon />
-        <STitle variant='h4'> Vote Succeed! </STitle>
+        <Image src={iconCheck} alt='Success' />
+        <STitle variant='h4'>Vote Registered</STitle>
 
         <STypography variant='body1'>You can safely close this modal</STypography>
-        <SButton onClick={() => setModalOpen(ModalType.NONE)}>Confirm</SButton>
+        <ModalButton />
       </ModalBody>
     </BaseModal>
   );
@@ -23,13 +22,23 @@ export const SuccessModal = () => {
 
 const ModalBody = styled(Box)(() => {
   return {
+    marginTop: '-3.2rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     width: '100%',
-    margin: 'auto',
-    gap: '0.7rem',
+    gap: '0.5rem',
+
+    img: {
+      width: '7rem',
+      height: '7rem',
+      background: '#1f3d2b', // fixed color
+      padding: '0.4rem',
+      borderRadius: '50%',
+      border: '1.3rem solid #15281d', // fixed color
+      marginBottom: '2rem',
+    },
   };
 });
 
@@ -55,9 +64,4 @@ const STypography = styled(Typography)(() => {
       fontWeight: 300,
     },
   };
-});
-
-const SCheckIcon = styled(CheckCircle)({
-  fontSize: '5rem',
-  color: '#4aa16c',
 });

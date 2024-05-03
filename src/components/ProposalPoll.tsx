@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { Box, Typography, TypographyProps, styled } from '@mui/material';
 import { Circle } from '@mui/icons-material';
 
@@ -99,9 +99,15 @@ const PollContainer = styled(Box)(() => {
     flexDirection: 'column',
     color: darkTheme.textPrimary,
     fontWeight: 500,
-    margin: '0 3.75rem',
+    margin: '1rem 3.75rem 3rem 3.75rem',
     '@media (max-width: 600px)': {
       marginTop: '1.5rem',
+    },
+    '@media (min-width: 601px) and (max-width: 1440px)': {
+      margin: '2rem 3.75rem',
+    },
+    '@media (min-width: 1441px)': {
+      margin: '4rem 0',
     },
   };
 });
@@ -111,8 +117,6 @@ const StatsContainer = styled(Box)({
   alignItems: 'center',
   justifyContent: 'center',
   width: '100%',
-  letterSpacing: '0.125rem',
-  fontSize: '1.125rem',
   gap: '0.5rem',
 });
 
@@ -126,6 +130,8 @@ const StatsInfoContainer = styled(Box)(() => {
     },
     '& .MuiTypography-root': {
       fontWeight: 500,
+      fontSize: '1rem',
+      marginBottom: '0.25rem',
       '@media (max-width: 600px)': {
         fontSize: '0.9rem',
       },
@@ -154,6 +160,7 @@ const SText = styled(Typography)(() => {
   return {
     fontWeight: 500,
     color: darkTheme.textSecondary,
+    fontSize: '1rem',
     '@media (max-width: 600px)': {
       fontSize: '0.75rem',
     },
@@ -164,6 +171,7 @@ const StyledTypography = styled(Typography)<StyledTypographyProps>(({ color }) =
   color: color,
   marginRight: 'auto',
   fontWeight: 500,
+  fontSize: '1rem',
   '@media (max-width: 600px)': {
     fontSize: '0.7rem',
     margin: '0',
@@ -181,13 +189,15 @@ const StyledCircleIcon = styled(Circle)(({ color }) => ({
 const OverallProgressContainer = styled('div')({
   position: 'relative',
   height: '10px',
-  width: '100%',
+  width: '35rem',
   borderRadius: '5px',
   overflow: 'hidden',
   backgroundColor: '#E0E0E0',
-  marginTop: '0.5rem',
+  margin: 'auto',
+  justifyContent: 'center',
   '@media (max-width: 600px)': {
     marginTop: '0',
+    width: '20rem',
   },
 });
 

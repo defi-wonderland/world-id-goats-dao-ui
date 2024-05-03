@@ -17,6 +17,7 @@ export interface Theme {
   secondaryBorderRadius: string;
   border: string;
   boxShadow: string;
+  borderModal: string;
   primaryColor: string;
   accentColor: string;
   disabledColor: string;

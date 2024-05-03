@@ -1,16 +1,17 @@
 import { Box, Typography, styled, CircularProgress } from '@mui/material';
 
-import { BaseModal } from '~/components';
+import { BaseModal, ModalButton } from '~/components';
 import { useCustomTheme } from '~/hooks';
 import { ModalType } from '~/types';
 
 export const LoadingModal = () => {
   return (
-    <BaseModal type={ModalType.LOADING} title='CASTING VOTE'>
+    <BaseModal type={ModalType.LOADING}>
       <ModalBody>
-        <SIcon size='3rem' variant='indeterminate' thickness={4} />
-        <STitle variant='h4'> Casting your vote 🐐 ... </STitle>
+        <SIcon size='5rem' variant='indeterminate' thickness={4} />
+        <STitle variant='h4'>Casting your vote 🐐 ...</STitle>
         <STypography variant='body1'>You can safely close this modal</STypography>
+        <ModalButton />
       </ModalBody>
     </BaseModal>
   );
@@ -18,13 +19,13 @@ export const LoadingModal = () => {
 
 export const ModalBody = styled(Box)(() => {
   return {
+    marginTop: '-3.2rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     width: '100%',
-    gap: '4rem',
-    margin: 'auto',
+    gap: '0.5rem',
   };
 });
 
@@ -56,5 +57,6 @@ export const SIcon = styled(CircularProgress)(() => {
   const { darkTheme } = useCustomTheme();
   return {
     color: darkTheme.primaryColor,
+    margin: '2rem 0',
   };
 });

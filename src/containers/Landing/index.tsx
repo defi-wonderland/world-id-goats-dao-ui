@@ -30,7 +30,7 @@ const LandingContainer = styled('div')({
   justifyContent: 'center',
   width: '66.25rem',
   overflow: 'hidden',
-  gap: '6.25rem',
+  gap: '5rem',
   '@media (max-width: 600px)': {
     padding: '0 1rem',
     width: '100%',
@@ -47,8 +47,8 @@ const BackgroundContainer = styled('div')`
 `;
 
 const BG1 = styled(SectionBackground)`
-  top: 170rem;
-  right: -2rem;
+  top: 140rem;
+  right: -15rem;
   width: 55%;
 `;
 
