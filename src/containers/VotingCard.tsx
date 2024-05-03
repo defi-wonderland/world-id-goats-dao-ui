@@ -68,8 +68,7 @@ export const SBox = styled(Box)(() => {
     flexDirection: 'column',
     flex: 1,
     width: '100%',
-    height: 'auto',
-    marginTop: '10rem',
+    height: '75%',
     justifyContent: 'center',
     alignItems: 'center',
   };
