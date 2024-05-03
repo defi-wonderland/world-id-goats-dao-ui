@@ -44,11 +44,12 @@ const GoatGuyContainer = styled(Box)(() => {
       textDecoration: 'none',
       color: darkTheme.textPrimary,
     },
-    '@media (max-width: 720px)': {
+    '@media (max-width: 600px)': {
       flexDirection: 'column-reverse',
-      alignItems: 'end',
+      justifyContent: 'center',
       gap: '1rem',
       padding: '0 2rem',
+      bottom: '-8rem',
     },
   };
 });
@@ -60,9 +61,9 @@ const TextStyled = styled(Typography)({
 const SImage = styled(Image)({
   transform: 'rotate(10deg)',
   borderRadius: '1.125rem',
-  '@media (max-width: 720px)': {
+  '@media (max-width: 600px)': {
     transform: 'rotate(0deg)',
-    display: 'flex',
+    display: 'grid',
     justifySelf: 'center',
     width: '8rem',
     height: '8rem',
@@ -72,8 +73,8 @@ const SImage = styled(Image)({
 
 const ArrowBox = styled(Box)({
   marginTop: '0rem',
-  '@media (max-width: 720px)': {
-    margin: '0 auto',
+  '@media (max-width: 600px)': {
+    margin: '0 0 0 5rem',
     img: {
       width: '8rem',
       height: '3rem',
