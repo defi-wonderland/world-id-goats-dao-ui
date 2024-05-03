@@ -44,7 +44,7 @@ const GoatGuyContainer = styled(Box)(() => {
       display: 'grid',
       justifyContent: 'center',
       alignItems: 'center',
-      top: '0',
+      top: '-2rem',
       left: '0',
     },
   };

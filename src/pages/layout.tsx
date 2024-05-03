@@ -1,5 +1,6 @@
 import { Box, CssBaseline, styled } from '@mui/material';
 import { Footer, Header, LoadingModal, SuccessModal, ErrorModal, WalletConfirm } from '~/containers';
+import { Disclaimer } from '~/components';
 
 export const Modals = () => {
   return (
@@ -18,6 +19,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <CssBaseline />
       <Modals />
+
+      <Disclaimer />
       <MainContent>
         <NoScriptMessage>
           <p>This website requires JavaScript to function properly.</p>
@@ -39,7 +42,7 @@ const MainContent = styled(Box)`
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  min-height: 100%;
+  min-height: calc(100vh - 4rem); // 4rem is the height of the Disclaimer component
   margin: 0 auto;
 `;
 

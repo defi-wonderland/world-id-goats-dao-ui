@@ -50,6 +50,10 @@ const BG1 = styled(SectionBackground)`
   top: 140rem;
   right: -15rem;
   width: 55%;
+
+  @media (max-width: 600px) {
+    right: 0rem;
+  }
 `;
 
 const BG2 = styled(SectionBackground)`
@@ -62,4 +66,7 @@ const BG3 = styled(SectionBackground)`
   top: 80rem;
   right: -23rem;
   width: 45%;
+  @media (max-width: 600px) {
+    right: 0rem;
+  }
 `;

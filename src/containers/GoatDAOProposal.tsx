@@ -21,6 +21,10 @@ const ProposalContainer = styled(Box)({
   display: 'grid',
   gap: '1.5rem',
   width: '55rem',
+  '@media (max-width: 600px)': {
+    width: '20rem',
+    margin: 'auto',
+  },
 });
 
 const CodeSnippet = styled(Typography)(() => {

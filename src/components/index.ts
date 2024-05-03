@@ -7,3 +7,4 @@ export * from './CountdownTimer';
 export * from './Connect';
 export * from './Partner';
 export * from './Button';
+export * from './Disclaimer';

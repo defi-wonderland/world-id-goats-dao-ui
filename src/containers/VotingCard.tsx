@@ -14,6 +14,8 @@ export const VotingCard = () => {
   const [deadline, setDeadline] = useState<Date>();
   const [addressVoted, setAddressVoted] = useState<boolean>();
   const [timeLeft, setTimeLeft] = useState<number>(0);
+  const votingActive = timeLeft > 0;
+  const votingEnded = timeLeft < 0;
 
   useEffect(() => {
     async function fetchContractData() {
@@ -44,17 +46,17 @@ export const VotingCard = () => {
       <SBox>
         <Title title="Should Wonderland contribute 250 WLD to Richard's goat project?" />
         <VotingContainer>
-          {!addressVoted && timeLeft > 0 && <Voting />}
+          {!addressVoted && votingActive && <Voting />}
 
           <ProposalPoll />
 
-          {addressVoted && timeLeft > 0 && <SecondaryText>THANKS FOR YOUR VOTE</SecondaryText>}
+          {addressVoted && votingActive && <SecondaryText>THANKS FOR YOUR VOTE</SecondaryText>}
 
-          {deadline && timeLeft > 0 && <CountdownTimer targetDate={deadline} />}
+          {deadline && votingActive && <CountdownTimer targetDate={deadline} />}
 
-          {timeLeft < 0 && <SecondaryText>VOTING ENDED</SecondaryText>}
+          {votingEnded && <SecondaryText>VOTING ENDED</SecondaryText>}
 
-          {timeLeft < 0 && <EndText>🐐 THANKS FOR YOUR HELPING RICHARD OUT 🐐</EndText>}
+          {votingEnded && <EndText>🐐 THANKS FOR YOUR HELPING RICHARD OUT 🐐</EndText>}
         </VotingContainer>
       </SBox>
     </>

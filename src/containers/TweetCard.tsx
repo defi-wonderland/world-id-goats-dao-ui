@@ -31,7 +31,7 @@ const TweetContainer = styled(Box)({
   gap: '1rem',
   '@media (max-width: 600px)': {
     width: '20rem',
-    margin: 'auto',
+    margin: '10rem 0 0 0',
   },
 });
 
@@ -41,6 +41,10 @@ const SText = styled(Typography)({
   fontSize: '1.5rem',
   width: '55rem',
   fontWeight: 500,
+  '@media (max-width: 600px)': {
+    width: '20rem',
+    margin: 'auto',
+  },
 });
 
 const SBox = styled(Box)({
