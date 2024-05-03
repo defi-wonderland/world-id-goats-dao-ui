@@ -52,7 +52,7 @@ const ConnectButton = styled(Button)(() => {
     },
 
     '@media (max-width: 600px)': {
-      fontSize: '1.4rem',
+      fontSize: '1rem',
     },
   };
 });
