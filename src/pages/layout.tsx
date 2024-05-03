@@ -1,4 +1,5 @@
 import { Box, CssBaseline, styled } from '@mui/material';
+
 import { Footer, LoadingModal, SuccessModal, ErrorModal, WalletConfirm } from '~/containers';
 
 export const Modals = () => {
