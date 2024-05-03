@@ -11,7 +11,7 @@ export const SuccessModal = () => {
     <BaseModal type={ModalType.SUCCESS}>
       <ModalBody>
         <Image src={iconCheck} alt='Success' />
-        <STitle variant='h4'> Vote Registered </STitle>
+        <STitle variant='h4'>Vote Registered</STitle>
 
         <STypography variant='body1'>You can safely close this modal</STypography>
         <ModalButton />

@@ -11,7 +11,7 @@ export const ErrorModal = () => {
     <BaseModal type={ModalType.ERROR}>
       <ModalBody>
         <Image src={iconError} alt='Error' width={100} height={100} />
-        <STitle variant='h4'> Something went wrong </STitle>
+        <STitle variant='h4'>Something went wrong</STitle>
 
         <STypography variant='body1'>You can safely close this modal</STypography>
         <ModalButton />
