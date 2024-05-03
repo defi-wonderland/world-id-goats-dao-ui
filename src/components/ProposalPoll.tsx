@@ -104,7 +104,7 @@ const PollContainer = styled(Box)(() => {
     '@media (max-width: 600px)': {
       marginTop: '1.5rem',
     },
-    '@media (min-width: 601px) and  (max-width: 1440px)': {
+    '@media (min-width: 601px) and (max-width: 1440px)': {
       margin: '2rem 3.75rem',
     },
     '@media (min-width: 1441px)': {

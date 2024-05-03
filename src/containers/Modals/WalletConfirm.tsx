@@ -10,7 +10,7 @@ export const WalletConfirm = () => {
     <BaseModal type={ModalType.WALLETCONFIRM}>
       <ModalBody>
         <Spinner size='5rem' variant='indeterminate' thickness={4} />
-        <ModalWalletTitle variant='h4'> Please confirm transaction </ModalWalletTitle>
+        <ModalWalletTitle variant='h4'>Please confirm transaction</ModalWalletTitle>
         <ModalButton />
       </ModalBody>
     </BaseModal>

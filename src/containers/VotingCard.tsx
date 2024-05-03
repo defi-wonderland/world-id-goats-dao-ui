@@ -32,6 +32,7 @@ export const VotingCard = () => {
     fetchContractData();
   }, [address, getHasVoted, getProposalDeadline, txDone]);
 
+
   return (
     <>
       {timeLeft < 0 && (
