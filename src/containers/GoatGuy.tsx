@@ -36,11 +36,10 @@ const GoatGuyContainer = styled(Box)(() => {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    gap: '2rem',
+    gap: '1rem',
     width: '100%',
     height: 'auto',
-    bottom: '1rem',
-
+    bottom: '-2rem',
     a: {
       textDecoration: 'none',
       color: darkTheme.textPrimary,
@@ -61,7 +60,6 @@ const TextStyled = styled(Typography)({
 const SImage = styled(Image)({
   transform: 'rotate(10deg)',
   borderRadius: '1.125rem',
-
   '@media (max-width: 720px)': {
     transform: 'rotate(0deg)',
     display: 'flex',
@@ -73,7 +71,7 @@ const SImage = styled(Image)({
 });
 
 const ArrowBox = styled(Box)({
-  marginTop: '5rem',
+  marginTop: '0rem',
   '@media (max-width: 720px)': {
     margin: '0 auto',
     img: {

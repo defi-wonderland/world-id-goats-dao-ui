@@ -5,13 +5,14 @@ const getRandomInt = (max: number) => {
   return Math.floor(Math.random() * max);
 };
 
-const generateStars = (stars: number) => {
+const generateStars = (stars: number, color: string = '#fff', opacity: number = 0.7) => {
   const width = 4000;
   const height = 2000;
+  const colorWithOpacity = `${color}${Math.floor(opacity * 255).toString(16)}`;
 
-  let shadows = `${getRandomInt(width)}px ${getRandomInt(height)}px #fff`;
-  for (let index = 0; index < stars; index++) {
-    shadows = `${shadows}, ${getRandomInt(width)}px ${getRandomInt(height)}px #fff`;
+  let shadows = `${getRandomInt(width)}px ${getRandomInt(height)}px ${colorWithOpacity}`;
+  for (let i = 1; i < stars; i++) {
+    shadows += `, ${getRandomInt(width)}px ${getRandomInt(height)}px ${colorWithOpacity}`;
   }
   return shadows;
 };
@@ -29,26 +30,25 @@ const StarsContainer = styled.div<StarsContainerProps>`
   height: 100%;
   top: 0;
   left: 0;
-  z-index: 0;
+  z-index: ${(props) => props.zindex || 0};
   pointer-events: none;
 
   & .stars {
     width: 0.1rem;
     height: 0.1rem;
-    box-shadow: ${(props) => generateStars(props.smstars)};
+    box-shadow: ${(props) => generateStars(props.smstars, '#ffffff', 0.5)};
     z-index: 0;
   }
 
   & .stars1 {
     width: 0.1rem;
     height: 0.1rem;
-    box-shadow: ${(props) => generateStars(props.smstars)};
+    box-shadow: ${(props) => generateStars(props.smstars, '#ffffff', 0.5)};
     z-index: 0;
   }
 
   & div {
     border-radius: 100%;
-  }
   }
 `;
 
@@ -62,7 +62,7 @@ export default function StarsBackground({ zIndex }: BackgroundProps) {
   useEffect(() => {
     setTimeout(() => {
       setShowBackground(true);
-    });
+    }, 500); // Adjusts delay before stars appear
   }, []);
 
   return (
