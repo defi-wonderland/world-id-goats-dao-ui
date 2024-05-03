@@ -30,7 +30,7 @@ const FooterContainer = styled('footer')(() => {
       color: darkTheme.textPrimary,
       marginLeft: '0.25rem',
     },
-    '@media (max-width: 600px)': {
+    '@media (max-width: 720px)': {
       padding: '0 1rem',
     },
   };
@@ -44,7 +44,7 @@ const LegalTerms = styled(Typography)(() => {
     fontSize: '1rem',
     color: darkTheme.disabledColor,
     padding: '0 0 2rem 0',
-    '@media (max-width: 600px)': {
+    '@media (max-width: 720px)': {
       fontSize: '0.5rem',
     },
   };

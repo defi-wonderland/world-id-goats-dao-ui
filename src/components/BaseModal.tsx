@@ -51,7 +51,7 @@ export const StyledModal = styled(Modal)`
   justify-content: center;
   width: 100%;
 
-  @media (max-width: 600px) {
+  @media (max-width: 720px) {
     padding: 0rem 1.6rem;
   }
 `;
@@ -83,7 +83,7 @@ export const SModal = styled(Box)(() => {
       minHeight: '38.6rem',
     },
 
-    '@media (max-width: 600px)': {
+    '@media (max-width: 720px)': {
       minWidth: '100%',
       margin: '0rem 1.6rem',
       padding: '1.6rem 2rem 3.2rem',
@@ -110,7 +110,7 @@ export const ModalHeader = styled(Box)(() => {
       marginLeft: 'auto',
     },
 
-    '@media (max-width: 600px)': {
+    '@media (max-width: 720px)': {
       h2: {
         fontSize: '1.8rem',
       },

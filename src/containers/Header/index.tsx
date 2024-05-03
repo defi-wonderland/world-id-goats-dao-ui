@@ -29,7 +29,7 @@ const StyledHeader = styled('header')(() => {
       color: darkTheme.textPrimary,
       marginLeft: '0.25rem',
     },
-    '@media (max-width: 600px)': {
+    '@media (max-width: 720px)': {
       padding: '0 1rem',
     },
   };
@@ -43,7 +43,7 @@ const ControlsBox = styled(Box)({
 
 export const SText = styled(Typography)({
   fontSize: '1rem',
-  '@media (max-width: 600px)': {
+  '@media (max-width: 720px)': {
     fontSize: '0.75rem',
   },
 });

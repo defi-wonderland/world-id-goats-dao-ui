@@ -51,7 +51,7 @@ const ConnectButton = styled(Button)(() => {
       backgroundColor: darkTheme.backgroundButtonSecondary,
     },
 
-    '@media (max-width: 600px)': {
+    '@media (max-width: 720px)': {
       fontSize: '1rem',
     },
   };
