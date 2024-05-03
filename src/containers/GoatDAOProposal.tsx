@@ -40,6 +40,9 @@ const CodeSnippet = styled(Typography)(() => {
     fontSize: '1.125rem',
     color: darkTheme.textPrimary,
     zIndex: '100',
+    '@media (max-width: 720px)': {
+      fontSize: '0.8rem',
+    },
   };
 });
 

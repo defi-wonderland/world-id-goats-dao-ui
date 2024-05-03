@@ -56,6 +56,9 @@ export const SText = styled(Typography)({
     fontSize: '0.8rem',
     lineHeight: '1.5rem',
   },
+  '@media (max-width: 400px)': {
+    fontSize: '0.7rem',
+  },
 });
 
 export const SCircleIcon = styled(CircleIcon)({
@@ -73,6 +76,9 @@ export const SHeart = styled(FavoriteIcon)({
     fontSize: '0.8rem',
     lineHeight: '1.5rem',
   },
+  '@media (max-width: 400px)': {
+    fontSize: '0.7rem',
+  },
 });
 
 const WonderlandImg = styled(Image)({
@@ -84,6 +90,10 @@ const WonderlandImg = styled(Image)({
     height: '0.7rem',
     width: 'auto',
   },
+  '@media (max-width: 400px)': {
+    height: '0.5rem',
+    width: 'auto',
+  },
 });
 
 const WorldIdImg = styled(Image)({
@@ -93,6 +103,10 @@ const WorldIdImg = styled(Image)({
   width: 'auto',
   '@media (max-width: 720px)': {
     height: '1rem',
+    width: 'auto',
+  },
+  '@media (max-width: 400px)': {
+    height: '0.75rem',
     width: 'auto',
   },
 });

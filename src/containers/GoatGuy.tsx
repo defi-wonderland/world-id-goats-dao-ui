@@ -51,6 +51,13 @@ const GoatGuyContainer = styled(Box)(() => {
       padding: '0 2rem',
       bottom: '-8rem',
     },
+    '@media (max-width: 400px)': {
+      flexDirection: 'column-reverse',
+      justifyContent: 'center',
+      gap: '1rem',
+      padding: '0 2rem',
+      bottom: '-18rem',
+    },
   };
 });
 

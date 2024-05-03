@@ -54,5 +54,8 @@ const ConnectButton = styled(Button)(() => {
     '@media (max-width: 720px)': {
       fontSize: '1rem',
     },
+    '@media (max-width: 400px)': {
+      fontSize: '0.7rem',
+    },
   };
 });
