@@ -15,7 +15,6 @@ export const VotingCard = () => {
   const [addressVoted, setAddressVoted] = useState<boolean>();
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const votingActive = timeLeft > 0;
-  const votingEnded = timeLeft < 0;
 
   useEffect(() => {
     async function fetchContractData() {
@@ -36,7 +35,7 @@ export const VotingCard = () => {
 
   return (
     <>
-      {timeLeft < 0 && (
+      {!votingActive && (
         <GoatBgContainer>
           <Goat1>🐐</Goat1>
           <Goat2>🐐</Goat2>
@@ -54,9 +53,9 @@ export const VotingCard = () => {
 
           {deadline && votingActive && <CountdownTimer targetDate={deadline} />}
 
-          {votingEnded && <SecondaryText>VOTING ENDED</SecondaryText>}
+          {!votingActive && <SecondaryText>VOTING ENDED</SecondaryText>}
 
-          {votingEnded && <EndText>🐐 THANKS FOR YOUR HELPING RICHARD OUT 🐐</EndText>}
+          {!votingActive && <EndText>🐐 THANKS FOR YOUR HELPING RICHARD OUT 🐐</EndText>}
         </VotingContainer>
       </SBox>
     </>
