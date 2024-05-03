@@ -42,7 +42,7 @@ export const PartnerContainer = styled(Box)(() => {
       display: 'flex',
       alignItems: 'center',
     },
-    '@media (max-width: 600px)': {
+    '@media (max-width: 720px)': {
       display: 'grid',
     },
   };
@@ -52,7 +52,7 @@ export const SText = styled(Typography)({
   display: 'flex',
   alignItems: 'center',
   fontSize: '1rem',
-  '@media (max-width: 600px)': {
+  '@media (max-width: 720px)': {
     fontSize: '0.5rem',
   },
 });
@@ -60,7 +60,7 @@ export const SText = styled(Typography)({
 export const SCircleIcon = styled(CircleIcon)({
   fontSize: '0.5rem',
   margin: '0 0.75rem',
-  '@media (max-width: 600px)': {
+  '@media (max-width: 720px)': {
     display: 'none',
   },
 });
@@ -68,7 +68,7 @@ export const SCircleIcon = styled(CircleIcon)({
 export const SHeart = styled(FavoriteIcon)({
   fontSize: '1rem',
   margin: '0 0.25rem',
-  '@media (max-width: 600px)': {
+  '@media (max-width: 720px)': {
     fontSize: '0.5rem',
   },
 });
@@ -78,7 +78,7 @@ const WonderlandImg = styled(Image)({
   alignItems: 'center',
   height: '1rem',
   width: 'auto',
-  '@media (max-width: 600px)': {
+  '@media (max-width: 720px)': {
     height: '0.35rem',
     width: 'auto',
   },
@@ -89,7 +89,7 @@ const WorldIdImg = styled(Image)({
   alignItems: 'center',
   height: '1.75rem',
   width: 'auto',
-  '@media (max-width: 600px)': {
+  '@media (max-width: 720px)': {
     height: '0.55rem',
     width: 'auto',
   },

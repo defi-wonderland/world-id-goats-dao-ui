@@ -42,7 +42,7 @@ export const CountdownContainer = styled(Box)(() => {
     '& .MuiTypography-root': {
       fontWeight: 600,
       fontSize: '1.125rem',
-      '@media (max-width: 600px)': {
+      '@media (max-width: 720px)': {
         fontSize: '0.9rem',
       },
     },

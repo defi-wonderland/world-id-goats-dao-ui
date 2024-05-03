@@ -20,7 +20,7 @@ export const GoatDAOProposal = () => {
 const ProposalContainer = styled(Box)({
   display: 'grid',
   gap: '1.5rem',
-  '@media (max-width: 600px)': {
+  '@media (max-width: 720px)': {
     width: '20rem',
     margin: 'auto',
   },
@@ -40,7 +40,7 @@ const CodeSnippet = styled(Typography)(() => {
     fontSize: '1.125rem',
     color: darkTheme.textPrimary,
     zIndex: '100',
-    '@media (max-width: 600px)': {
+    '@media (max-width: 720px)': {
       maxWidth: '18rem',
     },
   };

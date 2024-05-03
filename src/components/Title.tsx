@@ -17,7 +17,7 @@ const TitleText = styled(Typography)({
   lineHeight: 'normal',
   textTransform: 'uppercase',
   letterSpacing: '0.25rem',
-  '@media (max-width: 600px)': {
+  '@media (max-width: 720px)': {
     fontSize: '2rem',
     margin: '0',
   },
