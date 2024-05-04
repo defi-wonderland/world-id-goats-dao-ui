@@ -15,7 +15,7 @@ export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps)
 
         <meta property='og:title' content='GoatsDao' />
         <meta property='og:description' content={descriptionText} />
-        <meta name='twitter:image' content={bannerImage} />
+        <meta property='og:image' content={bannerImage} />
 
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:site' content='@' />

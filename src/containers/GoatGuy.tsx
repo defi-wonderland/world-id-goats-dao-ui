@@ -104,7 +104,7 @@ const GoatGuyContainerMobile = styled(Box)(() => {
       margin: '2rem 0 0 0',
     },
     '@media (max-width: 420px)': {
-      margin: '5rem 0 0 0',
+      margin: '3rem 0 0 0',
     },
   };
 });

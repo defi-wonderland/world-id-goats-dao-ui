@@ -39,7 +39,7 @@ const TweetContainer = styled(Box)({
     margin: '12rem 0 0 0',
   },
   '@media (max-width: 420px)': {
-    margin: '18rem 0 0 0',
+    margin: '22rem 0 0 0',
   },
 });
 
