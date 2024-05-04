@@ -208,7 +208,7 @@ export const SButtonFor = styled(Button)(() => {
     lineHeigth: '0.9rem',
     '@media (max-width: 720px)': {
       fontSize: '1rem',
-      padding: '0.2rem 1rem',
+      padding: '0.3rem 1rem',
       gap: '0rem',
       margin: '0rem',
     },

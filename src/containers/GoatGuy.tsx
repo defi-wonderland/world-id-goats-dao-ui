@@ -1,4 +1,4 @@
-import { Box, Typography, styled } from '@mui/material';
+import { Box, Typography, styled, useMediaQuery } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -7,21 +7,44 @@ import goatGuy from '~/assets/goatGuy.svg';
 import { useCustomTheme } from '~/hooks';
 
 export const GoatGuy = () => {
+  const isMobile = useMediaQuery('(max-width:600px)');
   return (
-    <GoatGuyContainer>
-      <ArrowBox>
-        <Image src={arrow} alt='Arrow' width={75} height={75} />
-      </ArrowBox>
+    <>
+      {!isMobile && (
+        <GoatGuyContainer>
+          <ArrowBox>
+            <Image src={arrow} alt='Arrow' width={75} height={75} />
+          </ArrowBox>
 
-      <Link href='https://twitter.com/OpanyRichard' target='_blank'>
-        <Box>
-          <TextStyled variant='body1'>Who is Richard Opany?</TextStyled>
-          <TextStyled variant='body1'>(a.k.a Goat Guy)</TextStyled>
-        </Box>
-      </Link>
+          <Link href='https://twitter.com/OpanyRichard' target='_blank'>
+            <Box>
+              <TextStyled variant='body1'>Who is Richard Opany?</TextStyled>
+              <TextStyled variant='body1'>(a.k.a Goat Guy)</TextStyled>
+            </Box>
+          </Link>
 
-      <SImage src={goatGuy} alt='Goat Guy' width={150} height={150} />
-    </GoatGuyContainer>
+          <SImage src={goatGuy} alt='Goat Guy' width={150} height={150} />
+        </GoatGuyContainer>
+      )}
+      {isMobile && (
+        <GoatGuyContainerMobile>
+          <SImageMobile src={goatGuy} alt='Goat Guy' width={120} height={120} />
+
+          <Box>
+            <Link href='https://twitter.com/OpanyRichard' target='_blank'>
+              <Box>
+                <Typography variant='body1'>Who is Richard Opany?</Typography>
+                <Typography variant='body1'>(a.k.a Goat Guy)</Typography>
+              </Box>
+            </Link>
+
+            <ArrowBoxMobile>
+              <Image src={arrow} alt='Arrow' width={55} height={55} />
+            </ArrowBoxMobile>
+          </Box>
+        </GoatGuyContainerMobile>
+      )}
+    </>
   );
 };
 
@@ -44,20 +67,6 @@ const GoatGuyContainer = styled(Box)(() => {
       textDecoration: 'none',
       color: darkTheme.textPrimary,
     },
-    '@media (max-width: 600px)': {
-      flexDirection: 'column-reverse',
-      justifyContent: 'center',
-      gap: '1rem',
-      padding: '0 2rem',
-      bottom: '-8rem',
-    },
-    '@media (max-width: 400px)': {
-      flexDirection: 'column-reverse',
-      justifyContent: 'center',
-      gap: '1rem',
-      padding: '0 2rem',
-      bottom: '-18rem',
-    },
   };
 });
 
@@ -68,23 +77,44 @@ const TextStyled = styled(Typography)({
 const SImage = styled(Image)({
   transform: 'rotate(10deg)',
   borderRadius: '1.125rem',
-  '@media (max-width: 600px)': {
-    transform: 'rotate(0deg)',
-    display: 'grid',
-    justifySelf: 'center',
-    width: '8rem',
-    height: '8rem',
-    margin: '0 2rem',
-  },
 });
 
 const ArrowBox = styled(Box)({
   marginTop: '0rem',
-  '@media (max-width: 600px)': {
-    margin: '0 0 0 5rem',
-    img: {
-      width: '8rem',
-      height: '3rem',
+});
+
+//Mobile
+const GoatGuyContainerMobile = styled(Box)(() => {
+  const { darkTheme } = useCustomTheme();
+  return {
+    display: 'grid',
+    justifyItems: 'center',
+    alignItems: 'center',
+    height: 'fit-content',
+    gap: '1rem',
+    margin: '5rem 0 0 0',
+    a: {
+      textDecoration: 'none',
+      color: darkTheme.textPrimary,
     },
-  },
+    '@media (max-width: 720px)': {
+      margin: '5rem 0 0 0',
+    },
+    '@media (max-width: 600px)': {
+      margin: '2rem 0 0 0',
+    },
+    '@media (max-width: 420px)': {
+      margin: '5rem 0 0 0',
+    },
+  };
+});
+
+const SImageMobile = styled(Image)(() => {
+  return {
+    borderRadius: '1.125rem',
+  };
+});
+
+const ArrowBoxMobile = styled(Box)({
+  margin: '-1rem 0 0 10rem',
 });

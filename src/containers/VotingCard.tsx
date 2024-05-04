@@ -71,6 +71,9 @@ export const SBox = styled(Box)(() => {
     height: '75%',
     justifyContent: 'center',
     alignItems: 'center',
+    '@media (max-width: 720px)': {
+      height: '65%',
+    },
   };
 });
 
