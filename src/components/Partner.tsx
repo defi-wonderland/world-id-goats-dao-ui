@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, styled, Typography } from '@mui/material';
 import Link from 'next/link';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -8,10 +9,14 @@ import Image from 'next/image';
 import wonderland from '../assets/wonderland.svg';
 import worldId from '../assets/worldId.svg';
 
-export const Partner = () => {
+interface PartnerProps {
+  footer?: boolean;
+}
+
+export const Partner: React.FC<PartnerProps> = ({ footer }) => {
   return (
     <PartnerContainer>
-      <SText>
+      <SText footer={footer}>
         Made with <SHeart /> by
         <Link href='https://defi.sucks/' target='_blank'>
           <WonderlandImg src={wonderland} alt='wonderland' width={1} height={1} />
@@ -20,7 +25,7 @@ export const Partner = () => {
 
       <SCircleIcon />
 
-      <SText>
+      <SText footer={footer}>
         Powered by
         <Link href='https://worldcoin.org/world-id' target='_blank'>
           <WorldIdImg src={worldId} alt='worldId' />
@@ -48,10 +53,11 @@ export const PartnerContainer = styled(Box)(() => {
   };
 });
 
-export const SText = styled(Typography)({
+export const SText = styled(Typography)<PartnerProps>(({ footer }) => ({
   display: 'flex',
   alignItems: 'center',
   fontSize: '1rem',
+  justifyContent: footer ? 'center' : 'flex-start',
   '@media (max-width: 720px)': {
     fontSize: '0.8rem',
     lineHeight: '1.5rem',
@@ -59,7 +65,7 @@ export const SText = styled(Typography)({
   '@media (max-width: 400px)': {
     fontSize: '0.7rem',
   },
-});
+}));
 
 export const SCircleIcon = styled(CircleIcon)({
   fontSize: '0.5rem',

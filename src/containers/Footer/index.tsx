@@ -8,8 +8,8 @@ export const Footer = () => {
   const { terms } = proposalData.LEGAL;
   return (
     <FooterContainer>
-      <Partner />
-      <Divider />
+      <Partner footer={true} />
+      <SDivider />
       <Box>
         <LegalTerms>Disclaimer: {terms}</LegalTerms>
       </Box>
@@ -49,3 +49,7 @@ const LegalTerms = styled(Typography)(() => {
     },
   };
 });
+
+const SDivider = styled(Divider)`
+  margin-top: 1rem;
+`;

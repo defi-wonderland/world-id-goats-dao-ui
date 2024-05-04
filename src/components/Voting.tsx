@@ -207,7 +207,7 @@ export const SButtonFor = styled(Button)(() => {
     background: 'linear-gradient(90deg, #FCCC50 0%, #C55FA3 42.5%, #935EB1 71%, #625CBF 100%)',
     lineHeigth: '0.9rem',
     '@media (max-width: 720px)': {
-      fontSize: '0.9rem',
+      fontSize: '1rem',
       padding: '0.2rem 1rem',
       gap: '0rem',
       margin: '0rem',

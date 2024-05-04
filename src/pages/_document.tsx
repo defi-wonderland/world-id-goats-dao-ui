@@ -3,14 +3,14 @@ import type { DocumentHeadTagsProps } from '@mui/material-nextjs/v13-pagesRouter
 import { DocumentContext, DocumentProps, Head, Html, Main, NextScript } from 'next/document';
 
 export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps) {
-  const descriptionText = 'GoatsDao by Wonderland.';
-  const bannerImage = '';
+  const descriptionText = 'GoatsDao made with love by Wonderland powered by World Id.';
+  const bannerImage = 'https://dev.moregoats.com/GoatsDAO_Banner.png';
 
   return (
     <Html lang='en'>
       <Head>
         <DocumentHeadTags {...props} />
-        <link rel='icon' href='/favicon.ico' type='image/x-icon' sizes='48x48' />
+        <link rel='icon' href='/Logo.png' type='image/x-icon' sizes='48x48' />
         <meta name='description' content={descriptionText} />
 
         <meta property='og:title' content='GoatsDao' />
