@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect, useCallback } from 'react';
 import { Box, Typography, TypographyProps, styled } from '@mui/material';
 import { Circle } from '@mui/icons-material';
 
-import { useCustomTheme, useContract } from '~/hooks';
+import { useCustomTheme, useContract, useVote } from '~/hooks';
 import { getConfig } from '~/config';
 
 const { PROPOSAL_ID } = getConfig();
@@ -18,7 +18,8 @@ interface ProgressSegmentProps {
 }
 
 export const ProposalPoll = () => {
-  const { getQuorumThreshold, getProposalVotes, txDone } = useContract();
+  const { getQuorumThreshold, getProposalVotes } = useContract();
+  const { txDone } = useVote();
   const { darkTheme } = useCustomTheme();
   const [votes, setVotes] = useState({ for: 0, against: 0, abstain: 0 });
   const [quorum, setQuorum] = useState('');

@@ -50,6 +50,10 @@ const STitle = styled(Typography)(() => {
       color: darkTheme.textPrimary,
       fontSize: '1.5rem',
       fontWeight: 500,
+      '@media (max-width: 720px)': {
+        fontSize: '1.3rem',
+        margin: '0.5rem 0',
+      },
     },
   };
 });
@@ -62,6 +66,9 @@ const STypography = styled(Typography)(() => {
       color: darkTheme.textPrimary,
       fontSize: '1rem',
       fontWeight: 400,
+      '@media (max-width: 720px)': {
+        fontSize: '0.9rem',
+      },
     },
   };
 });

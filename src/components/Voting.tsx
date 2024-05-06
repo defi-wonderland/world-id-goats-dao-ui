@@ -27,7 +27,8 @@ export enum VerificationLevel {
 export const Voting = () => {
   const { setModalOpen } = useModal();
   const { vote, setVote } = useVote();
-  const { simulateCheckValidity, castVote, setTxDone } = useContract();
+  const { simulateCheckValidity, castVote } = useContract();
+  const { setTxDone } = useVote();
   const publicClient = usePublicClient();
   const { address } = useAccount();
   const { openConnectModal } = useConnectModal();
