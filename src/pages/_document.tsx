@@ -3,7 +3,7 @@ import type { DocumentHeadTagsProps } from '@mui/material-nextjs/v13-pagesRouter
 import { DocumentContext, DocumentProps, Head, Html, Main, NextScript } from 'next/document';
 
 export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps) {
-  const descriptionText = 'GoatsDao made with love by Wonderland powered by World Id.';
+  const descriptionText = 'GoatsDAO made with love by Wonderland powered by World Id.';
   const bannerImage = 'https://dev.moregoats.com/GoatsDAO_Banner.png';
 
   return (

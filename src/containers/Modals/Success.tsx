@@ -62,6 +62,9 @@ const STypography = styled(Typography)(() => {
       color: darkTheme.textPrimary,
       fontSize: '1rem',
       fontWeight: 300,
+      '@media (max-width: 720px)': {
+        fontSize: '0.9rem',
+      },
     },
   };
 });

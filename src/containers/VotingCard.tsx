@@ -3,13 +3,14 @@ import { Box, Typography, styled } from '@mui/material';
 import { useAccount } from 'wagmi';
 
 import { ProposalPoll, Voting, CountdownTimer, Title } from '~/components';
-import { useContract } from '~/hooks';
+import { useContract, useVote } from '~/hooks';
 import { getConfig } from '~/config';
 
 const { PROPOSAL_ID } = getConfig();
 
 export const VotingCard = () => {
-  const { getProposalDeadline, getHasVoted, txDone } = useContract();
+  const { getProposalDeadline, getHasVoted } = useContract();
+  const { txDone } = useVote();
   const { address } = useAccount();
   const [deadline, setDeadline] = useState<Date>();
   const [addressVoted, setAddressVoted] = useState<boolean>();

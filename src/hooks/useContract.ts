@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { usePublicClient, useWalletClient } from 'wagmi';
 import { Address, Hex } from 'viem';
 
@@ -26,7 +26,6 @@ type Params = Hex;
 export function useContract() {
   const { data: walletClient } = useWalletClient();
   const publicClient = usePublicClient();
-  const [txDone, setTxDone] = useState<boolean>(false);
 
   const checkValidity = useCallback(
     async (proposalId: ProposalID, support: SupportType, proofData: ProofData) => {
@@ -181,7 +180,5 @@ export function useContract() {
     getProposalState,
     simulateCastVote,
     getHasVoted,
-    setTxDone,
-    txDone,
   };
 }
