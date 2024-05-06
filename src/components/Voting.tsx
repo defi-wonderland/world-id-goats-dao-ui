@@ -6,6 +6,7 @@ import { useAccount } from 'wagmi';
 import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
 import JSConfetti from 'js-confetti';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
+import { track } from '@vercel/analytics';
 
 import { useContract, useCustomTheme, useModal, useVote } from '~/hooks';
 import { ModalType } from '~/types';
@@ -40,6 +41,7 @@ export const Voting = () => {
       openConnectModal?.();
     } else {
       setVote(support);
+      track('Voting started', { vote: support });
       setOpen(true);
     }
   };
@@ -86,6 +88,7 @@ export const Voting = () => {
           if (receipt) {
             setTxDone(true);
             setModalOpen(ModalType.SUCCESS);
+            track('Voting success', { vote });
             if (vote === 1) {
               const jsConfetti = new JSConfetti();
               jsConfetti?.addConfetti({
