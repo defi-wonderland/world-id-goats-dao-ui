@@ -88,7 +88,7 @@ export const Voting = () => {
           if (receipt) {
             setTxDone(true);
             setModalOpen(ModalType.SUCCESS);
-            track('Voting success', { vote: vote });
+            track('Voting success', { vote });
             if (vote === 1) {
               const jsConfetti = new JSConfetti();
               jsConfetti?.addConfetti({
