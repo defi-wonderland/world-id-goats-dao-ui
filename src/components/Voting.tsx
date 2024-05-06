@@ -41,7 +41,7 @@ export const Voting = () => {
       openConnectModal?.();
     } else {
       setVote(support);
-      track('Voting started', { support: support });
+      track('Voting started', { vote: support });
       setOpen(true);
     }
   };
@@ -88,7 +88,7 @@ export const Voting = () => {
           if (receipt) {
             setTxDone(true);
             setModalOpen(ModalType.SUCCESS);
-            track('Voting success', { support: vote });
+            track('Voting success', { vote: vote });
             if (vote === 1) {
               const jsConfetti = new JSConfetti();
               jsConfetti?.addConfetti({
