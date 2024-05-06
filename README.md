@@ -1,38 +1,52 @@
-# GoatsDao
+# GoatsDAO
 
-## Features
+Official interface for [GoatsDAO](https://www.moregoats.com/)
 
-- TBD
+## Development
 
-## Setup
+To set up the development environment, follow these steps:
 
-1. Clone this repository.
-2. Copy the `.env.example` file to `.env` and fill in the variables.
-3. Install the project dependencies by running:
+1. Clone the repository:
 
-   ```bash
-   pnpm install
-   ```
-## Available Scripts
+```bash
+git clone [this repo link] && cd worldid-goat-dao-ui
+```
 
-Available scripts that can be run using `pnpm`:
+2. Install dependencies:
 
-| Script         | Description                                                  |
-| -------------- | ------------------------------------------------------------ |
-| `dev`          | Start the development server using Next.                     |
-| `build`        | Build the project for production.                            |
-| `preview`      | Preview the production build using Next.                     |
-| `lint`         | Run ESLint on the source code to check for coding standards. |
-| `lint:fix`     | Run ESLint and automatically fix code formatting issues.     |
-| `prettier`     | Check code formatting using Prettier.                        |
-| `prettier:fix` | Format code using Prettier and automatically fix issues.     |
-| `format`       | Run Prettier and ESLint to format and fix code issues.       |
-| `format:check` | Check code formatting and linting without making changes.    |
+```bash
+pnpm
+```
 
+3. Configure the `.env` variables:
 
-## Technologies Used
+```bash
+cp .env.example .env
+```
 
-- [NextJS](https://nextjs.org/)
-- [Wagmi](https://wagmi.sh/)
-- [Viem](https://viem.sh/)
-- [Rainbowkit](https://www.rainbowkit.com/)
+4. Start the app:
+
+```bash
+pnpm dev
+```
+
+The app should be live at [http://localhost:5173/](http://localhost:5173/)
+
+## Production
+
+To build the production version of the app and preview it, use the following commands:
+
+```bash
+pnpm build
+pnpm preview
+```
+
+The app should be live at [http://localhost:4173/](http://localhost:4173/)
+
+## Contributors
+
+GoatsDAO was built with ❤️ by [Wonderland](https://defi.sucks).
+
+Wonderland is a team of top Web3 researchers, developers, and operators who believe that the future needs to be open-source, permissionless, and decentralized.
+
+[DeFi sucks](https://defi.sucks), but Wonderland is here to make it better.
