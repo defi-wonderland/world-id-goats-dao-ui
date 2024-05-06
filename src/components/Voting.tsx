@@ -154,7 +154,7 @@ export const SBox = styled(Box)(() => {
     margin: '0',
     alignItems: 'center',
     '@media (max-width: 720px)': {
-      display: 'grid',
+      flexDirection: 'column',
       gap: '1rem',
       margin: '1rem 0',
     },
@@ -208,7 +208,8 @@ export const SButtonFor = styled(Button)(() => {
     lineHeigth: '0.9rem',
     '@media (max-width: 720px)': {
       fontSize: '1rem',
-      padding: '0.3rem 1rem',
+      padding: '0.2rem 3.5rem',
+      letterSpacing: '0.125rem',
       gap: '0rem',
       margin: '0rem',
     },
