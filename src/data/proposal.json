@@ -1,0 +1,17 @@
+{
+  "HEADER": {
+    "status": "active",
+    "title": "Request for Continuation of the Arbitrum DDA Program Request",
+    "date": "Apr 3rd, 2024",
+    "id": "98446466630612736687159241204141593794174501692677162686607521796118942563659"
+  },
+  "DESCRIPTION": {
+    "summary": "This proposal has two goals: first, to help Richard develop his project, and second, to demonstrate the first live DAO vote using Worldcoin's WorldID to verify proof of personhood. Wonderland received a grant from the Worldcoin Foundation to showcase what a Sybil-resistant 'one vote per human' system would look like, and this is it!\n\nAs a first implementation, we chose to do some good by contributing to Richard's project. Please vote using your Worldcoin app!"
+  },
+  "CODE": {
+    "data": "Signature: transfer(address, uint256)\n\nCalldata:\naddress:\n0xD075Caa6e58702E028D0e43Cb796B73d23ab3eA5\nuint256:\n250000000000000000000\n\nTarget:\n0xdC6fF44d5d932Cbd77B52E5612Ba0529DC6226F1\n\nValue:\n0"
+  },
+  "LEGAL": {
+    "terms": "Wonderland is not a DAO, and this vote is not an endorsement of any specific projects or entities. In particular, Wonderland is not associated with Richard Opany or any of his projects, and this vote does not imply any affiliation with or support for Mr. Opany or his endeavors.\nFurthermore, Wonderland assumes no liability for how any funds directed toward Mr. Opany's projects are used or managed. Any funds or assets associated with Mr. Opany or any of his projects are handled at his discretion, and Wonderland bears no responsibility for his actions or the outcomes related to these funds.\nParticipants in this vote acknowledge that it is merely a demonstration of World ID's voting functionality and has no binding or financial implications for Wonderland or its affiliates. By participating in this vote, users agree to release Wonderland from any claims, liabilities, or legal responsibilities arising from the voting event or its outcomes."
+  }
+}

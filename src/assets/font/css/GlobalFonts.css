@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'SharpGroteskItalic';
+  src: url('../fonts/SharpGrotesk-LightItalic10.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SharpGroteskMedium';
+  src: url('../fonts/SharpGrotesk-Medium15_bkp.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SharpGroteskLight';
+  src: url('../fonts/SharpGrotesk-Light15.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'GeneralSans-Variable';
+  src:
+    url('../fonts/GeneralSans-Variable.woff2') format('woff2'),
+    url('../fonts/GeneralSans-Variable.woff') format('woff'),
+    url('../fonts/GeneralSans-Variable.ttf') format('truetype');
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
+}
