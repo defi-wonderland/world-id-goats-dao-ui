@@ -10,6 +10,7 @@ export const LoadingModal = () => {
       <ModalBody>
         <SIcon size='5rem' variant='indeterminate' thickness={4} />
         <STitle variant='h4'>Casting your vote 🐐 ...</STitle>
+
         <STypography variant='body1'>You can safely close this modal</STypography>
         <ModalButton />
       </ModalBody>

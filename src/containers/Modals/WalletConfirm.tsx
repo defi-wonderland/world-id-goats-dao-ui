@@ -23,9 +23,9 @@ export const ModalWalletTitle = styled(Typography)(() => {
     '&&': {
       display: 'block',
       color: darkTheme.textPrimary,
-      fontSize: '1.5rem',
+      fontSize: '1rem',
       fontWeight: 600,
-      marginBottom: '2rem',
+      marginBottom: '3rem',
     },
   };
 });
