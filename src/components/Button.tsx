@@ -12,7 +12,7 @@ const MButton = styled(Button)(() => {
   const { darkTheme } = useCustomTheme();
   return {
     padding: '0.625rem 1rem',
-    borderRadius: '1.2rem',
+    borderRadius: '0.75rem',
     color: darkTheme.textPrimary,
     backgroundColor: darkTheme.backgroundButton,
     boxShadow: '0 0.1rem 0.2rem 0 rgba(16, 24, 40, 0.05)',

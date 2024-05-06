@@ -153,8 +153,8 @@ export const SBox = styled(Box)(() => {
     gap: '2.5rem',
     margin: '0',
     alignItems: 'center',
-    '@media (max-width: 600px)': {
-      display: 'grid',
+    '@media (max-width: 720px)': {
+      flexDirection: 'column',
       gap: '1rem',
       margin: '1rem 0',
     },
@@ -180,7 +180,7 @@ export const SButton = styled(Button)(() => {
     '&.Mui-disabled': {
       border: `1px solid ${darkTheme.disabledColor}`,
     },
-    '@media (max-width: 600px)': {
+    '@media (max-width: 720px)': {
       fontSize: '0.75rem',
       padding: '0.2rem 1.75rem',
       letterSpacing: '0.125rem',
@@ -206,9 +206,10 @@ export const SButtonFor = styled(Button)(() => {
     textTransform: 'uppercase',
     background: 'linear-gradient(90deg, #FCCC50 0%, #C55FA3 42.5%, #935EB1 71%, #625CBF 100%)',
     lineHeigth: '0.9rem',
-    '@media (max-width: 600px)': {
-      fontSize: '0.9rem',
-      padding: '0.2rem 1rem',
+    '@media (max-width: 720px)': {
+      fontSize: '1rem',
+      padding: '0.2rem 3.5rem',
+      letterSpacing: '0.125rem',
       gap: '0rem',
       margin: '0rem',
     },

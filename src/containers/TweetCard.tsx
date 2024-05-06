@@ -26,22 +26,29 @@ export const TweetCard = () => {
 
 const TweetContainer = styled(Box)({
   display: 'grid',
+  marginTop: '2rem',
   justifyContent: 'center',
-  width: '65rem',
   gap: '1rem',
-  '@media (max-width: 600px)': {
+  width: '100%',
+  '@media (max-width: 720px)': {
     width: '20rem',
     margin: '10rem 0 0 0',
+  },
+  '@media (max-width: 600px)': {
+    width: '20rem',
+    margin: '12rem 0 0 0',
+  },
+  '@media (max-width: 420px)': {
+    margin: '22rem 0 0 0',
   },
 });
 
 const SText = styled(Typography)({
   textAlign: 'center',
   lineHeight: 'normal',
-  fontSize: '1.5rem',
-  width: '55rem',
+  fontSize: '2.125rem',
   fontWeight: 500,
-  '@media (max-width: 600px)': {
+  '@media (max-width: 720px)': {
     width: '20rem',
     margin: 'auto',
   },
@@ -57,9 +64,9 @@ const SBox = styled(Box)({
 
 const Tweet = styled(Image)({
   borderRadius: '1rem',
-  width: '30rem',
-  height: '40rem',
-  '@media (max-width: 600px)': {
+  width: '43rem',
+  height: 'auto',
+  '@media (max-width: 720px)': {
     width: '20rem',
     height: '26rem',
     margin: 'auto',

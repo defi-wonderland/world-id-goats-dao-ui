@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import { Landing } from '~/containers';
+import { Landing, Layout } from '~/containers';
 
 const Home = () => {
   return (
@@ -8,6 +8,7 @@ const Home = () => {
       <Head>
         <title>GoatsDao</title>
       </Head>
+      <Layout />
       <Landing />
     </>
   );

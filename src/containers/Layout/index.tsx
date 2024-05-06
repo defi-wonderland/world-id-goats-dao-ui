@@ -1,20 +1,23 @@
-import { ReactNode, FunctionComponent } from 'react';
+import { Box, styled } from '@mui/material';
 
-import { Header, Footer } from '~/containers';
+import { Disclaimer } from '~/components';
+import { GoatGuy, Header, VotingCard } from '~/containers';
 
-interface AppLayoutProps {
-  children: ReactNode;
-}
-
-const AppLayout: FunctionComponent<AppLayoutProps> = (props) => {
-  const { children } = props;
+export const Layout = () => {
   return (
-    <>
+    <ScreenContainer>
+      <Disclaimer />
       <Header />
-      {children}
-      <Footer />
-    </>
+      <VotingCard />
+      <GoatGuy />
+    </ScreenContainer>
   );
 };
 
-export { AppLayout };
+export const ScreenContainer = styled(Box)(() => {
+  return {
+    width: '100%',
+    height: '100vh',
+    position: 'relative',
+  };
+});
