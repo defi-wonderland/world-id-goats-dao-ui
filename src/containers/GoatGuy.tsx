@@ -7,7 +7,7 @@ import goatGuy from '~/assets/goatGuy.svg';
 import { useCustomTheme } from '~/hooks';
 
 export const GoatGuy = () => {
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const isMobile = useMediaQuery('(max-width:720px)');
   return (
     <>
       {!isMobile && (

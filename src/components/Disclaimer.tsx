@@ -26,6 +26,14 @@ export const Container = styled(Box)`
     font-size: 1rem;
     color: #121212;
     font-weight: 500;
-    letter-spacing: 1;
+    letter-spacing: 1px;
+
+    @media (max-width: 720px) {
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 400px) {
+      font-size: 0.7rem;
+    }
   }
 `;

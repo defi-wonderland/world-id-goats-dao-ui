@@ -126,6 +126,11 @@ const Goat1 = styled(Typography)({
   transform: 'scaleX(-1) rotate(35deg)',
   top: '16rem',
   left: '4rem',
+  '@media (max-width: 720px)': {
+    fontSize: '10rem',
+    top: '35rem',
+    left: '-5rem',
+  },
 });
 
 const Goat2 = styled(Typography)({
@@ -134,4 +139,9 @@ const Goat2 = styled(Typography)({
   right: '-5rem',
   top: '2rem',
   transform: 'rotate(45deg)',
+  '@media (max-width: 720px)': {
+    fontSize: '10rem',
+    right: '-5rem',
+    top: '7rem',
+  },
 });
