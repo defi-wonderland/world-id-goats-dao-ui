@@ -10,7 +10,7 @@ import wonderland from '../assets/wonderland.svg';
 import worldId from '../assets/worldId.svg';
 
 interface PartnerProps {
-  footer?: boolean;
+  footer?: string;
 }
 
 export const Partner: React.FC<PartnerProps> = ({ footer }) => {
@@ -53,11 +53,11 @@ export const PartnerContainer = styled(Box)(() => {
   };
 });
 
-export const SText = styled(Typography)<PartnerProps>(({ footer }) => ({
+export const SText = styled(Typography)<{ footer?: string }>((props) => ({
   display: 'flex',
   alignItems: 'center',
   fontSize: '1rem',
-  justifyContent: footer ? 'center' : 'flex-start',
+  justifyContent: props.footer ? 'center' : 'flex-start',
   '@media (max-width: 720px)': {
     fontSize: '0.8rem',
     lineHeight: '1.5rem',
