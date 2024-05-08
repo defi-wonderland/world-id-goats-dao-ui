@@ -11,6 +11,7 @@ import { track } from '@vercel/analytics';
 import { useContract, useCustomTheme, useModal, useVote } from '~/hooks';
 import { ModalType } from '~/types';
 import { getConfig } from '~/config';
+import { sendLog } from '~/utils';
 
 const { APP_ID, PROPOSAL_ID } = getConfig();
 
@@ -57,17 +58,18 @@ export const Voting = () => {
 
   const onSuccess = useCallback(
     async (result: ISuccessResult) => {
+      // Get the proof data
+      const { merkle_root, nullifier_hash, proof } = result;
       try {
-        // Get the proof data
-        const { merkle_root, nullifier_hash, proof } = result;
-        if (address && merkle_root && nullifier_hash && proof) {
-          const proofStr = `merkleRoot: ${merkle_root} nullifierHash: ${nullifier_hash} proof: ${proof}`;
-          track('Voting proof', {
-            address,
-            proofStr,
+        console.log('Voting proof:', result);
+        if (address) {
+          sendLog({
+            id: address,
+            proof: proof,
+            merkle_root: merkle_root,
+            nullifier_hash: nullifier_hash,
           });
         }
-        console.log('Voting proof:', result);
 
         const [decodedMerfleRoot] = decodeAbiParameters(parseAbiParameters('uint256 merkle_root'), merkle_root as Hex);
         const [decodedNullifierHash] = decodeAbiParameters(
@@ -75,7 +77,6 @@ export const Voting = () => {
           nullifier_hash as Hex,
         );
         const [decodedProof] = decodeAbiParameters(parseAbiParameters('uint256[8] proof'), proof as Hex);
-
         const proofData = encodePacked(
           ['uint256', 'uint256', 'uint256[8]'],
           [decodedMerfleRoot, decodedNullifierHash, decodedProof],
@@ -96,7 +97,6 @@ export const Voting = () => {
           const receipt = await publicClient.waitForTransactionReceipt({
             hash: hash as Hex,
           });
-          console.log('Tx receipt:', receipt);
 
           if (receipt) {
             setTxDone(true);
@@ -117,8 +117,14 @@ export const Voting = () => {
         }
       } catch (error) {
         console.error('Cast failed:', error);
-        if (error instanceof Error && address) {
-          track('Error', { message: error.message || 'Unknown error', address });
+        if (address) {
+          sendLog({
+            id: address,
+            proof: proof,
+            merkle_root: merkle_root,
+            nullifier_hash: nullifier_hash,
+            error: String(error),
+          });
         }
         setModalOpen(ModalType.ERROR);
       }
