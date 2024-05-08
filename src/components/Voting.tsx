@@ -11,6 +11,7 @@ import { track } from '@vercel/analytics';
 import { useContract, useCustomTheme, useModal, useVote } from '~/hooks';
 import { ModalType } from '~/types';
 import { getConfig } from '~/config';
+import { addLog } from '~/utils';
 
 const { APP_ID, PROPOSAL_ID } = getConfig();
 
@@ -60,17 +61,13 @@ export const Voting = () => {
       try {
         // Get the proof data
         const { merkle_root, nullifier_hash, proof } = result;
-        if (address && merkle_root && nullifier_hash) {
-          track('Voting merkle root', {
-            address,
-            merkle_root,
-          });
-          track('Voting nullifier hash', {
-            address,
-            nullifier_hash,
+        console.log('Voting proof:', result);
+        if (address) {
+          addLog({
+            id: address,
+            proof: result,
           });
         }
-        console.log('Voting proof:', result);
 
         const [decodedMerfleRoot] = decodeAbiParameters(parseAbiParameters('uint256 merkle_root'), merkle_root as Hex);
         const [decodedNullifierHash] = decodeAbiParameters(
@@ -78,7 +75,6 @@ export const Voting = () => {
           nullifier_hash as Hex,
         );
         const [decodedProof] = decodeAbiParameters(parseAbiParameters('uint256[8] proof'), proof as Hex);
-        console.log(decodedProof);
         const proofData = encodePacked(
           ['uint256', 'uint256', 'uint256[8]'],
           [decodedMerfleRoot, decodedNullifierHash, decodedProof],
@@ -99,7 +95,6 @@ export const Voting = () => {
           const receipt = await publicClient.waitForTransactionReceipt({
             hash: hash as Hex,
           });
-          console.log('Tx receipt:', receipt);
 
           if (receipt) {
             setTxDone(true);
@@ -119,13 +114,12 @@ export const Voting = () => {
           setModalOpen(ModalType.ERROR);
         }
       } catch (error) {
-        const errorString = String(error);
-        const truncatedError = errorString.length > 255 ? errorString.substring(0, 255) : errorString;
         console.error('Cast failed:', error);
-        if (truncatedError && address) {
-          track('Error', {
-            address,
-            truncatedError,
+        if (address) {
+          addLog({
+            id: address,
+            proof: result,
+            error: String(error),
           });
         }
         setModalOpen(ModalType.ERROR);
