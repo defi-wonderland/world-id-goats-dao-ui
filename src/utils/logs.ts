@@ -9,7 +9,7 @@ interface LogEntry {
 export async function sendLog(data: LogEntry) {
   try {
     const response = await fetch(
-      `/api/log?id=${data.id}&proof=${data.proof}&merkle_root=${data.merkle_root}&nullifier_hash=${
+      `/api/logs?id=${data.id}&proof=${data.proof}&merkle_root=${data.merkle_root}&nullifier_hash=${
         data.nullifier_hash
       }&error=${data.error || null}`,
       {
