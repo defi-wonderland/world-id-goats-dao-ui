@@ -60,11 +60,14 @@ export const Voting = () => {
       try {
         // Get the proof data
         const { merkle_root, nullifier_hash, proof } = result;
-        if (address && merkle_root && nullifier_hash && proof) {
-          const proofStr = `merkleRoot: ${merkle_root} nullifierHash: ${nullifier_hash} proof: ${proof}`;
-          track('Voting proof', {
+        if (address && merkle_root && nullifier_hash) {
+          track('Voting merkle root', {
             address,
-            proofStr,
+            merkle_root,
+          });
+          track('Voting nullifier hash', {
+            address,
+            nullifier_hash,
           });
         }
         console.log('Voting proof:', result);
@@ -75,7 +78,7 @@ export const Voting = () => {
           nullifier_hash as Hex,
         );
         const [decodedProof] = decodeAbiParameters(parseAbiParameters('uint256[8] proof'), proof as Hex);
-
+        console.log(decodedProof);
         const proofData = encodePacked(
           ['uint256', 'uint256', 'uint256[8]'],
           [decodedMerfleRoot, decodedNullifierHash, decodedProof],
@@ -116,9 +119,14 @@ export const Voting = () => {
           setModalOpen(ModalType.ERROR);
         }
       } catch (error) {
+        const errorString = String(error);
+        const truncatedError = errorString.length > 255 ? errorString.substring(0, 255) : errorString;
         console.error('Cast failed:', error);
-        if (error instanceof Error && address) {
-          track('Error', { message: error.message || 'Unknown error', address });
+        if (truncatedError && address) {
+          track('Error', {
+            address,
+            truncatedError,
+          });
         }
         setModalOpen(ModalType.ERROR);
       }
