@@ -8,14 +8,13 @@ interface LogEntry {
 
 export async function sendLog(data: LogEntry) {
   try {
-    const response = await fetch(
-      `/api/logs?id=${data.id}&proof=${data.proof}&merkle_root=${data.merkle_root}&nullifier_hash=${
-        data.nullifier_hash
-      }&error=${data.error || null}`,
-      {
-        method: 'GET',
+    const response = await fetch('/api/logs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify(data),
+    });
 
     if (!response.ok) {
       throw new Error('Failed to send log data');
