@@ -4,6 +4,7 @@ import { getLogs } from '~/utils';
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     const logs = getLogs();
+    console.log(logs);
     res.status(200).json(logs);
   } else {
     res.setHeader('Allow', ['GET']);
