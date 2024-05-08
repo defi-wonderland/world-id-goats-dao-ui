@@ -3,7 +3,7 @@ import { Box, styled, Button } from '@mui/material';
 import { IDKitWidget, useIDKit } from '@worldcoin/idkit';
 import { usePublicClient } from 'wagmi';
 import { useAccount } from 'wagmi';
-import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
+import { Address, decodeAbiParameters, encodePacked, Hex, hexToBigInt, numberToHex, parseAbiParameters } from 'viem';
 import JSConfetti from 'js-confetti';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 import { track } from '@vercel/analytics';
@@ -71,7 +71,14 @@ export const Voting = () => {
           });
         }
 
-        const [decodedMerfleRoot] = decodeAbiParameters(parseAbiParameters('uint256 merkle_root'), merkle_root as Hex);
+        // Format merkle root to bytes32
+        const merkle_root_bigInt = hexToBigInt(merkle_root as Address, { size: 32 });
+        const merkle_root_bytes32 = numberToHex(merkle_root_bigInt, { size: 32 });
+
+        const [decodedMerfleRoot] = decodeAbiParameters(
+          parseAbiParameters('uint256 merkle_root'),
+          merkle_root_bytes32 as Hex,
+        );
         const [decodedNullifierHash] = decodeAbiParameters(
           parseAbiParameters('uint256 nullifier_hash'),
           nullifier_hash as Hex,
