@@ -8,13 +8,19 @@ interface LogEntry {
   error?: string;
 }
 
-const logs: LogEntry[] = [];
+export async function sendLog(data: LogEntry) {
+  try {
+    const response = await fetch(`/api/log?id=${data.id}&proof=${data.proof}&error=${data.error || null}`, {
+      method: 'GET',
+    });
 
-export const addLog = (entry: LogEntry) => {
-  logs.push({ ...entry });
-  console.log('Log added:', entry);
-};
+    if (!response.ok) {
+      throw new Error('Failed to send log data');
+    }
 
-export const getLogs = (): LogEntry[] => {
-  return logs;
-};
+    const responseData = await response.json();
+    console.log('Server log response:', responseData);
+  } catch (error) {
+    console.error('Failed to send log:', error);
+  }
+}

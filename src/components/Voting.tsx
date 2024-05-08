@@ -11,7 +11,7 @@ import { track } from '@vercel/analytics';
 import { useContract, useCustomTheme, useModal, useVote } from '~/hooks';
 import { ModalType } from '~/types';
 import { getConfig } from '~/config';
-import { addLog } from '~/utils';
+import { sendLog } from '~/utils';
 
 const { APP_ID, PROPOSAL_ID } = getConfig();
 
@@ -63,7 +63,7 @@ export const Voting = () => {
         const { merkle_root, nullifier_hash, proof } = result;
         console.log('Voting proof:', result);
         if (address) {
-          addLog({
+          sendLog({
             id: address,
             proof: result,
           });
@@ -116,7 +116,7 @@ export const Voting = () => {
       } catch (error) {
         console.error('Cast failed:', error);
         if (address) {
-          addLog({
+          sendLog({
             id: address,
             proof: result,
             error: String(error),

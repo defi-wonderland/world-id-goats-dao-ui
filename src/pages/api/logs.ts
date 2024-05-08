@@ -1,11 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getLogs } from '~/utils';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
-    const logs = getLogs();
-    console.log(logs);
-    res.status(200).json(logs);
+    const { id, proof, error } = req.query;
+
+    console.log({ id, proof, error });
+
+    res.status(200).json({ message: 'Log received successfully' });
   } else {
     res.setHeader('Allow', ['GET']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
