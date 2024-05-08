@@ -130,6 +130,7 @@ export const Voting = () => {
       }
     },
     [address, simulateCheckValidity, vote, setModalOpen, castVote, publicClient, setTxDone],
+    [address, simulateCheckValidity, vote, setModalOpen, castVote, publicClient, setTxDone],
   );
 
   return (
