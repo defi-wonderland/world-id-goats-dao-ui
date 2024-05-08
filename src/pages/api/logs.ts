@@ -1,13 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Cors from 'nextjs-cors';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  await Cors(req, res, {
-    methods: ['GET'],
-    origin: 'https://www.moregoats.com/',
-    allowCredentials: true,
-    optionsSuccessStatus: 200,
-  });
+  const referer = req.headers.referer;
+
+  const allowedReferers = ['https://www.moregoats.com/', 'https://dev.moregoats.com/'];
+
+  if (!referer || !allowedReferers.includes(referer)) {
+    res.status(403).json({ error: 'Unauthorized access' });
+    return;
+  }
 
   if (req.method === 'GET') {
     const { id, merkle_root, nullifier_hash, proof, error } = req.query;
