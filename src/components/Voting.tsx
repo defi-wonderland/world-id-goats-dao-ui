@@ -60,6 +60,14 @@ export const Voting = () => {
       try {
         // Get the proof data
         const { merkle_root, nullifier_hash, proof } = result;
+        if (address && merkle_root && nullifier_hash && proof) {
+          const proofStr = `merkleRoot: ${merkle_root} nullifierHash: ${nullifier_hash} proof: ${proof}`;
+          track('Voting proof', {
+            address,
+            proofStr,
+          });
+        }
+        console.log('Voting proof:', result);
 
         const [decodedMerfleRoot] = decodeAbiParameters(parseAbiParameters('uint256 merkle_root'), merkle_root as Hex);
         const [decodedNullifierHash] = decodeAbiParameters(
@@ -78,17 +86,23 @@ export const Voting = () => {
 
         if (isValid) {
           setModalOpen(ModalType.WALLETCONFIRM);
+
           const hash = await castVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
           if (!hash) throw new Error('No hash returned');
+          track('Tx hash', { hash });
           setModalOpen(ModalType.LOADING);
+
           if (!publicClient) return;
           const receipt = await publicClient.waitForTransactionReceipt({
             hash: hash as Hex,
           });
+          console.log('Tx receipt:', receipt);
+
           if (receipt) {
             setTxDone(true);
             setModalOpen(ModalType.SUCCESS);
             track('Voting success', { vote });
+
             if (vote === 1) {
               const jsConfetti = new JSConfetti();
               jsConfetti?.addConfetti({
@@ -103,10 +117,13 @@ export const Voting = () => {
         }
       } catch (error) {
         console.error('Cast failed:', error);
+        if (error instanceof Error && address) {
+          track('Error', { message: error.message || 'Unknown error', address });
+        }
         setModalOpen(ModalType.ERROR);
       }
     },
-    [simulateCheckValidity, vote, castVote, setModalOpen, publicClient, setTxDone],
+    [address, simulateCheckValidity, vote, setModalOpen, castVote, publicClient, setTxDone],
   );
 
   return (
