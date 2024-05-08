@@ -58,14 +58,16 @@ export const Voting = () => {
 
   const onSuccess = useCallback(
     async (result: ISuccessResult) => {
+      // Get the proof data
+      const { merkle_root, nullifier_hash, proof } = result;
       try {
-        // Get the proof data
-        const { merkle_root, nullifier_hash, proof } = result;
         console.log('Voting proof:', result);
         if (address) {
           sendLog({
             id: address,
-            proof: result,
+            proof: proof,
+            merkle_root: merkle_root,
+            nullifier_hash: nullifier_hash,
           });
         }
 
@@ -118,7 +120,9 @@ export const Voting = () => {
         if (address) {
           sendLog({
             id: address,
-            proof: result,
+            proof: proof,
+            merkle_root: merkle_root,
+            nullifier_hash: nullifier_hash,
             error: String(error),
           });
         }
