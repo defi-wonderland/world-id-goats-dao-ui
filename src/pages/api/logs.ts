@@ -2,8 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
-    const { id, proof, error } = req.query;
-    const logData = { id, proof, error };
+    const { id, merkle_root, nullifier_hash, proof, error } = req.query;
+    const logData = { id, merkle_root, nullifier_hash, proof, error };
 
     console.log(logData);
 
