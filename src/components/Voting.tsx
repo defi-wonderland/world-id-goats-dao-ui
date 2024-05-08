@@ -61,11 +61,10 @@ export const Voting = () => {
         // Get the proof data
         const { merkle_root, nullifier_hash, proof } = result;
         if (address && merkle_root && nullifier_hash && proof) {
+          const proofStr = `merkleRoot: ${merkle_root} nullifierHash: ${nullifier_hash} proof: ${proof}`;
           track('Voting proof', {
             address,
-            merkle_root,
-            nullifier_hash,
-            proof,
+            proofStr,
           });
         }
         console.log('Voting proof:', result);
