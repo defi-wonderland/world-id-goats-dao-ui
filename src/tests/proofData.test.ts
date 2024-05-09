@@ -6,7 +6,7 @@ describe('Proof Data Formatting', () => {
     const input: ISuccessResult = {
       merkle_root: '0x' + '1'.repeat(63), // 31 bytes hex string, missing one character to make it 32 bytes
       nullifier_hash: '0x' + '2'.repeat(64), // 32 bytes
-      proof: '0x' + '3'.repeat(256), // 128 bytes
+      proof: '0x' + '3'.repeat(64).repeat(8), //uint256[8]
     };
 
     // Testing the merkle_root formatting to 32 bytes
