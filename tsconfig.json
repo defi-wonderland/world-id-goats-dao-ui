@@ -25,6 +25,6 @@
       "~/*": ["src/*"]
     }
   },
-  "include": ["./src", "./src/tests", "./dist/types/**/*.ts", "./next-env.d.ts"],
+  "include": ["./src", "./src/tests", "./dist/types/**/*.ts", "./next-env.d.ts", "./jest.config.ts"],
   "exclude": ["./node_modules"]
 }
