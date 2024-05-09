@@ -1,4 +1,4 @@
-import { formatProofData, to32Bytes } from '~/utils';
+import { formatProofData, to32Bytes } from '~/utils/misc';
 import { ISuccessResult } from '~/types';
 
 describe('Proof Data Formatting', () => {
