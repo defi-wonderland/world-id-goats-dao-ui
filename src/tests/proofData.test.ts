@@ -1,5 +1,5 @@
-import { formatProofData, to32Bytes } from '../../src/utils';
-import { ISuccessResult } from '../../src/types';
+import { formatProofData, to32Bytes } from '~/utils';
+import { ISuccessResult } from '~/types';
 
 describe('Proof Data Formatting', () => {
   it('should correctly format proof data including handling of truncated merkle_root', () => {
@@ -11,11 +11,11 @@ describe('Proof Data Formatting', () => {
 
     // Testing the merkle_root formatting to 32 bytes
     const formattedMerkleRoot = to32Bytes(input.merkle_root);
-    expect(formattedMerkleRoot).to.have.length(66); // 64 hex chars + '0x'
+    expect(formattedMerkleRoot.length).toBe(66); // 64 hex chars + '0x'
 
     const output = formatProofData(input);
 
     // Verify the output format
-    expect(output).to.be.a('string');
+    expect(typeof output).toBe('string');
   });
 });
