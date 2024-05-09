@@ -3,28 +3,18 @@ import { Box, styled, Button } from '@mui/material';
 import { IDKitWidget, useIDKit } from '@worldcoin/idkit';
 import { usePublicClient } from 'wagmi';
 import { useAccount } from 'wagmi';
-import { Address, decodeAbiParameters, encodePacked, Hex, hexToBigInt, numberToHex, parseAbiParameters } from 'viem';
 import JSConfetti from 'js-confetti';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 import { track } from '@vercel/analytics';
+import { Hex } from 'viem';
 
 import { useContract, useCustomTheme, useModal, useVote } from '~/hooks';
 import { ModalType } from '~/types';
 import { getConfig } from '~/config';
-import { sendLog } from '~/utils';
+import { sendLog, formatProofData } from '~/utils';
+import { ISuccessResult, VerificationLevel } from '~/types';
 
 const { APP_ID, PROPOSAL_ID } = getConfig();
-
-interface ISuccessResult {
-  merkle_root: string;
-  nullifier_hash: string;
-  proof: string;
-}
-
-export enum VerificationLevel {
-  Orb = 'orb',
-  Device = 'device',
-}
 
 export const Voting = () => {
   const { setModalOpen } = useModal();
@@ -60,8 +50,10 @@ export const Voting = () => {
     async (result: ISuccessResult) => {
       // Get the proof data
       const { merkle_root, nullifier_hash, proof } = result;
+
       try {
         console.log('Voting proof:', result);
+
         if (address) {
           sendLog({
             id: address,
@@ -71,24 +63,8 @@ export const Voting = () => {
           });
         }
 
-        // Format merkle root to bytes32
-        const merkle_root_bigInt = hexToBigInt(merkle_root as Address, { size: 32 });
-        const merkle_root_bytes32 = numberToHex(merkle_root_bigInt, { size: 32 });
-
-        const [decodedMerfleRoot] = decodeAbiParameters(
-          parseAbiParameters('uint256 merkle_root'),
-          merkle_root_bytes32 as Hex,
-        );
-        const [decodedNullifierHash] = decodeAbiParameters(
-          parseAbiParameters('uint256 nullifier_hash'),
-          nullifier_hash as Hex,
-        );
-        const [decodedProof] = decodeAbiParameters(parseAbiParameters('uint256[8] proof'), proof as Hex);
-        const proofData = encodePacked(
-          ['uint256', 'uint256', 'uint256[8]'],
-          [decodedMerfleRoot, decodedNullifierHash, decodedProof],
-        );
-
+        const proofData = formatProofData(result);
+        console.log(proofData);
         //PRODUCTION
         const isValid = await simulateCheckValidity(BigInt(PROPOSAL_ID), vote, proofData);
 
@@ -97,7 +73,6 @@ export const Voting = () => {
 
           const hash = await castVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
           if (!hash) throw new Error('No hash returned');
-          track('Tx hash', { hash });
           setModalOpen(ModalType.LOADING);
 
           if (!publicClient) return;
