@@ -49,22 +49,20 @@ export const Voting = () => {
   const onSuccess = useCallback(
     async (result: ISuccessResult) => {
       // Get the proof data
-      const { merkle_root, nullifier_hash, proof } = result;
+      const { merkle_root: merkleRoot, nullifier_hash: nullifierHash, proof } = result;
 
       try {
-        console.log('Voting proof:', result);
-
         if (address) {
           sendLog({
             id: address,
             proof: proof,
-            merkle_root: merkle_root,
-            nullifier_hash: nullifier_hash,
+            merkle_root: merkleRoot,
+            nullifier_hash: nullifierHash,
           });
         }
 
-        const proofData = formatProofData(result);
-        console.log(proofData);
+        const proofData = formatProofData({ merkleRoot, nullifierHash, proof });
+
         //PRODUCTION
         const isValid = await simulateCheckValidity(BigInt(PROPOSAL_ID), vote, proofData);
 
@@ -103,8 +101,8 @@ export const Voting = () => {
           sendLog({
             id: address,
             proof: proof,
-            merkle_root: merkle_root,
-            nullifier_hash: nullifier_hash,
+            merkle_root: merkleRoot,
+            nullifier_hash: nullifierHash,
             error: String(error),
           });
         }

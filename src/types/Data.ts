@@ -4,6 +4,12 @@ export interface ISuccessResult {
   proof: string;
 }
 
+export interface ProofData {
+  merkleRoot: string;
+  nullifierHash: string;
+  proof: string;
+}
+
 export enum VerificationLevel {
   Orb = 'orb',
   Device = 'device',

@@ -1,6 +1,6 @@
 import { hexToBigInt, numberToHex, decodeAbiParameters, parseAbiParameters, encodePacked, Hex, Address } from 'viem';
 
-import { ISuccessResult } from '~/types';
+import { ProofData } from '~/types';
 
 export const truncateValue = (value: string) => {
   return `${value?.slice(0, 6)}...${value?.slice(-4)}`;
@@ -33,19 +33,19 @@ export function to32Bytes(hexString: string): string {
   return bytes32;
 }
 
-export function formatProofData({ merkle_root, nullifier_hash, proof }: ISuccessResult) {
+export function formatProofData({ merkleRoot, nullifierHash, proof }: ProofData) {
   // Format merkle root to bytes32
-  const merkle_root_bytes32 = to32Bytes(merkle_root);
+  const merkleRootBytes32 = to32Bytes(merkleRoot);
 
-  const [decodedMerkleRoot] = decodeAbiParameters(
-    parseAbiParameters('uint256 merkle_root'),
-    merkle_root_bytes32 as Hex,
-  );
+  const [decodedMerkleRoot] = decodeAbiParameters(parseAbiParameters('uint256 merkle_root'), merkleRootBytes32 as Hex);
+
   const [decodedNullifierHash] = decodeAbiParameters(
     parseAbiParameters('uint256 nullifier_hash'),
-    nullifier_hash as Hex,
+    nullifierHash as Hex,
   );
+
   const [decodedProof] = decodeAbiParameters(parseAbiParameters('uint256[8] proof'), proof as Hex);
+
   const proofData = encodePacked(
     ['uint256', 'uint256', 'uint256[8]'],
     [decodedMerkleRoot, decodedNullifierHash, decodedProof],
