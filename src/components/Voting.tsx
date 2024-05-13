@@ -3,28 +3,18 @@ import { Box, styled, Button } from '@mui/material';
 import { IDKitWidget, useIDKit } from '@worldcoin/idkit';
 import { usePublicClient } from 'wagmi';
 import { useAccount } from 'wagmi';
-import { decodeAbiParameters, encodePacked, Hex, parseAbiParameters } from 'viem';
 import JSConfetti from 'js-confetti';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
 import { track } from '@vercel/analytics';
+import { Hex } from 'viem';
 
 import { useContract, useCustomTheme, useModal, useVote } from '~/hooks';
 import { ModalType } from '~/types';
 import { getConfig } from '~/config';
-import { sendLog } from '~/utils';
+import { sendLog, formatProofData } from '~/utils';
+import { ISuccessResult, VerificationLevel } from '~/types';
 
 const { APP_ID, PROPOSAL_ID } = getConfig();
-
-interface ISuccessResult {
-  merkle_root: string;
-  nullifier_hash: string;
-  proof: string;
-}
-
-export enum VerificationLevel {
-  Orb = 'orb',
-  Device = 'device',
-}
 
 export const Voting = () => {
   const { setModalOpen } = useModal();
@@ -59,28 +49,19 @@ export const Voting = () => {
   const onSuccess = useCallback(
     async (result: ISuccessResult) => {
       // Get the proof data
-      const { merkle_root, nullifier_hash, proof } = result;
+      const { merkle_root: merkleRoot, nullifier_hash: nullifierHash, proof } = result;
+
       try {
-        console.log('Voting proof:', result);
         if (address) {
           sendLog({
             id: address,
             proof: proof,
-            merkle_root: merkle_root,
-            nullifier_hash: nullifier_hash,
+            merkle_root: merkleRoot,
+            nullifier_hash: nullifierHash,
           });
         }
 
-        const [decodedMerfleRoot] = decodeAbiParameters(parseAbiParameters('uint256 merkle_root'), merkle_root as Hex);
-        const [decodedNullifierHash] = decodeAbiParameters(
-          parseAbiParameters('uint256 nullifier_hash'),
-          nullifier_hash as Hex,
-        );
-        const [decodedProof] = decodeAbiParameters(parseAbiParameters('uint256[8] proof'), proof as Hex);
-        const proofData = encodePacked(
-          ['uint256', 'uint256', 'uint256[8]'],
-          [decodedMerfleRoot, decodedNullifierHash, decodedProof],
-        );
+        const proofData = formatProofData({ merkleRoot, nullifierHash, proof });
 
         //PRODUCTION
         const isValid = await simulateCheckValidity(BigInt(PROPOSAL_ID), vote, proofData);
@@ -90,7 +71,6 @@ export const Voting = () => {
 
           const hash = await castVote(BigInt(PROPOSAL_ID), vote, thoughts, proofData);
           if (!hash) throw new Error('No hash returned');
-          track('Tx hash', { hash });
           setModalOpen(ModalType.LOADING);
 
           if (!publicClient) return;
@@ -121,8 +101,8 @@ export const Voting = () => {
           sendLog({
             id: address,
             proof: proof,
-            merkle_root: merkle_root,
-            nullifier_hash: nullifier_hash,
+            merkle_root: merkleRoot,
+            nullifier_hash: nullifierHash,
             error: String(error),
           });
         }

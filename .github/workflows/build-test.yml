@@ -71,3 +71,6 @@ jobs:
 
       - name: Run Linter
         run: pnpm lint
+
+      - name: Run Jest tests
+        run: pnpm test
