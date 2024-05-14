@@ -56,7 +56,7 @@ export const VotingCard = () => {
 
           {!votingActive && <SecondaryText>VOTING ENDED</SecondaryText>}
 
-          {!votingActive && <EndText>🐐 THANKS FOR YOUR HELPING RICHARD OUT 🐐</EndText>}
+          {!votingActive && <EndText>🐐 THANK YOU FOR HELPING RICHARD OUT 🐐</EndText>}
         </VotingContainer>
       </SBox>
     </>
